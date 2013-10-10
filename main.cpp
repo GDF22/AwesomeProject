@@ -6,7 +6,6 @@
  */
 
 #include <cstdlib>
-//#include<SDL2/SDL.h>
 #include<SDL/SDL.h>
 #include <stdlib.h>
 #include<iostream>
