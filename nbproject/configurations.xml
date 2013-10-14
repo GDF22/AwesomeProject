@@ -42,6 +42,7 @@
             <linkerLibLibItem>SDLmain</linkerLibLibItem>
             <linkerLibLibItem>SDL.dll</linkerLibLibItem>
             <linkerLibLibItem>opengl32</linkerLibLibItem>
+            <linkerLibLibItem>glu32</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
