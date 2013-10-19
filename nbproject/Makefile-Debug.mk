@@ -35,6 +35,10 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/Camera.o \
+	${OBJECTDIR}/Coord3D.o \
+	${OBJECTDIR}/EvenementClavier.o \
+	${OBJECTDIR}/Fenetre.o \
 	${OBJECTDIR}/main.o
 
 
@@ -61,6 +65,26 @@ LDLIBSOPTIONS=-lmingw32 -lSDLmain -lSDL.dll -lopengl32 -lglu32
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/awesomeproject.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/awesomeproject ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/Camera.o: Camera.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Camera.o Camera.cpp
+
+${OBJECTDIR}/Coord3D.o: Coord3D.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Coord3D.o Coord3D.cpp
+
+${OBJECTDIR}/EvenementClavier.o: EvenementClavier.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/EvenementClavier.o EvenementClavier.cpp
+
+${OBJECTDIR}/Fenetre.o: Fenetre.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Fenetre.o Fenetre.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}

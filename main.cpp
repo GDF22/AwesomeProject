@@ -6,63 +6,69 @@
  */
 
 #include <cstdlib>
-#include<SDL/SDL.h>
 #include <stdlib.h>
-#include<iostream>
-#include<GL/gl.h>
-#include<GL/glu.h>
-#include <math.h> 
+#include <iostream>
+#include <string>
+#include <map>
+#include <list>
+#include <math.h>
+#include <SDL/SDL.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
 
-void Dessiner(float x,float y);
+#include "Coord3D.h"
+#include "Fenetre.h"
+#include "Camera.h"
+#include "EvenementCLavier.h"
+
+
+using namespace std;
+
+void Dessiner();
+void axe();
+void grille();
  
 int main(int argc, char *argv[])
 {
+    freopen("CON", "w", stdout);
+    freopen("CON", "w", stderr);
+    
+    Fenetre fenetre(900, 700);
     SDL_Event event;
  
-    SDL_Init(SDL_INIT_VIDEO);
-    atexit(SDL_Quit);
-    SDL_WM_SetCaption("SDL GL Application", NULL);
-    SDL_SetVideoMode(640, 480, 32, SDL_OPENGL);
- 
+    
     glMatrixMode( GL_PROJECTION );
     glLoadIdentity();
     gluPerspective(70,(double)640/480,1,1000);
     glEnable(GL_DEPTH_TEST);
-  float x = 3;
-  float y = 3;
-  float ray = 3;
-  float angle = 0;
-    Dessiner(x,y);
+    
+    EvenementClavier clavier = EvenementClavier();
+    Camera camera = Camera(Coord3D(0, 5, 1), Coord3D(0, 4, 1), Coord3D(0, 0, 1));
+    
+    Dessiner();
  
     for (;;)
     {
         SDL_PollEvent(&event);
+        clavier.gereEvent(event);
+        
+        glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
  
-        switch(event.type)
-        {
-            case SDL_QUIT:
-            exit(0);
-            break;
-        }
-        angle+= 0.001;
-            x = ray*cos(angle);
-            y = ray*sin(angle);
-        Dessiner(x,y);
+        glMatrixMode( GL_MODELVIEW );
+        glLoadIdentity( );
+    
+        camera.deplacement(clavier);
+        camera.placeCamera();
+        
+        Dessiner();
  
     }
  
     return 0;
 }
  
-void Dessiner(float x , float y)
+void Dessiner()
 {
-    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
- 
-    glMatrixMode( GL_MODELVIEW );
-    glLoadIdentity( );
- 
-    gluLookAt(x,y,2,0,0,0,0,0,1);
- 
     glBegin(GL_QUADS);
  
     glColor3ub(255,0,0); //face rouge
@@ -84,7 +90,43 @@ void Dessiner(float x , float y)
     glVertex3d(1,-1,1);
  
     glEnd();
+    
+    grille();
+    axe();
  
     glFlush();
     SDL_GL_SwapBuffers();
+}
+
+void axe() {
+    glBegin(GL_LINES);
+    
+    glColor3ub(255,0,0);
+    glVertex2i(0,0);glVertex2i(0,1);
+    glVertex3i(0,1,0);glVertex3f(0.1,0.9,0);
+    glVertex3i(0,1,0);glVertex3f(-0.1,0.9,0);
+    
+    glColor3ub(0,255,0);
+    glVertex2i(0,0);glVertex2i(1,0);
+    glVertex3i(1,0,0);glVertex3f(0.9,0.1,0);
+    glVertex3i(1,0,0);glVertex3f(0.9,-0.1,0);
+    
+    glColor3ub(0,0,255);
+    glVertex2i(0,0);glVertex3i(0,0,1);
+    glVertex3i(0,0,1);glVertex3f(0.05,-0.05,0.9);
+    glVertex3i(0,0,1);glVertex3f(-0.05,0.05,0.9);
+    
+    glEnd();
+}
+
+void grille() {
+    glBegin(GL_LINES);
+    
+    glColor3ub(150,150,150);
+    for(int i = -50; i <= 50; i++) {
+        glVertex2i(i,-50);glVertex2i(i,50);
+        glVertex2i(-50,i);glVertex2i(50,i);
+    }
+    
+    glEnd();
 }
