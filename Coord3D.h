@@ -9,6 +9,8 @@
 #define	COORD3D_H
 
 #include <iostream>
+#include <math.h>
+
 using namespace std;
 
 class Coord3D {

@@ -8,10 +8,10 @@
 #ifndef EVENEMENTCLAVIER_H
 #define	EVENEMENTCLAVIER_H
 
-#include <cstdio>
+#include <map> 
 #include <iostream>
 #include <string>
-#include <map>
+#include <cstdio> 
 #include<SDL/SDL.h>
 
 /*struct classcomp {
@@ -28,8 +28,9 @@ public:
     //std::map<std::string, int, classcomp> getTabKey();
     int get(std::string key);
     
-   // std::map<std::string, int, classcomp> tabKey;
+    //std::map<std::string, int> tabKey;
     bool up, down, left, right, k8, k4, k6, k2;
+    int sourisdx, sourisdy, wheel;
     
     private:
 };

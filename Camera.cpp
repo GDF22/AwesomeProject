@@ -6,10 +6,6 @@
  */
 
 #include "Camera.h"
-#include "Coord3D.h"
-#include <GL/glu.h>
-#include <cstdio>
-#include <math.h>
 
 using namespace std;
 
@@ -27,7 +23,7 @@ Camera::Camera(Coord3D pos, Coord3D at, Coord3D up) {
     this->pos = pos;
     this->at = at;
     this->up = up;
-    vitesseDep = 0.005;
+    vitesseDep = 0.1;
     vitesseVue = 0.005;
     latitude = 0;
     longitude = 0;
@@ -62,10 +58,31 @@ void Camera::deplacement(EvenementClavier clavier) {
         this->rotDroite();
     }
     if(clavier.k8) {
-        this->haut();
+        this->rotHaut();
     }
     if(clavier.k2) {
-        this->bas();
+        this->rotBas();
+    }
+    
+    int i;
+    for(i = 0; i < clavier.sourisdx; i++) {
+        this->rotGauche();
+    }
+    for(i = 0; i > clavier.sourisdx; i--) {
+        this->rotDroite();
+    }
+    for(i = 0; i < clavier.sourisdy; i++) {
+        this->rotHaut();
+    }
+    for(i = 0; i > clavier.sourisdy; i--) {
+        this->rotBas();
+    }
+    
+    for(i = 0; i < clavier.wheel; i++) {
+        this->monte();
+    }
+    for(i = 0; i > clavier.wheel; i--) {
+        this->descend();
     }
 }
 
@@ -73,7 +90,6 @@ void Camera::deplacement(EvenementClavier clavier) {
 
 void Camera::avance() {
     Coord3D vect = pos.vectUnitaire(at);
-    
     pos.setX(pos.getX() + vect.getX()*vitesseDep);
     pos.setY(pos.getY() + vect.getY()*vitesseDep);
     pos.setZ(pos.getZ() + vect.getZ()*vitesseDep);
@@ -85,7 +101,6 @@ void Camera::avance() {
 
 void Camera::recule() {
     Coord3D vect = pos.vectUnitaire(at);
-    
     pos.setX(pos.getX() - vect.getX()*vitesseDep);
     pos.setY(pos.getY() - vect.getY()*vitesseDep);
     pos.setZ(pos.getZ() - vect.getZ()*vitesseDep);
@@ -95,17 +110,17 @@ void Camera::recule() {
 }
 
 void Camera::depGauche() {
-    pos.setX(pos.getX() - (at.getY() - pos.getY())*vitesseDep);
-    pos.setY(pos.getY() + (at.getX() - pos.getX())*vitesseDep);
-    at.setX(at.getX() -(at.getY() - pos.getY())*vitesseDep);
-    at.setY(at.getY() + (at.getX() - pos.getX())*vitesseDep);
+    pos.setX(pos.getX() - sin(longitude)*vitesseDep);
+    pos.setY(pos.getY() + cos(longitude)*vitesseDep);
+    at.setX(at.getX() - sin(longitude)*vitesseDep);
+    at.setY(at.getY() + cos(longitude)*vitesseDep);
 }
 
 void Camera::depDroite() {
-    pos.setX(pos.getX() + (at.getY() - pos.getY())*vitesseDep);
-    pos.setY(pos.getY() - (at.getX() - pos.getX())*vitesseDep);
-    at.setX(at.getX() + (at.getY() - pos.getY())*vitesseDep);
-    at.setY(at.getY() - (at.getX() - pos.getX())*vitesseDep);
+    pos.setX(pos.getX() + sin(longitude)*vitesseDep);
+    pos.setY(pos.getY() - cos(longitude)*vitesseDep);
+    at.setX(at.getX() + sin(longitude)*vitesseDep);
+    at.setY(at.getY() - cos(longitude)*vitesseDep);
 }
 
 
@@ -117,14 +132,24 @@ void Camera::rotDroite() {
     longitude -=  vitesseVue;
 }
 
-void Camera::haut() {
+void Camera::rotHaut() {
     if(latitude + vitesseVue < M_PI/2) {
         latitude += vitesseVue;
     }
 }
 
-void Camera::bas() {
+void Camera::rotBas() {
     if(latitude - vitesseVue > -M_PI/2) {
         latitude -= vitesseVue;
     }
+}
+
+void Camera::monte() {
+    pos.setZ(pos.getZ() + vitesseDep*2);
+    at.setZ(at.getZ() + vitesseDep*2);
+}
+
+void Camera::descend() {
+    pos.setZ(pos.getZ() - vitesseDep*2);
+    at.setZ(at.getZ() - vitesseDep*2);
 }

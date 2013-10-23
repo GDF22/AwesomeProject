@@ -37,6 +37,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/Camera.o \
 	${OBJECTDIR}/Coord3D.o \
+	${OBJECTDIR}/Dessin.o \
 	${OBJECTDIR}/EvenementClavier.o \
 	${OBJECTDIR}/Fenetre.o \
 	${OBJECTDIR}/main.o
@@ -75,6 +76,11 @@ ${OBJECTDIR}/Coord3D.o: Coord3D.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Coord3D.o Coord3D.cpp
+
+${OBJECTDIR}/Dessin.o: Dessin.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Dessin.o Dessin.cpp
 
 ${OBJECTDIR}/EvenementClavier.o: EvenementClavier.cpp 
 	${MKDIR} -p ${OBJECTDIR}

@@ -5,7 +5,6 @@
  * Created on 18 octobre 2013, 23:16
  */
 
-#include <math.h>
 #include "Coord3D.h"
 
 Coord3D::Coord3D() {

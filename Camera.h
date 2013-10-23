@@ -8,9 +8,13 @@
 #ifndef CAMERA_H
 #define	CAMERA_H
 
-#include <map>
 #include "EvenementClavier.h"
 #include "Coord3D.h"
+#include <GL/glu.h>
+#include <SDL/SDL.h>
+#include <cstdio>
+#include <math.h>
+#include <map>
 
 using namespace std;
 
@@ -28,8 +32,10 @@ public:
     void depDroite();
     void rotGauche();
     void rotDroite();
-    void haut();
-    void bas();
+    void rotHaut();
+    void rotBas();
+    void monte();
+    void descend();
     
     Coord3D getPos();
     Coord3D getAt();
