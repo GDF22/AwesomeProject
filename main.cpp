@@ -15,7 +15,6 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 //#include <glm/glm.hpp>
-
 #include "Coord3D.h"
 #include "Fenetre.h"
 #include "Camera.h"
@@ -31,20 +30,21 @@ void grille();
 void carre(float x, float y, float z, float taille);
 void triangle(float x, float y, float z, float hauteur, float rayonBase);
 void pyramide(float x, float y, float z, float hauteur, float rayonBase, int nbSommetBase);
- 
+void grilleModulaire();
+
 int main(int argc, char *argv[])
 {
     freopen("CON", "w", stdout);
     freopen("CON", "w", stderr);
     
-    
-    /*vec4 myVector = vec4(10.0, 10.0, 10.0, 1.0);
+    /*
+    vec4 myVector = vec4(10.0, 10.0, 10.0, 1.0);
     mat4 myMatrix = mat4(vec4(1.0, 0.0, 0.0, 0.0), vec4(0.0, 1.0, 0.0, 0.0), vec4(0.0, 0.0, 1.0, 0.0), vec4(10.0, 0.0, 0.0, 1.0));
     
     vec4 transformedVector = myMatrix * myVector; // Again, in this order ! this is important.
     
-    printf("%f\n", transformedVector[0]);*/
-    
+    printf("%f\n", transformedVector[0]);
+    */
     Fenetre fenetre(1600, 900);
     SDL_Event event;
  
@@ -88,6 +88,7 @@ void Dessiner()
     //pyramide(20, 20, 2, 5, 5, 6);
     
     grille();
+    grilleModulaire();
     axe();
  
     glFlush();
@@ -127,6 +128,36 @@ void grille() {
     glEnd();
 }
 
+
+
+void grilleModulaire() {
+    int I,J;
+    I = 200; J = 200;
+    Coord3D coordTab[I][J];
+   int z = 5; 
+   for(int i = 0; i < I; i++) {
+        for(int j = 0; j < J; j++) {
+          //  coordTab[i][j] = Coord3D(i,j,z);  /* classic */
+            coordTab[i][j] = Coord3D(i,j,z+40*min(sin(M_PI *(j-25)/25),sin(M_PI *(i-25)/25)) );  /* sin */
+          //    coordTab[i][j] = Coord3D(i,j,i);  /* sin */
+        }
+    }
+    glBegin(GL_LINES);
+    glColor3ub(150,150,150);
+    
+    for(int i = 0; i < I-1; i++) {
+        for(int j = 0; j < J-1; j++) {
+            
+            glVertex3i(coordTab[i][j].getX(),coordTab[i][j].getY(),coordTab[i][j].getZ());
+            glVertex3i(coordTab[i][j+1].getX(),coordTab[i][j+1].getY(),coordTab[i][j+1].getZ());
+            
+            glVertex3i(coordTab[i][j].getX(),coordTab[i][j].getY(),coordTab[i][j].getZ());
+            glVertex3i(coordTab[i+1][j].getX(),coordTab[i+1][j].getY(),coordTab[i+1][j].getZ());
+            
+        }
+    }
+    glEnd();
+}
 
 void carre(float x, float y, float z, float taille) {
     glBegin(GL_QUADS);
@@ -226,7 +257,7 @@ void triangle(float x, float y, float z, float hauteur, float rayonBase) {
 
 void pyramide(float x, float y, float z, float hauteur, float rayonBase, int nbSommetBase) {
     Coord3D sommets[nbSommetBase+1];
-    sommets[0] = Coord3D(x, y, z+hauteur);
+    sommets[0] =  Coord3D(x, y, z+hauteur);
     int i;
     for(i = 0; i < nbSommetBase; i++) {
         float angle = i*(180/(nbSommetBase-1));
