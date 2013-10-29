@@ -38,50 +38,50 @@ void Camera::placeCamera() {
 
 
 
-void Camera::deplacement(EvenementClavier clavier) {
-    if(clavier.left) {
+void Camera::deplacement(KeyboardEvent keyboard, MouseEvent mouse) {
+    if(keyboard.left) {
         this->depGauche();
     }
-    if(clavier.right) {
+    if(keyboard.right) {
         this->depDroite();
     }
-    if(clavier.up) {
+    if(keyboard.up) {
         this->avance();
     }
-    if(clavier.down) {
+    if(keyboard.down) {
         this->recule();
     }
-    if(clavier.k4) {
+    if(keyboard.k4) {
         this->rotGauche();
     }
-    if(clavier.k6) {
+    if(keyboard.k6) {
         this->rotDroite();
     }
-    if(clavier.k8) {
+    if(keyboard.k8) {
         this->rotHaut();
     }
-    if(clavier.k2) {
+    if(keyboard.k2) {
         this->rotBas();
     }
     
     int i;
-    for(i = 0; i < clavier.sourisdx; i++) {
+    for(i = 0; i < mouse.sourisdx; i++) {
         this->rotGauche();
     }
-    for(i = 0; i > clavier.sourisdx; i--) {
+    for(i = 0; i > mouse.sourisdx; i--) {
         this->rotDroite();
     }
-    for(i = 0; i < clavier.sourisdy; i++) {
+    for(i = 0; i < mouse.sourisdy; i++) {
         this->rotHaut();
     }
-    for(i = 0; i > clavier.sourisdy; i--) {
+    for(i = 0; i > mouse.sourisdy; i--) {
         this->rotBas();
     }
     
-    for(i = 0; i < clavier.wheel; i++) {
+    for(i = 0; i < mouse.wheel; i++) {
         this->monte();
     }
-    for(i = 0; i > clavier.wheel; i--) {
+    for(i = 0; i > mouse.wheel; i--) {
         this->descend();
     }
 }

@@ -1,5 +1,7 @@
-build/Debug/MinGW-Windows/main.o: main.cpp Coord3D.h Fenetre.h Camera.h \
- EvenementClavier.h EvenementCLavier.h
+build/Debug/MinGW-Windows/main.o: main.cpp Controler.h Coord3D.h \
+ Fenetre.h Camera.h KeyboardEvent.h MouseEvent.h
+
+Controler.h:
 
 Coord3D.h:
 
@@ -7,6 +9,6 @@ Fenetre.h:
 
 Camera.h:
 
-EvenementClavier.h:
+KeyboardEvent.h:
 
-EvenementCLavier.h:
+MouseEvent.h:

@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--<item path="GestionConfig.cpp" ex="false" tool="1" flavor2="0">
+		</item>
+		<item path="GestionConfig.h" ex="false" tool="3" flavor2="0">
+		</item>-->
 <configurationDescriptor version="89">
   <projectmakefile>Makefile</projectmakefile>
   <confs>

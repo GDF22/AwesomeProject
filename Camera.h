@@ -8,13 +8,15 @@
 #ifndef CAMERA_H
 #define	CAMERA_H
 
-#include "EvenementClavier.h"
-#include "Coord3D.h"
 #include <GL/glu.h>
 #include <SDL/SDL.h>
 #include <cstdio>
 #include <math.h>
-#include <map>
+
+#include "KeyboardEvent.h"
+#include "MouseEvent.h"
+#include "Coord3D.h"
+
 
 using namespace std;
 
@@ -25,7 +27,7 @@ public:
     
     void placeCamera();
     
-    void deplacement(EvenementClavier clavier);
+    void deplacement(KeyboardEvent keyboard, MouseEvent mouse);
     void avance();
     void recule();
     void depGauche();

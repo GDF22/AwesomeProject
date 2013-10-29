@@ -36,10 +36,11 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/Camera.o \
+	${OBJECTDIR}/Controler.o \
 	${OBJECTDIR}/Coord3D.o \
-	${OBJECTDIR}/Dessin.o \
-	${OBJECTDIR}/EvenementClavier.o \
 	${OBJECTDIR}/Fenetre.o \
+	${OBJECTDIR}/KeyboardEvent.o \
+	${OBJECTDIR}/MouseEvent.o \
 	${OBJECTDIR}/main.o
 
 
@@ -72,25 +73,30 @@ ${OBJECTDIR}/Camera.o: Camera.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Camera.o Camera.cpp
 
+${OBJECTDIR}/Controler.o: Controler.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Controler.o Controler.cpp
+
 ${OBJECTDIR}/Coord3D.o: Coord3D.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Coord3D.o Coord3D.cpp
 
-${OBJECTDIR}/Dessin.o: Dessin.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Dessin.o Dessin.cpp
-
-${OBJECTDIR}/EvenementClavier.o: EvenementClavier.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/EvenementClavier.o EvenementClavier.cpp
-
 ${OBJECTDIR}/Fenetre.o: Fenetre.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Fenetre.o Fenetre.cpp
+
+${OBJECTDIR}/KeyboardEvent.o: KeyboardEvent.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/KeyboardEvent.o KeyboardEvent.cpp
+
+${OBJECTDIR}/MouseEvent.o: MouseEvent.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/MouseEvent.o MouseEvent.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
