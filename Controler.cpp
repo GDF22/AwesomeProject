@@ -7,7 +7,6 @@
 
 #include "Controler.h"
 
-void FrameManager();
 void Dessiner();
 void axe();
 void grille();
@@ -34,9 +33,10 @@ Controler::~Controler() {
 
 void Controler::run() {
     SDL_Event event;
-     
+    FrameManager frame = FrameManager(60);
+    
     for (;;)
-    {        
+    {
         glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
         glLoadIdentity( );
     
@@ -50,13 +50,8 @@ void Controler::run() {
         
         Dessiner();
         
-        FrameManager();
+        frame.manageFrame();
     }
-}
-
-
-void FrameManager() {
-    
 }
 
 void Dessiner()

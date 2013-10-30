@@ -10,15 +10,23 @@
 
 #include <SDL/SDL.h>
 #include <ctime>
+
 class FrameManager {
 public:
     FrameManager();
-    FrameManager(const FrameManager& orig);
+    FrameManager(int frameMax);
     virtual ~FrameManager();
+    
+    void manageFrame();
+    int getFrameMax();
+    int getFPS();
 private:
-    int frame;
-    double fps;
-    double update;
+    int frameMax;
+    int FPS;
+    int fpsTemp;
+    double startfps;
+    double start;
+    double current;
 };
 
 #endif	/* FRAMEMANAGER_H */

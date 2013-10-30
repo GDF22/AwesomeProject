@@ -39,8 +39,10 @@ OBJECTFILES= \
 	${OBJECTDIR}/Controler.o \
 	${OBJECTDIR}/Coord3D.o \
 	${OBJECTDIR}/Fenetre.o \
+	${OBJECTDIR}/FrameManager.o \
 	${OBJECTDIR}/KeyboardEvent.o \
 	${OBJECTDIR}/MouseEvent.o \
+	${OBJECTDIR}/Object.o \
 	${OBJECTDIR}/main.o
 
 
@@ -88,6 +90,11 @@ ${OBJECTDIR}/Fenetre.o: Fenetre.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Fenetre.o Fenetre.cpp
 
+${OBJECTDIR}/FrameManager.o: FrameManager.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/FrameManager.o FrameManager.cpp
+
 ${OBJECTDIR}/KeyboardEvent.o: KeyboardEvent.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
@@ -97,6 +104,11 @@ ${OBJECTDIR}/MouseEvent.o: MouseEvent.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/MouseEvent.o MouseEvent.cpp
+
+${OBJECTDIR}/Object.o: Object.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Object.o Object.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}

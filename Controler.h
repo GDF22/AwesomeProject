@@ -22,6 +22,7 @@
 #include "Camera.h"
 #include "KeyboardEvent.h"
 #include "MouseEvent.h"
+#include "FrameManager.h"
 
 class Controler {
 public:
@@ -32,7 +33,6 @@ private:
     KeyboardEvent keyboard;
     MouseEvent mouse;
     Camera camera;
-            
 };
 
 #endif	/* CONTROLER_H */

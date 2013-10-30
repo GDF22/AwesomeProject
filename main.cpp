@@ -7,8 +7,6 @@
 
 #include "Controler.h"
 
-using namespace std;
-
 int main(int argc, char *argv[])
 {
     freopen("CON", "w", stdout);    // redirection des flux
