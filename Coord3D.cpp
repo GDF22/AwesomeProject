@@ -5,6 +5,7 @@
  * Created on 18 octobre 2013, 23:16
  */
 
+#include <cstdio>
 #include "Coord3D.h"
 
 Coord3D::Coord3D() {
@@ -61,8 +62,6 @@ Coord3D Coord3D::vectUnitaire(Coord3D direction) {
 }
 
 
-string Coord3D::toString() {
-    string out = "";
-    //out = "("+x+", "+y+", "+z+")";
-    return(out);
+void Coord3D::toString() {
+    printf("(%f, %f, %f)\n", x, y, z);
 }

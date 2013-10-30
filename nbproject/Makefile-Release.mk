@@ -38,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Camera.o \
 	${OBJECTDIR}/Controler.o \
 	${OBJECTDIR}/Coord3D.o \
+	${OBJECTDIR}/Face.o \
 	${OBJECTDIR}/Fenetre.o \
 	${OBJECTDIR}/FrameManager.o \
 	${OBJECTDIR}/KeyboardEvent.o \
@@ -84,6 +85,11 @@ ${OBJECTDIR}/Coord3D.o: Coord3D.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Coord3D.o Coord3D.cpp
+
+${OBJECTDIR}/Face.o: Face.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Face.o Face.cpp
 
 ${OBJECTDIR}/Fenetre.o: Fenetre.cpp 
 	${MKDIR} -p ${OBJECTDIR}

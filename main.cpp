@@ -9,8 +9,8 @@
 
 int main(int argc, char *argv[])
 {
-    freopen("CON", "w", stdout);    // redirection des flux
-    freopen("CON", "w", stderr);
+    /*freopen("CON", "w", stdout);    // redirection des flux
+    freopen("CON", "w", stderr);*/
     
     Fenetre fenetre(1600, 900);
     

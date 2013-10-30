@@ -9,26 +9,16 @@
 #define	OBJECT_H
 
 #include <vector>
-#include <cstdlib>
-#include <iostream>
-#include <string>
-#include <map>
-#include <list>
-#include <math.h>
-#include <SDL/SDL.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
 #include "Coord3D.h"
-
-using namespace std;
+#include "Face.h"
 
 class Object {
 public:
     Object();
     virtual ~Object();
 private:
-    vector<glVertex3f> listeSommets;
-    glVertex3f vertex;
+    //vector<Coord3D> listeSommet;
+    //vector<Face> listeFace;
 };
 
 #endif	/* OBJECT_H */

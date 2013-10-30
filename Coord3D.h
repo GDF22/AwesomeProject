@@ -9,6 +9,7 @@
 #define	COORD3D_H
 
 #include <iostream>
+#include <sstream>
 #include <math.h>
 
 using namespace std;
@@ -28,7 +29,7 @@ public:
     double distance(Coord3D p);
     Coord3D vectUnitaire(Coord3D direction);
     
-    string toString();
+    void toString();
 private:
     double x, y, z;
 };

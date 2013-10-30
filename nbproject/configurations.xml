@@ -32,6 +32,8 @@
         <itemPath>Camera.h</itemPath>
         <itemPath>Coord3D.cpp</itemPath>
         <itemPath>Coord3D.h</itemPath>
+        <itemPath>Face.cpp</itemPath>
+        <itemPath>Face.h</itemPath>
         <itemPath>Fenetre.cpp</itemPath>
         <itemPath>Fenetre.h</itemPath>
         <itemPath>Object.cpp</itemPath>
@@ -83,6 +85,10 @@
       <item path="Coord3D.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Coord3D.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Face.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Face.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Fenetre.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -139,6 +145,10 @@
       <item path="Coord3D.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Coord3D.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Face.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Face.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Fenetre.cpp" ex="false" tool="1" flavor2="0">
       </item>

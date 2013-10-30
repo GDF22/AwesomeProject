@@ -32,8 +32,22 @@ Controler::~Controler() {
 }
 
 void Controler::run() {
+    string t = "coucou";
     SDL_Event event;
     FrameManager frame = FrameManager(60);
+    
+    vector<Coord3D> vect;
+    vect.push_back(Coord3D(1, 1, 1));
+    vect.push_back(Coord3D(2, 2, 2));
+    vect.push_back(Coord3D(3, 3, 3));
+    vect.push_back(Coord3D(1, 2, 3));
+    vect.push_back(Coord3D(2, 1, 3));
+    vect.push_back(Coord3D(3, 2, 1));
+    
+    Face face = Face(vect);
+    face.toString();
+    
+    
     
     for (;;)
     {
@@ -48,6 +62,7 @@ void Controler::run() {
         camera.deplacement(keyboard, mouse);
         camera.placeCamera();
         
+        face.draw();
         Dessiner();
         
         frame.manageFrame();
