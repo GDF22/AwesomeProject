@@ -16,9 +16,13 @@ class Object {
 public:
     Object();
     virtual ~Object();
+    
+    
+    void drawFace();
+    void drawEdge();
 private:
-    //vector<Coord3D> listeSommet;
-    //vector<Face> listeFace;
+    vector<Coord3D> listVertex;
+    vector<Face> listFace;
 };
 
 #endif	/* OBJECT_H */

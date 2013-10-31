@@ -9,7 +9,6 @@
 #define	FACE_H
 
 #include <cstdio>
-#include <iostream>
 #include <vector>
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -19,13 +18,20 @@ using namespace std;
 
 class Face {
 public:
-    Face(vector<Coord3D> vect);
+    Face(vector<Coord3D> vect, Coord3D colorFace, Coord3D colorEdge);
     virtual ~Face();
     
-    void draw();
+    Coord3D getColorFace();
+    Coord3D getColorEdge();
+    void setColor(Coord3D face, Coord3D edge);
+    
+    void drawFace();
+    void drawEdge();
     void toString();
 private:
     vector<Coord3D*> tabVertex;   // liste des pointeurs de sommet
+    Coord3D colorFace;
+    Coord3D colorEdge;
 };
 
 #endif	/* FACE_H */

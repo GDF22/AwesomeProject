@@ -26,25 +26,26 @@ Controler::Controler() {
     glEnable(GL_DEPTH_TEST);
     glMatrixMode( GL_MODELVIEW );
     glLoadIdentity();
+    
+    glEnable(GL_BLEND) ;
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA) ; 
 }
 
 Controler::~Controler() {
 }
 
 void Controler::run() {
-    string t = "coucou";
     SDL_Event event;
     FrameManager frame = FrameManager(60);
     
     vector<Coord3D> vect;
-    vect.push_back(Coord3D(1, 1, 1));
-    vect.push_back(Coord3D(2, 2, 2));
-    vect.push_back(Coord3D(3, 3, 3));
-    vect.push_back(Coord3D(1, 2, 3));
-    vect.push_back(Coord3D(2, 1, 3));
-    vect.push_back(Coord3D(3, 2, 1));
+    vect.push_back(Coord3D(1.0, 1.0, 1.0));
+    vect.push_back(Coord3D(1.0, 1.0, 4.0));
+    vect.push_back(Coord3D(4.0, 1.0, 4.0));
+    vect.push_back(Coord3D(4.0, 1.0, 1.0));
+
     
-    Face face = Face(vect);
+    Face face = Face(vect, Coord3D(255, 0, 0), Coord3D(255, 255, 255));
     face.toString();
     
     
@@ -62,7 +63,8 @@ void Controler::run() {
         camera.deplacement(keyboard, mouse);
         camera.placeCamera();
         
-        face.draw();
+        face.drawFace();
+        face.drawEdge();
         Dessiner();
         
         frame.manageFrame();
@@ -74,12 +76,12 @@ void Dessiner()
     carre(2, 5, -3, 1);
     carre(5, 2, 5, 1);
     carre(2, 5, 3, 1);
-    triangle(-5, -3, 5, 4, 3);
+    //triangle(-5, -3, 5, 4, 3);
     //pyramide(20, 20, 2, 5, 5, 6);
     
     grille();
     grilleModulaire();
-    axe();
+    //axe();
  
     glFlush();
     SDL_GL_SwapBuffers();
@@ -151,7 +153,7 @@ void grilleModulaire() {
 
 void carre(float x, float y, float z, float taille) {
     glBegin(GL_QUADS);
-        glColor3ub(0,0,255);
+        glColor4d(0.0,0.0,255.0, 0.5);
         glVertex3f(x+(taille/2),y+(taille/2),z+(taille/2));
         glVertex3f(x+(taille/2),y+(taille/2),z-(taille/2));
         glVertex3f(x-(taille/2),y+(taille/2),z-(taille/2));
