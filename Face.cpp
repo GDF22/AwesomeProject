@@ -13,9 +13,7 @@ using namespace std;
 Face::Face(vector<Coord3D> vect, Coord3D colorFace, Coord3D colorEdge) {
     int i;
     for(i = 0; i < vect.size(); i++) {
-        printf("%f  %f\n", vect[i].getX(), vect[i].getY());
-        tabVertex.push_back(&vect[i]);
-        printf("%f  %f\n", (*tabVertex[i]).getX(), (*tabVertex[i]).getY());
+        tabVertex.push_back(&(vect[i]));
     }
     this->setColor(colorFace, colorEdge);
 }
@@ -59,6 +57,7 @@ void Face::drawFace() {
     glBegin(GL_POLYGON);
         glColor4d(colorFace.getX(), colorFace.getY(), colorFace.getZ(), 1);
         for(int i = 0; i < tabVertex.size(); i++) {
+            printf("%f  %f %f\n", (*tabVertex[i]).getX(), (*tabVertex[i]).getY(), (*tabVertex[i]).getZ());
             glVertex3f((*tabVertex[i]).getX(),(*tabVertex[i]).getY(),(*tabVertex[i]).getZ());
         }
     glEnd();

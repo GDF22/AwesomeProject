@@ -38,7 +38,7 @@ void Controler::run() {
     SDL_Event event;
     FrameManager frame = FrameManager(60);
     
-    vector<Coord3D> vect;
+    /*static vector<Coord3D> vect;
     vect.push_back(Coord3D(1.0, 1.0, 1.0));
     vect.push_back(Coord3D(1.0, 1.0, 4.0));
     vect.push_back(Coord3D(4.0, 1.0, 4.0));
@@ -46,9 +46,22 @@ void Controler::run() {
 
     
     Face face = Face(vect, Coord3D(255, 0, 0), Coord3D(255, 255, 255));
-    face.toString();
+    face.toString();*/
     
     
+    Object obj = Object();
+    obj.addVertex(Coord3D(1.0, 1.0, 1.0));
+    obj.addVertex(Coord3D(1.0, 1.0, 4.0));
+    obj.addVertex(Coord3D(4.0, 1.0, 4.0));
+    obj.addVertex(Coord3D(4.0, 1.0, 1.0));
+    
+    vector<int> face;
+    face.push_back(0);face.push_back(1);face.push_back(2);face.push_back(3);
+    obj.addFace(face);
+    
+    obj.toString();
+    obj.removeVertex(4);
+    obj.toString();
     
     for (;;)
     {
@@ -63,9 +76,15 @@ void Controler::run() {
         camera.deplacement(keyboard, mouse);
         camera.placeCamera();
         
-        face.drawFace();
-        face.drawEdge();
-        Dessiner();
+        grille();
+        grilleModulaire();
+        carre(2, 5, -3, 1);
+        carre(5, 2, 5, 1);
+        carre(2, 5, 3, 1);
+        obj.drawFace();
+ 
+        glFlush();
+        SDL_GL_SwapBuffers();
         
         frame.manageFrame();
     }
@@ -90,17 +109,17 @@ void Dessiner()
 void axe() {
     glBegin(GL_LINES);
     
-    glColor3ub(255,0,0);
+    glColor3i(255,0,0);
     glVertex2i(0,0);glVertex2i(0,1);
     glVertex3i(0,1,0);glVertex3f(0.1,0.9,0);
     glVertex3i(0,1,0);glVertex3f(-0.1,0.9,0);
     
-    glColor3ub(0,255,0);
+    glColor3i(0,255,0);
     glVertex2i(0,0);glVertex2i(1,0);
     glVertex3i(1,0,0);glVertex3f(0.9,0.1,0);
     glVertex3i(1,0,0);glVertex3f(0.9,-0.1,0);
     
-    glColor3ub(0,0,255);
+    glColor3i(0,0,255);
     glVertex2i(0,0);glVertex3i(0,0,1);
     glVertex3i(0,0,1);glVertex3f(0.05,-0.05,0.9);
     glVertex3i(0,0,1);glVertex3f(-0.05,0.05,0.9);
@@ -153,7 +172,7 @@ void grilleModulaire() {
 
 void carre(float x, float y, float z, float taille) {
     glBegin(GL_QUADS);
-        glColor4d(0.0,0.0,255.0, 0.5);
+        glColor3ub(0,0,255);
         glVertex3f(x+(taille/2),y+(taille/2),z+(taille/2));
         glVertex3f(x+(taille/2),y+(taille/2),z-(taille/2));
         glVertex3f(x-(taille/2),y+(taille/2),z-(taille/2));

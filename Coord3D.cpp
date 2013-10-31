@@ -62,6 +62,12 @@ Coord3D Coord3D::vectUnitaire(Coord3D direction) {
 }
 
 
+bool Coord3D::equal(Coord3D a) {
+    return(a.getX() == this->x && a.getY() == this->y && a.getZ() == this->z);
+}
+
+
+
 void Coord3D::toString() {
     printf("(%f, %f, %f)\n", x, y, z);
 }

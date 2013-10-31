@@ -29,6 +29,7 @@ public:
     double distance(Coord3D p);
     Coord3D vectUnitaire(Coord3D direction);
     
+    bool equal(Coord3D a);
     void toString();
 private:
     double x, y, z;

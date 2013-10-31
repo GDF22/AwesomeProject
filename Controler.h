@@ -23,6 +23,7 @@
 #include "MouseEvent.h"
 #include "FrameManager.h"
 #include "Face.h"
+#include "Object.h"
 
 using namespace std;
 
