@@ -41,6 +41,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Face.o \
 	${OBJECTDIR}/Fenetre.o \
 	${OBJECTDIR}/FrameManager.o \
+	${OBJECTDIR}/KeyAssignment.o \
 	${OBJECTDIR}/KeyboardEvent.o \
 	${OBJECTDIR}/MouseEvent.o \
 	${OBJECTDIR}/Object.o \
@@ -100,6 +101,11 @@ ${OBJECTDIR}/FrameManager.o: FrameManager.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/FrameManager.o FrameManager.cpp
+
+${OBJECTDIR}/KeyAssignment.o: KeyAssignment.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/KeyAssignment.o KeyAssignment.cpp
 
 ${OBJECTDIR}/KeyboardEvent.o: KeyboardEvent.cpp 
 	${MKDIR} -p ${OBJECTDIR}
