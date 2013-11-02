@@ -16,3 +16,6 @@ Component::Component(const Component& orig) {
 Component::~Component() {
 }
 
+void Component::draw(Component* parent){
+    
+}

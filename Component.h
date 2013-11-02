@@ -10,13 +10,12 @@
 
 #include "Coord3D.h"
 
-
 class Component {
 public:
     Component();
     Component(const Component& orig);
     virtual ~Component();
-    void draw(Component parent);
+    void draw(Component* parent);
 protected:
     Coord3D position;
 

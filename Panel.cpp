@@ -38,7 +38,7 @@ void Panel::draw(Panel* par){
     for(unsigned int i=0; i<componentList.size(); ++i)
         {
                Component& el = componentList[i];
-               //el.draw(this);
+               el.draw(this);
         }
     
     SDL_Flip(parent);
