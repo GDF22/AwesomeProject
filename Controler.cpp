@@ -16,9 +16,8 @@ void pyramide(float x, float y, float z, float hauteur, float rayonBase, int nbS
 void grilleModulaire();
 
 Controler::Controler() {
-    this->keyboard = KeyboardEvent();
+    this->event = Event();
     this->ka = KeyAssignment();
-    this->mouse = MouseEvent();
     this->camera = Camera(Coord3D(-5, 0, 2), Coord3D(0, 0, 0), Coord3D(0, 0, 1));
     
     glMatrixMode( GL_PROJECTION );
@@ -36,7 +35,6 @@ Controler::~Controler() {
 }
 
 void Controler::run() {
-    SDL_Event event;
     FrameManager frame = FrameManager(60);
     
     /*static vector<Coord3D> vect;
@@ -90,13 +88,9 @@ void Controler::run() {
         glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
         glLoadIdentity( );
     
-        SDL_PollEvent(&event);
+        event.EventManager();
         
-        SDL_WarpMouse(800, 450);
-        keyboard.EventManager(event);
-        mouse.EventManager(event);
-        
-        camera.deplacement(keyboard, mouse);
+        camera.deplacement(event.notifyMouse());
         camera.placeCamera();
         
         grille();

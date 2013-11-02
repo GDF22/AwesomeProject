@@ -19,9 +19,8 @@
 #include "Coord3D.h"
 #include "Fenetre.h"
 #include "Camera.h"
-#include "KeyboardEvent.h"
 #include "KeyAssignment.h"
-#include "MouseEvent.h"
+#include "Event.h"
 #include "FrameManager.h"
 #include "Face.h"
 #include "Object.h"
@@ -35,8 +34,7 @@ public:
     void run();
 private:
     KeyAssignment ka;
-    KeyboardEvent keyboard;
-    MouseEvent mouse;
+    Event event;
     Camera camera;
 };
 
