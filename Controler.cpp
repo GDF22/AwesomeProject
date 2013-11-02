@@ -19,35 +19,21 @@ Controler::Controler() {
     this->event = Event();
     this->ka = KeyAssignment();
     this->camera = Camera(Coord3D(-5, 0, 2), Coord3D(0, 0, 0), Coord3D(0, 0, 1));
-    
-    glMatrixMode( GL_PROJECTION );
-    glLoadIdentity();
-    gluPerspective(70,(double)640/480,1,1000);
-    glEnable(GL_DEPTH_TEST);
-    glMatrixMode( GL_MODELVIEW );
-    glLoadIdentity();
-    
-    glEnable(GL_BLEND) ;
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA) ; 
 }
 
 Controler::~Controler() {
 }
 
 void Controler::run() {
+    Panel screenPanel = Panel();
+    
+    Coord3D cp = Coord3D(20.0,20.0,0.0);
+       
+    Panel p =  Panel(cp,50,50);
+    screenPanel.addComponent(p);
+    
     FrameManager frame = FrameManager(60);
-    
-    /*static vector<Coord3D> vect;
-    vect.push_back(Coord3D(1.0, 1.0, 1.0));
-    vect.push_back(Coord3D(1.0, 1.0, 4.0));
-    vect.push_back(Coord3D(4.0, 1.0, 4.0));
-    vect.push_back(Coord3D(4.0, 1.0, 1.0));
-
-    
-    Face face = Face(vect, Coord3D(255, 0, 0), Coord3D(255, 255, 255));
-    face.toString();*/
-    
-    
+        
     Object obj = Object();
     obj.addVertex(Coord3D(1.0, 1.0, 1.0));
     obj.addVertex(Coord3D(1.0, 1.0, 4.0));
@@ -77,19 +63,26 @@ void Controler::run() {
     face6.push_back(0);face6.push_back(3);face6.push_back(7);face6.push_back(4);
     obj.addFace(Face(face6, Coord3D(0, 255, 255), Coord3D(255, 255, 255)));
     
-    cout << obj.toString() << endl;
     obj.removeVertex(0);
-    //obj.removeVertex(0);
-    cout << obj.toString() << endl;
-    printf("%d", obj.nbFace());
     
     for (;;)
     {
+        event.EventManager();
+                
+        // Début de la 3D
+        glMatrixMode( GL_PROJECTION );
+        glLoadIdentity();
+        gluPerspective(70,(double)640/480,1,1000);
+        glEnable(GL_DEPTH_TEST);
+        glMatrixMode( GL_MODELVIEW );
+        glLoadIdentity();
+
+        glEnable(GL_BLEND) ;
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA) ; 
+    
         glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
         glLoadIdentity( );
     
-        event.EventManager();
-        
         camera.deplacement(event.notifyMouse());
         camera.placeCamera();
         
@@ -100,10 +93,33 @@ void Controler::run() {
         carre(2, 5, 3, 1);
         obj.drawFace();
         obj.drawEdge();
- 
+        // Fin de la 3D
+        
+        // Début de la 2D
+        glDisable(GL_DEPTH_TEST);
+
+        glMatrixMode(GL_PROJECTION);
+        glPushMatrix();
+            glLoadIdentity();
+            gluOrtho2D(0.0, 1600, 0.0, 900);
+            glMatrixMode(GL_MODELVIEW);
+            glPushMatrix();
+                glLoadIdentity();
+
+                    screenPanel.draw(&screenPanel);
+
+                glMatrixMode(GL_PROJECTION);
+            glPopMatrix();
+            glMatrixMode(GL_MODELVIEW);
+        glPopMatrix();
+
+        glEnable(GL_DEPTH_TEST);
+        // Fin de la 2D
+        
+        // Affichage
         glFlush();
         SDL_GL_SwapBuffers();
-        
+                
         frame.manageFrame();
     }
 }

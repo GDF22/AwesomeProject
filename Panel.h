@@ -11,6 +11,8 @@
 #include <vector>
 #include "Component.h"
 #include <SDL/SDL.h>
+#include <gl/gl.h>
+#include <gl/glu.h>
 
 class Panel : public Component {
 public:

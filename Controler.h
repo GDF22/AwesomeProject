@@ -16,6 +16,7 @@
 #include <vector>
 #include <math.h>
 #include <SDL/SDL.h>
+#include <gl/glu.h>
 #include "Coord3D.h"
 #include "Fenetre.h"
 #include "Camera.h"
@@ -24,6 +25,7 @@
 #include "FrameManager.h"
 #include "Face.h"
 #include "Object.h"
+#include "Panel.h"
 
 using namespace std;
 

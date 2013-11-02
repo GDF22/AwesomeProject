@@ -29,18 +29,19 @@ void Panel::addComponent(Component toAdd){
 }
 
 void Panel::draw(Panel* par){
-    SDL_Surface* parent = par->sdlPanel;
-    sdlPanel = SDL_CreateRGBSurface(SDL_HWSURFACE, 220, 180, 32, 0, 0, 0, 0);
-    SDL_FillRect(sdlPanel, NULL, SDL_MapRGB(parent->format, 255, 255, 255));
-    SDL_Rect sdlp = position.toSDL_Rect();
-    SDL_BlitSurface(sdlPanel, NULL, parent, &sdlp);
-    
+    glBegin(GL_QUADS);
+        glColor3f(1, 0, 0); glVertex3f(0, 0, 0);
+        glColor3f(1, 1, 0); glVertex3f(100, 0, 0);
+        glColor3f(1, 0, 1); glVertex3f(100, 100, 0);
+        glColor3f(1, 1, 1); glVertex3f(0, 100, 0);
+    glEnd();
+
+
     for(unsigned int i=0; i<componentList.size(); ++i)
         {
                Component& el = componentList[i];
                el.draw(this);
         }
     
-    SDL_Flip(parent);
     
 }
