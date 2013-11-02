@@ -12,6 +12,7 @@
 #include <sstream>
 #include <cstdio>
 #include <math.h>
+#include <SDL/SDL.h>
 
 using namespace std;
 
@@ -34,6 +35,8 @@ public:
     
     bool equal(Coord3D a);
     string toString();
+    
+    SDL_Rect toSDL_Rect();
 private:
     double x, y, z;
 };

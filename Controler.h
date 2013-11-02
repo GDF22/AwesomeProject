@@ -20,6 +20,7 @@
 #include "Fenetre.h"
 #include "Camera.h"
 #include "KeyboardEvent.h"
+#include "KeyAssignment.h"
 #include "MouseEvent.h"
 #include "FrameManager.h"
 #include "Face.h"
@@ -33,6 +34,7 @@ public:
     virtual ~Controler();
     void run();
 private:
+    KeyAssignment ka;
     KeyboardEvent keyboard;
     MouseEvent mouse;
     Camera camera;

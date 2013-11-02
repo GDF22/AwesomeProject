@@ -14,8 +14,10 @@
 class Fenetre {
 public:
     Fenetre(int hauteur, int largeur);
+    SDL_Surface* getScreen();
     virtual ~Fenetre();
 private:
+    SDL_Surface *screen;
 
 };
 

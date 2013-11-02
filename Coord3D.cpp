@@ -44,6 +44,12 @@ void Coord3D::setZ(double z) {
     this->z = z;
 }
 
+SDL_Rect Coord3D::toSDL_Rect(){
+    SDL_Rect result;
+    result.x = this->x;
+    result.y = this->y;
+    return result;
+}
 
 
 double Coord3D::distance(Coord3D p) {

@@ -18,6 +18,7 @@ class KeyAssignment {
 public:
     KeyAssignment();
     KeyAssignment(const KeyAssignment& orig);
+    void chooseConfig();
     virtual ~KeyAssignment();
 private:
     int* primary;

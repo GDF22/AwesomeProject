@@ -10,6 +10,7 @@
 KeyAssignment::KeyAssignment() {
     this->primary =  new int[20];
     this->readConfig();
+    this->chooseConfig();
 }
 
 KeyAssignment::KeyAssignment(const KeyAssignment& orig) {
@@ -19,30 +20,25 @@ KeyAssignment::~KeyAssignment() {
 }
 
 void KeyAssignment::readConfig(){
-    vector<string> keyVector; 
-    printf("read2\n");
-   
-    
-    /*
-    FILE * pFile;
-    pFile = fopen ("config/keys","w");
-    */
-    
-        fstream myfile ("keys");
-    
-/*
-    string value;
-        if(pFile != NULL)  // si l'ouverture a réussi
-        {       
-                while ( fichier.good() )
-                {
-                     getline ( fichier, value, ';' ); // read a string until next comma: http://www.cplusplus.com/reference/string/getline/
-                     keyVector.push_back( value);
-                     printf("\nvalue\n");
-                     //cout << string( value, 1, value.length()-2 ); // display value removing the first and the last character from it
-                }
-            fichier.close();  // on ferme le fichier
+    fstream file;
+    string key;
+    int count = 0 ;
+    file.open("config\\keys");
+    while (getline(file, key, ';')) {
+      this->primary[count] = atoi(key.c_str() );
+    }
+
+}
+
+void KeyAssignment::chooseConfig(){
+    for(int i = 0 ; i < 4 ; i++){
+        SDL_Event e;
+        int tmpKey;
+        while (SDL_WaitEvent(&e) && e.type != SDL_KEYDOWN ){
+            tmpKey = e.key.keysym.sym;
         }
-        else  // sinon
-                cout << "Impossible d'ouvrir le fichier !" << endl;*/
+        cout<<tmpKey<<" - ";
+        this->primary[i] = tmpKey;
+    }
+    
 }

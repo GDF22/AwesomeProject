@@ -17,6 +17,7 @@ void grilleModulaire();
 
 Controler::Controler() {
     this->keyboard = KeyboardEvent();
+    this->ka = KeyAssignment();
     this->mouse = MouseEvent();
     this->camera = Camera(Coord3D(-5, 0, 2), Coord3D(0, 0, 0), Coord3D(0, 0, 1));
     
@@ -90,6 +91,7 @@ void Controler::run() {
         glLoadIdentity( );
     
         SDL_PollEvent(&event);
+        
         SDL_WarpMouse(800, 450);
         keyboard.EventManager(event);
         mouse.EventManager(event);

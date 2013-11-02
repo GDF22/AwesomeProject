@@ -12,11 +12,12 @@ Fenetre::Fenetre(int hauteur, int largeur) {
     atexit(SDL_Quit);
     putenv("SDL_VIDEO_WINDOW_POS==0,0");
     SDL_WM_SetCaption("SDL GL Application", NULL);
-    SDL_SetVideoMode(hauteur, largeur, 32, SDL_OPENGL);
-    
-
+    this->screen = SDL_SetVideoMode(hauteur, largeur, 32, SDL_OPENGL);
 }
 
+SDL_Surface* Fenetre::getScreen(){
+    return screen;
+}
 
 Fenetre::~Fenetre() {
     SDL_Quit();
