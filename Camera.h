@@ -13,8 +13,7 @@
 #include <cstdio>
 #include <math.h>
 
-#include "KeyboardEvent.h"
-#include "MouseEvent.h"
+#include "Event.h"
 #include "Coord3D.h"
 
 

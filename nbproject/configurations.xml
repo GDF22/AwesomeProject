@@ -19,12 +19,10 @@
       <logicalFolder name="f1" displayName="Controler" projectFiles="true">
         <itemPath>Controler.cpp</itemPath>
         <itemPath>Controler.h</itemPath>
+        <itemPath>Event.cpp</itemPath>
+        <itemPath>Event.h</itemPath>
         <itemPath>FrameManager.cpp</itemPath>
         <itemPath>FrameManager.h</itemPath>
-        <itemPath>KeyboardEvent.cpp</itemPath>
-        <itemPath>KeyboardEvent.h</itemPath>
-        <itemPath>MouseEvent.cpp</itemPath>
-        <itemPath>MouseEvent.h</itemPath>
         <itemPath>main.cpp</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="Model" projectFiles="true">
@@ -99,6 +97,10 @@
       </item>
       <item path="Coord3D.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Event.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Event.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Face.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Face.h" ex="false" tool="3" flavor2="0">
@@ -114,14 +116,6 @@
       <item path="KeyAssignment.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="KeyAssignment.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="KeyboardEvent.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="KeyboardEvent.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="MouseEvent.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="MouseEvent.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Object.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -171,6 +165,10 @@
       </item>
       <item path="Coord3D.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Event.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Event.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Face.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Face.h" ex="false" tool="3" flavor2="0">
@@ -186,14 +184,6 @@
       <item path="KeyAssignment.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="KeyAssignment.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="KeyboardEvent.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="KeyboardEvent.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="MouseEvent.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="MouseEvent.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Object.cpp" ex="false" tool="1" flavor2="0">
       </item>
