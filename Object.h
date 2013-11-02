@@ -40,6 +40,7 @@ private:
     Coord3D position;
     vector<Coord3D> listVertex;
     vector<Face> listFace;
+    bool move;
 };
 
 #endif	/* OBJECT_H */

@@ -27,7 +27,7 @@ public:
     
     void placeCamera();
     
-    void deplacement(KeyboardEvent keyboard, MouseEvent mouse);
+    void deplacement(int* mouse);
     void avance();
     void recule();
     void depGauche();

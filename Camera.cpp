@@ -38,8 +38,8 @@ void Camera::placeCamera() {
 
 
 
-void Camera::deplacement(KeyboardEvent keyboard, MouseEvent mouse) {
-    if(keyboard.left) {
+void Camera::deplacement(int* mouse) {
+    /*if(keyboard.left) {
         this->depGauche();
     }
     if(keyboard.right) {
@@ -62,28 +62,28 @@ void Camera::deplacement(KeyboardEvent keyboard, MouseEvent mouse) {
     }
     if(keyboard.k2) {
         this->rotBas();
-    }
+    }*/
     
     int i;
-    for(i = 0; i < mouse.sourisdx; i++) {
+    for(i = 0; i < mouse[0]; i++) {
         this->rotGauche();
     }
-    for(i = 0; i > mouse.sourisdx; i--) {
+    for(i = 0; i > mouse[0]; i--) {
         this->rotDroite();
     }
-    for(i = 0; i < mouse.sourisdy; i++) {
+    for(i = 0; i < mouse[1]; i++) {
         this->rotHaut();
     }
-    for(i = 0; i > mouse.sourisdy; i--) {
+    for(i = 0; i > mouse[1]; i--) {
         this->rotBas();
     }
     
-    for(i = 0; i < mouse.wheel; i++) {
+    /*for(i = 0; i < mouse.wheel; i++) {
         this->monte();
     }
     for(i = 0; i > mouse.wheel; i--) {
         this->descend();
-    }
+    }*/
 }
 
 
