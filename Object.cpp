@@ -22,63 +22,104 @@ void Object::addVertex(Coord3D vertex) {
 /* Suppression du sommet d'indice 'vertex' */
 void Object::removeVertex(int vertex) {
     if(vertex < listVertex.size() && vertex >= 0) {
-        /* Suppression de le tableau de sommets */
+        /* Suppression dans le tableau de sommets */
         vector<Coord3D>::iterator it(listVertex.begin());
-        int i;
-        for(i = 0; i < vertex; i++) {
+        for(int i = 0; i < vertex; i++) {
             ++it;
         }
         this->listVertex.erase(it);
     
         /* Actualisation des faces */
         for(int i = 0; i < listFace.size(); i++) {
-            for(int j = 0; j < listFace[i].size(); j++) {
-                /*vector<Coord3D>::iterator it(listFace[i].begin());
-                while (it != listVertex.end() && listVertex[i].equal(vertex)) {
-                    ++i;
-                }*/
-            }
+            listFace[i].removeVertex(vertex);
         }
     }
 }
 
 /* Suppression du sommet ayant les même valeurs que 'vertex' */
 void Object::removeVertex(Coord3D vertex) {
+    bool found = false;
     int i = 0;
     vector<Coord3D>::iterator it(listVertex.begin());
-    while (it != listVertex.end() && listVertex[i].equal(vertex)) {
-        ++i;
+    
+    /* Suppression dans le tableau de sommets */
+    while (it != listVertex.end() && !found) {
+        if(listVertex[i].equal(vertex)) {
+            found = true;
+        } else {
+            ++it;
+            i++;
+        }
     }
-    this->listVertex.erase(it);
+    if(found) {
+        this->listVertex.erase(it);
+    }
+    
+    /* Actualisation des faces */
+    for(int i = 0; i < listFace.size(); i++) {
+        listFace[i].removeVertex(i);
+    }
 }
 
 /* AJout d'une face à partir d'une liste de sommets */
-void Object::addFace(vector<int> tabVertex) {
-    vector<int> face;
-    
-    for(int i = 0; i < tabVertex.size(); i++) {
-        face.push_back(tabVertex[i]);
-    }
+void Object::addFace(vector<int> listVertex) {
+    Face face = Face(listVertex);
+    listFace.push_back(face);
+}
+
+/* AJout d'une face à partir d'une liste de sommets */
+void Object::addFace(Face face) {
     listFace.push_back(face);
 }
 
 
-
 void Object::drawFace() {
-    glBegin(GL_POLYGON);
-        glColor3d(255, 0, 0);
         for(int i = 0; i < listFace.size(); i++) {
-            for(int j = 0; j < listFace[i].size(); j++) {
-                glVertex3f(listVertex[listFace[i][j]].getX(), listVertex[listFace[i][j]].getY(), listVertex[listFace[i][j]].getZ());
+            glBegin(GL_POLYGON);
+                listFace[i].applyColorFace();
+                for(int j = 0; j < listFace[i].getSize(); j++) {
+                    Coord3D vertex = listVertex[listFace[i].getVertex(j)];
+                    glVertex3f(vertex.getX(), vertex.getY(), vertex.getZ());
+                }
+             glEnd();
+        }
+}
+
+void Object::drawEdge() {
+    Coord3D vertex1, vertex2;
+    
+    glBegin(GL_LINES);
+        glColor3d(255, 255, 255);
+        for(int i = 0; i < listFace.size(); i++) {
+            for(int j = 0; j < listFace[i].getSize() - 1; j++) {
+                vertex1 = listVertex[listFace[i].getVertex(j)];
+                vertex2 = listVertex[listFace[i].getVertex(j+1)];
+                glVertex3f(vertex1.getX(), vertex1.getY(), vertex1.getZ());
+                glVertex3f(vertex2.getX(), vertex2.getY(), vertex2.getZ());
             }
+            vertex1 = listVertex[listFace[i].getVertex(listFace[i].getSize()- 1)];
+            vertex2 = listVertex[listFace[i].getVertex(0)];
+            glVertex3f(vertex1.getX(), vertex1.getY(), vertex1.getZ());
+            glVertex3f(vertex2.getX(), vertex2.getY(), vertex2.getZ());
         }
     glEnd();
 }
 
 
-void Object::toString() {
+int Object::nbVertex() {
+    return(listVertex.size());
+}
+
+
+int Object::nbFace() {
+    return(listFace.size());
+}
+
+
+string Object::toString() {
+    string out = "";
     for(int i = 0; i < listVertex.size(); i++) {
-        printf("(%f, %f, %f)\n", listVertex[i].getX(), listVertex[i].getY(), listVertex[i].getZ());
+        out += listVertex[i].toString() + " ";
     }
-    printf("\n");
+    return(out);
 }

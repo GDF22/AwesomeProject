@@ -5,7 +5,6 @@
  * Created on 18 octobre 2013, 23:16
  */
 
-#include <cstdio>
 #include "Coord3D.h"
 
 Coord3D::Coord3D() {
@@ -68,6 +67,12 @@ bool Coord3D::equal(Coord3D a) {
 
 
 
-void Coord3D::toString() {
-    printf("(%f, %f, %f)\n", x, y, z);
+string Coord3D::toString() {
+    string out = "";
+    std::ostringstream sx, sy, sz;
+    sx << x;
+    sy << y;
+    sz << z;
+    out = "(" + sx.str() + ", " + sy.str() + ", " + sz.str() + ")";
+    return(out);
 }

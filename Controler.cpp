@@ -54,14 +54,35 @@ void Controler::run() {
     obj.addVertex(Coord3D(1.0, 1.0, 4.0));
     obj.addVertex(Coord3D(4.0, 1.0, 4.0));
     obj.addVertex(Coord3D(4.0, 1.0, 1.0));
+    obj.addVertex(Coord3D(1.0, 4.0, 1.0));
+    obj.addVertex(Coord3D(1.0, 4.0, 4.0));
+    obj.addVertex(Coord3D(4.0, 4.0, 4.0));
+    obj.addVertex(Coord3D(4.0, 4.0, 1.0));
     
     vector<int> face;
     face.push_back(0);face.push_back(1);face.push_back(2);face.push_back(3);
-    obj.addFace(face);
+    obj.addFace(Face(face, Coord3D(255, 255, 0), Coord3D(255, 255, 255)));
+    vector<int> face2;
+    face2.push_back(4);face2.push_back(5);face2.push_back(6);face2.push_back(7);
+    obj.addFace(Face(face2, Coord3D(0, 0, 255), Coord3D(255, 255, 255)));
+    vector<int> face3;
+    face3.push_back(0);face3.push_back(1);face3.push_back(5);face3.push_back(4);
+    obj.addFace(Face(face3, Coord3D(0, 255, 0), Coord3D(255, 255, 255)));
+    vector<int> face4;
+    face4.push_back(2);face4.push_back(3);face4.push_back(7);face4.push_back(6);
+    obj.addFace(Face(face4, Coord3D(255, 0, 0), Coord3D(255, 255, 255)));
+    vector<int> face5;
+    face5.push_back(1);face5.push_back(2);face5.push_back(6);face5.push_back(5);
+    obj.addFace(Face(face5, Coord3D(255, 0, 255), Coord3D(255, 255, 255)));
+    vector<int> face6;
+    face6.push_back(0);face6.push_back(3);face6.push_back(7);face6.push_back(4);
+    obj.addFace(Face(face6, Coord3D(0, 255, 255), Coord3D(255, 255, 255)));
     
-    obj.toString();
-    obj.removeVertex(4);
-    obj.toString();
+    cout << obj.toString() << endl;
+    obj.removeVertex(0);
+    //obj.removeVertex(0);
+    cout << obj.toString() << endl;
+    printf("%d", obj.nbFace());
     
     for (;;)
     {
@@ -82,6 +103,7 @@ void Controler::run() {
         carre(5, 2, 5, 1);
         carre(2, 5, 3, 1);
         obj.drawFace();
+        obj.drawEdge();
  
         glFlush();
         SDL_GL_SwapBuffers();

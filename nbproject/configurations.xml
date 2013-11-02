@@ -74,6 +74,7 @@
             <linkerLibLibItem>opengl32</linkerLibLibItem>
             <linkerLibLibItem>glu32</linkerLibLibItem>
           </linkerLibItems>
+          <commandLine>-static-libgcc -static-libstdc++</commandLine>
         </linkerTool>
       </compileType>
       <item path="Camera.cpp" ex="false" tool="1" flavor2="0">

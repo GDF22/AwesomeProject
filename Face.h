@@ -18,20 +18,29 @@ using namespace std;
 
 class Face {
 public:
-    Face(vector<Coord3D> vect, Coord3D colorFace, Coord3D colorEdge);
+    Face(vector<int> vect);
+    Face(vector<int> vect, Coord3D colorFace, Coord3D colorEdge);
     virtual ~Face();
     
+    int getVertex(int i);
     Coord3D getColorFace();
     Coord3D getColorEdge();
+    int getSize();
+    
     void setColor(Coord3D face, Coord3D edge);
+    
+    void applyColorFace();
+    void applyColorEdge();
+    
+    void removeVertex(int vertex);
     
     void drawFace();
     void drawEdge();
-    void toString();
+    string toString();
 private:
-    vector<Coord3D*> tabVertex;   // liste des pointeurs de sommet
-    Coord3D colorFace;
-    Coord3D colorEdge;
+    vector<int> listVertex;   // Liste des sommets
+    Coord3D colorFace;      // Couleur de la face
+    Coord3D colorEdge;      // Couleur des arêtes
 };
 
 #endif	/* FACE_H */

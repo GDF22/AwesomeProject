@@ -10,10 +10,15 @@
 
 using namespace std;
 
-Face::Face(vector<Coord3D> vect, Coord3D colorFace, Coord3D colorEdge) {
-    int i;
-    for(i = 0; i < vect.size(); i++) {
-        tabVertex.push_back(&(vect[i]));
+Face::Face(vector<int> vect) {
+    for(int i = 0; i < vect.size(); i++) {
+        listVertex.push_back(vect[i]);
+    }
+}
+
+Face::Face(vector<int> vect, Coord3D colorFace, Coord3D colorEdge) {
+    for(int i = 0; i < vect.size(); i++) {
+        listVertex.push_back(vect[i]);
     }
     this->setColor(colorFace, colorEdge);
 }
@@ -22,6 +27,9 @@ Face::~Face() {
 }
 
 
+int Face::getVertex(int i) {
+    return(listVertex[i]);
+}
 
 Coord3D Face::getColorFace() {
     return(this->colorFace);
@@ -29,6 +37,11 @@ Coord3D Face::getColorFace() {
 
 Coord3D Face::getColorEdge() {
     return(this->colorEdge);
+}
+
+
+int Face::getSize() {
+    return(this->listVertex.size());
 }
 
 
@@ -53,11 +66,40 @@ void Face::setColor(Coord3D colorFace, Coord3D colorEdge) {
 }
 
 
+void Face::applyColorFace() {
+    glColor3d(colorFace.getX(), colorFace.getY(), colorFace.getZ());
+}
+
+void Face::applyColorEdge() {
+    glColor3d(colorEdge.getX(), colorEdge.getY(), colorEdge.getZ());
+}
+
+
+void Face::removeVertex(int vertex) {
+    vector<int>::iterator it(listVertex.begin());
+    
+    for (int i = 0; i < getSize(); i++) {
+        if(listVertex[i] == vertex) {
+            listVertex.erase(it);
+            --it;
+            i--;
+        } else if(listVertex[i] > vertex) {
+            listVertex[i] -= 1;
+        }
+        ++it;
+    }
+}
+
+
+
+
+
+/*
 void Face::drawFace() {
     glBegin(GL_POLYGON);
         glColor4d(colorFace.getX(), colorFace.getY(), colorFace.getZ(), 1);
-        for(int i = 0; i < tabVertex.size(); i++) {
-            printf("%f  %f %f\n", (*tabVertex[i]).getX(), (*tabVertex[i]).getY(), (*tabVertex[i]).getZ());
+        for(int i = 0; i < listVertex.size(); i++) {
+            //printf("%f  %f %f\n", (*tabVertex[i]).getX(), (*tabVertex[i]).getY(), (*tabVertex[i]).getZ());
             glVertex3f((*tabVertex[i]).getX(),(*tabVertex[i]).getY(),(*tabVertex[i]).getZ());
         }
     glEnd();
@@ -75,12 +117,18 @@ void Face::drawEdge() {
     glEnd();
 }
 
+*/
 
-
-void Face::toString() {
-    int i;
-    for(i = 0; i < tabVertex.size(); i++) {
-        (tabVertex[i])->toString();
+string Face::toString() {
+    string out = "<";
+    for(int i = 0; i < listVertex.size(); i++) {
+        std::ostringstream oss;
+        oss << listVertex[i];
+        out += oss.str();
+        if(i != listVertex.size() - 1) {
+            out += ", ";
+        }
     }
-    printf("\n");
+    out += ">";
+    return(out);
 }

@@ -10,7 +10,10 @@
 
 #include <iostream>
 #include <sstream>
+#include <cstdio>
 #include <math.h>
+
+using namespace std;
 
 using namespace std;
 
@@ -30,7 +33,7 @@ public:
     Coord3D vectUnitaire(Coord3D direction);
     
     bool equal(Coord3D a);
-    void toString();
+    string toString();
 private:
     double x, y, z;
 };

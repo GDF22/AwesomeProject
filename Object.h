@@ -22,18 +22,24 @@ public:
     virtual ~Object();
     
     void addVertex(Coord3D vertex);
+    
     void removeVertex(int vertex);
     void removeVertex(Coord3D vertex);
-    void addFace(vector<int> face);
+    
+    void addFace(vector<int> listVertex);
+    void addFace(Face face);
     
     void drawFace();
     void drawEdge();
     
-    void toString();
+    int nbVertex();
+    int nbFace();
+    
+    string toString();
 private:
     Coord3D position;
     vector<Coord3D> listVertex;
-    vector< vector<int> > listFace;
+    vector<Face> listFace;
 };
 
 #endif	/* OBJECT_H */
