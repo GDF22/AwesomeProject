@@ -26,24 +26,27 @@ public:
     
     void placeCamera();
     
-    void deplacement(int* mouse);
-    void avance();
-    void recule();
-    void depGauche();
-    void depDroite();
-    void rotGauche();
-    void rotDroite();
-    void rotHaut();
-    void rotBas();
-    void monte();
-    void descend();
+    void updateView(int* mouse);
+    
+    void forward();
+    void backward();
+    void lateralLeft();
+    void lateralRight();
+    void up();
+    void down();
+    void lookUp();
+    void lookDown();
+    void lookLeft();
+    void lookRight();
     
     Coord3D getPos();
     Coord3D getAt();
+    void setPos(Coord3D pos);
+    void setAt(Coord3D at);
+    
 private:
     Coord3D pos;
     Coord3D at;
-    Coord3D up;
     double latitude;
     double longitude;
     float vitesseDep;

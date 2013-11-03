@@ -18,7 +18,7 @@ public:
     Event();
     virtual ~Event();
     
-    void EventManager();
+    bool EventManager();
     void removeKeyDown(SDLKey key);
     
     vector<SDLKey> notifyKeyboard();

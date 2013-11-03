@@ -15,20 +15,21 @@ Event::~Event() {
 }
 
 
-void Event::EventManager() {
+bool Event::EventManager() {
     int centrex = 800;
     int centrey = 450;
-    mouseX = 0;
-    mouseY = 0;
     
     SDL_Event event;
     SDL_PollEvent(&event);
     
     switch(event.type) {
         case SDL_QUIT:
-            exit(0);
+            return(false);
             break;
         case SDL_KEYDOWN:
+            if(event.key.keysym.sym == SDLK_ESCAPE) {
+                return(false);
+            }
             listKeyDown.push_back(event.key.keysym.sym);
             break;
         case SDL_KEYUP:
@@ -47,6 +48,7 @@ void Event::EventManager() {
     }
     
     SDL_WarpMouse(800, 450);
+    return(true);
 }
 
 
@@ -70,5 +72,8 @@ int* Event::notifyMouse() {
     int* mouse = new int[2];
     mouse[0] = mouseX;
     mouse[1] = mouseY;
+    mouseX = 0;
+    mouseY = 0;
+    
     return(mouse);
 }

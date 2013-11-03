@@ -12,12 +12,9 @@ void axe();
 void grille();
 void carre(float x, float y, float z, float taille);
 void triangle(float x, float y, float z, float hauteur, float rayonBase);
-void pyramide(float x, float y, float z, float hauteur, float rayonBase, int nbSommetBase);
 void grilleModulaire();
 
 Controler::Controler() {
-    this->event = Event();
-    this->ka = KeyAssignment();
     this->camera = Camera(Coord3D(-5, 0, 2), Coord3D(0, 0, 0), Coord3D(0, 0, 1));
 }
 
@@ -29,7 +26,7 @@ void Controler::run() {
     
     Coord3D cp = Coord3D(20.0,20.0,0.0);
        
-    Panel p =  Panel(cp,50,50);
+    Panel p =  Panel(cp,100,100);
     screenPanel.addComponent(p);
     
     FrameManager frame = FrameManager(60);
@@ -65,32 +62,30 @@ void Controler::run() {
     
     obj.removeVertex(0);
     
-    for (;;)
+    
+    
+    while (event.EventManager())
     {
-        event.EventManager();
-                
+        ka.useKey(event.notifyKeyboard(), &camera);
+        camera.updateView(event.notifyMouse());
+        
         // Début de la 3D
-        glMatrixMode( GL_PROJECTION );
+        glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
         gluPerspective(70,(double)640/480,1,1000);
         glEnable(GL_DEPTH_TEST);
-        glMatrixMode( GL_MODELVIEW );
+        glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
 
         glEnable(GL_BLEND) ;
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA) ; 
     
-        glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glLoadIdentity( );
     
-        camera.deplacement(event.notifyMouse());
         camera.placeCamera();
         
-        grille();
-        grilleModulaire();
-        carre(2, 5, -3, 1);
-        carre(5, 2, 5, 1);
-        carre(2, 5, 3, 1);
+        Dessiner();
         obj.drawFace();
         obj.drawEdge();
         // Fin de la 3D
@@ -101,12 +96,12 @@ void Controler::run() {
         glMatrixMode(GL_PROJECTION);
         glPushMatrix();
             glLoadIdentity();
-            gluOrtho2D(0.0, 1600, 0.0, 900);
+            gluOrtho2D(0.0, 1600, 900, 0);
             glMatrixMode(GL_MODELVIEW);
             glPushMatrix();
                 glLoadIdentity();
 
-                    screenPanel.draw(&screenPanel);
+                    p.draw(&p);
 
                 glMatrixMode(GL_PROJECTION);
             glPopMatrix();
@@ -124,20 +119,20 @@ void Controler::run() {
     }
 }
 
+
+
+
+
 void Dessiner()
 {
     carre(2, 5, -3, 1);
     carre(5, 2, 5, 1);
     carre(2, 5, 3, 1);
     //triangle(-5, -3, 5, 4, 3);
-    //pyramide(20, 20, 2, 5, 5, 6);
     
     grille();
     grilleModulaire();
-    //axe();
- 
-    glFlush();
-    SDL_GL_SwapBuffers();
+    axe();
 }
 
 void axe() {
@@ -296,53 +291,5 @@ void triangle(float x, float y, float z, float hauteur, float rayonBase) {
         glVertex3f(s3.getX(), s3.getY(), s3.getZ());glVertex3f(s4.getX(), s4.getY(), s4.getZ());
         glVertex3f(s4.getX(), s4.getY(), s4.getZ());glVertex3f(s2.getX(), s2.getY(), s2.getZ());
         
-    glEnd();
-}
-
-
-void pyramide(float x, float y, float z, float hauteur, float rayonBase, int nbSommetBase) {
-    Coord3D sommets[nbSommetBase+1];
-    sommets[0] =  Coord3D(x, y, z+hauteur);
-    int i;
-    for(i = 0; i < nbSommetBase; i++) {
-        float angle = i*(180/(nbSommetBase-1));
-        sommets[i+1] = Coord3D(x + cos(angle)*rayonBase, y + sin(angle)*rayonBase, z);
-        printf("%f, %f\n", cos(angle), sin(angle));
-    }
-    printf("\n\n");
-    
-    glBegin(GL_TRIANGLES);
-        glColor3ub(0,0,255);
-
-        for(i = 0; i <= nbSommetBase; i++) {
-            glVertex3f(sommets[0].getX(), sommets[0].getY(), sommets[0].getZ());
-            glVertex3f(sommets[i].getX(), sommets[i].getY(), sommets[i].getZ());
-            glVertex3f(sommets[i+1].getX(), sommets[i+1].getY(), sommets[i+1].getZ());
-        }
-        glVertex3f(sommets[0].getX(), sommets[0].getY(), sommets[0].getZ());
-        glVertex3f(sommets[1].getX(), sommets[1].getY(), sommets[1].getZ());
-        glVertex3f(sommets[nbSommetBase].getX(), sommets[nbSommetBase].getY(), sommets[nbSommetBase].getZ());  
-    glEnd();
-        
-    glBegin(GL_POLYGON);
-         for(i = 1; i <= nbSommetBase; i++) {
-             glVertex3f(sommets[i].getX(), sommets[i].getY(), sommets[i].getZ());
-         }
-    glEnd();
-    
-    glBegin(GL_LINES);
-        glColor3ub(255,255,255);
-        
-        for(i = 0; i <= nbSommetBase; i++) {
-            glVertex3f(sommets[0].getX(), sommets[0].getY(), sommets[0].getZ());
-            glVertex3f(sommets[i].getX(), sommets[i].getY(), sommets[i].getZ());
-        }
-        
-        for(i = 1; i <= nbSommetBase; i++) {
-            glVertex3f(sommets[i].getX(), sommets[i].getY(), sommets[i].getZ());
-            glVertex3f(sommets[i+1].getX(), sommets[i+1].getY(), sommets[i+1].getZ());
-        }
-        glVertex3f(sommets[1].getX(), sommets[1].getY(), sommets[1].getZ());
-        glVertex3f(sommets[nbSommetBase].getX(), sommets[nbSommetBase].getY(), sommets[nbSommetBase].getZ());
     glEnd();
 }
