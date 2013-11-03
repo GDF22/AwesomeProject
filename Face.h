@@ -12,23 +12,23 @@
 #include <vector>
 #include <GL/gl.h>
 #include <GL/glu.h>
-#include "Coord3D.h"
+#include "Color.h"
+
 
 using namespace std;
 
 class Face {
 public:
+    Face();
     Face(vector<int> vect);
-    Face(vector<int> vect, Coord3D colorFace, Coord3D colorEdge);
+    Face(vector<int> vect, Color colorFace, Color colorEdge);
     virtual ~Face();
     
     int getVertex(int i);
-    Coord3D getColorFace();
-    Coord3D getColorEdge();
+    Color getColorFace();
+    Color getColorEdge();
     int getSize();
-    
-    void setColor(Coord3D face, Coord3D edge);
-    
+        
     void applyColorFace();
     void applyColorEdge();
     
@@ -39,8 +39,8 @@ public:
     string toString();
 private:
     vector<int> listVertex;   // Liste des sommets
-    Coord3D colorFace;      // Couleur de la face
-    Coord3D colorEdge;      // Couleur des arêtes
+    Color colorFace;      // Couleur de la face
+    Color colorEdge;      // Couleur des arêtes
 };
 
 #endif	/* FACE_H */

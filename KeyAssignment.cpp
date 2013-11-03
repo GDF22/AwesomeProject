@@ -38,7 +38,7 @@ void KeyAssignment::chooseConfig(){
           this->primary[i] = e.key.keysym.sym;
           i++;
       }
-    }
+   }
 }
 
 

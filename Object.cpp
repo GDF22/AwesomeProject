@@ -28,11 +28,8 @@ void Object::removeVertex(int vertex) {
             ++it;
         }
         this->listVertex.erase(it);
-    
-        /* Actualisation des faces */
-        for(int i = 0; i < listFace.size(); i++) {
-            listFace[i].removeVertex(vertex);
-        }
+
+        actualisationFace(vertex);
     }
 }
 
@@ -55,11 +52,27 @@ void Object::removeVertex(Coord3D vertex) {
         this->listVertex.erase(it);
     }
     
-    /* Actualisation des faces */
+    actualisationFace(i);
+}
+
+void Object::actualisationFace(int vertex) {
+    // Suppression du vertex dans toutes les faces
     for(int i = 0; i < listFace.size(); i++) {
-        listFace[i].removeVertex(i);
+        listFace[i].removeVertex(vertex);
+    }
+    
+    // Suppression des faces ayant moins de 2 sommets
+    vector<Face>::iterator it(listFace.begin());
+    for(int i = 0; i < listFace.size(); i++) {
+        if(listFace[i].getSize() <= 1) {
+            listFace.erase(it);
+            ++it;
+        }
     }
 }
+
+
+
 
 /* AJout d'une face à partir d'une liste de sommets */
 void Object::addFace(vector<int> listVertex) {
@@ -67,30 +80,32 @@ void Object::addFace(vector<int> listVertex) {
     listFace.push_back(face);
 }
 
-/* AJout d'une face à partir d'une liste de sommets */
+/* AJout d'une face à partir d'une face */
 void Object::addFace(Face face) {
     listFace.push_back(face);
 }
 
 
+/* Affichage des faces */
 void Object::drawFace() {
-        for(int i = 0; i < listFace.size(); i++) {
-            glBegin(GL_POLYGON);
-                listFace[i].applyColorFace();
-                for(int j = 0; j < listFace[i].getSize(); j++) {
-                    Coord3D vertex = listVertex[listFace[i].getVertex(j)];
-                    glVertex3f(vertex.getX(), vertex.getY(), vertex.getZ());
-                }
-             glEnd();
-        }
+    for(int i = 0; i < listFace.size(); i++) {
+        glBegin(GL_POLYGON);
+            listFace[i].applyColorFace();
+            for(int j = 0; j < listFace[i].getSize(); j++) {
+                Coord3D vertex = listVertex[listFace[i].getVertex(j)];
+                glVertex3f(vertex.getX(), vertex.getY(), vertex.getZ());
+            }
+         glEnd();
+    }
 }
 
+/* Affichage des arêtes */
 void Object::drawEdge() {
     Coord3D vertex1, vertex2;
     
     glBegin(GL_LINES);
-        glColor3d(255, 255, 255);
         for(int i = 0; i < listFace.size(); i++) {
+            listFace[i].applyColorEdge();
             for(int j = 0; j < listFace[i].getSize() - 1; j++) {
                 vertex1 = listVertex[listFace[i].getVertex(j)];
                 vertex2 = listVertex[listFace[i].getVertex(j+1)];

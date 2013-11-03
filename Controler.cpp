@@ -16,8 +16,8 @@ void pyramide(float x, float y, float z, float hauteur, float rayonBase, int nbS
 void grilleModulaire();
 
 Controler::Controler() {
-    this->event = Event();
-    this->ka = KeyAssignment();
+    this->event;
+    this->ka;
     this->camera = Camera(Coord3D(-5, 0, 2), Coord3D(0, 0, 0), Coord3D(0, 0, 1));
 }
 
@@ -25,10 +25,10 @@ Controler::~Controler() {
 }
 
 void Controler::run() {
-    
+    World world;
     
 
-    Panel p =  Panel(Coord3D(100,100,0),100,100,Color(1.0f, 0.5f , 0.0f));
+    /*Panel p =  Panel(Coord3D(100,100,0),100,100,Color(1.0f, 0.5f , 0.0f));
     Panel partOne =  Panel(Coord3D(110,110,0),50,50,Color(0.9f, 0.0f , 0.0f));
    
     
@@ -42,7 +42,7 @@ void Controler::run() {
     
     
     p.addComponent(&partOne);
-    p.addComponent(&partTwo);
+    p.addComponent(&partTwo);*/
     
     
     
@@ -57,28 +57,38 @@ void Controler::run() {
     obj.addVertex(Coord3D(1.0, 4.0, 4.0));
     obj.addVertex(Coord3D(4.0, 4.0, 4.0));
     obj.addVertex(Coord3D(4.0, 4.0, 1.0));
+    obj.addVertex(Coord3D(1.0, 2.5, 6.0));
+    obj.addVertex(Coord3D(4.0, 2.5, 6.0));
     
     vector<int> face;
     face.push_back(0);face.push_back(1);face.push_back(2);face.push_back(3);
-    obj.addFace(Face(face, Coord3D(255, 255, 0), Coord3D(255, 255, 255)));
+    obj.addFace(Face(face, Color(1, 1, 0), Color(255, 255, 255)));
     vector<int> face2;
     face2.push_back(4);face2.push_back(5);face2.push_back(6);face2.push_back(7);
-    obj.addFace(Face(face2, Coord3D(0, 0, 255), Coord3D(255, 255, 255)));
+    obj.addFace(Face(face2, Color(0, 0, 1), Color(1, 1, 1)));
     vector<int> face3;
     face3.push_back(0);face3.push_back(1);face3.push_back(5);face3.push_back(4);
-    obj.addFace(Face(face3, Coord3D(0, 255, 0), Coord3D(255, 255, 255)));
+    obj.addFace(Face(face3, Color(0, 1, 0), Color(1, 1, 1)));
     vector<int> face4;
     face4.push_back(2);face4.push_back(3);face4.push_back(7);face4.push_back(6);
-    obj.addFace(Face(face4, Coord3D(255, 0, 0), Coord3D(255, 255, 255)));
+    obj.addFace(Face(face4, Color(1, 0, 0), Color(1, 1, 1)));
     vector<int> face5;
     face5.push_back(1);face5.push_back(2);face5.push_back(6);face5.push_back(5);
-    obj.addFace(Face(face5, Coord3D(255, 0, 255), Coord3D(255, 255, 255)));
+    obj.addFace(Face(face5, Color(1, 0, 1), Color(1, 1, 1)));
     vector<int> face6;
     face6.push_back(0);face6.push_back(3);face6.push_back(7);face6.push_back(4);
-    obj.addFace(Face(face6, Coord3D(0, 255, 255), Coord3D(255, 255, 255)));
+    obj.addFace(Face(face6, Color(0, 1, 1), Color(1, 1, 1)));
+    vector<int> face7;
+    face7.push_back(1);face7.push_back(2);face7.push_back(9);face7.push_back(8);
+    obj.addFace(Face(face7, Color(0.5, 0.25, 0), Color(1, 1, 1)));
+    vector<int> face8;
+    face8.push_back(5);face8.push_back(6);face8.push_back(9);face8.push_back(8);
+    obj.addFace(Face(face8, Color(0.5, 0.25, 0), Color(1, 1, 1)));
     
-    obj.removeVertex(0);
-    
+    /*obj.removeVertex(Coord3D(1.0, 1.0, 1.0));
+    obj.removeVertex(Coord3D(4.0, 1.0, 4.0));
+    obj.removeVertex(Coord3D(1.0, 1.0, 4.0));*/
+
     
     
     while (event.EventManager())
@@ -105,6 +115,7 @@ void Controler::run() {
         Dessiner();
         obj.drawFace();
         obj.drawEdge();
+        //world.draw();
         // Fin de la 3D
         
         // Début de la 2D
@@ -118,11 +129,11 @@ void Controler::run() {
             glPushMatrix();
                 glLoadIdentity();
 
-                   p.draw();
+                   //p.draw();
 
-                glMatrixMode(GL_PROJECTION);
+                /*glMatrixMode(GL_PROJECTION);
             glPopMatrix();
-            glMatrixMode(GL_MODELVIEW);
+            glMatrixMode(GL_MODELVIEW);*/
         glPopMatrix();
 
         glEnable(GL_DEPTH_TEST);

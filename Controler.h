@@ -26,6 +26,7 @@
 #include "Face.h"
 #include "Object.h"
 #include "Panel.h"
+#include "World.h"
 
 
 

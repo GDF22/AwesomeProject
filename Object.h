@@ -25,7 +25,8 @@ public:
     
     void removeVertex(int vertex);
     void removeVertex(Coord3D vertex);
-    
+    void actualisationFace(int vertex);
+
     void addFace(vector<int> listVertex);
     void addFace(Face face);
     

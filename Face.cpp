@@ -10,17 +10,25 @@
 
 using namespace std;
 
+Face::Face() {
+    this->colorFace = Color(0, 0, 0);
+    this->colorEdge = Color(0, 0, 0);
+}
+
 Face::Face(vector<int> vect) {
     for(int i = 0; i < vect.size(); i++) {
         listVertex.push_back(vect[i]);
     }
+    this->colorFace = Color(0, 0, 0);
+    this->colorEdge = Color(0, 0, 0);
 }
 
-Face::Face(vector<int> vect, Coord3D colorFace, Coord3D colorEdge) {
+Face::Face(vector<int> vect, Color colorFace, Color colorEdge) {
     for(int i = 0; i < vect.size(); i++) {
         listVertex.push_back(vect[i]);
     }
-    this->setColor(colorFace, colorEdge);
+    this->colorFace = colorFace;
+    this->colorEdge = colorEdge;
 }
 
 Face::~Face() {
@@ -31,11 +39,11 @@ int Face::getVertex(int i) {
     return(listVertex[i]);
 }
 
-Coord3D Face::getColorFace() {
+Color Face::getColorFace() {
     return(this->colorFace);
 }
 
-Coord3D Face::getColorEdge() {
+Color Face::getColorEdge() {
     return(this->colorEdge);
 }
 
@@ -45,33 +53,12 @@ int Face::getSize() {
 }
 
 
-void Face::setColor(Coord3D colorFace, Coord3D colorEdge) {
-    this->colorFace = Coord3D(0, 0, 0);
-    this->colorEdge = Coord3D(0, 0, 0);
-    if(colorFace.getX() >= 0 && colorFace.getX() <= 255) {
-        if(colorFace.getX() >= 0 && colorFace.getX() <= 255) {
-            if(colorFace.getX() >= 0 && colorFace.getX() <= 255) {
-                this->colorFace = colorFace;
-            }
-        }
-    }
-
-    if(colorEdge.getX() >= 0 && colorEdge.getX() <= 255) {
-        if(colorEdge.getX() >= 0 && colorEdge.getX() <= 255) {
-            if(colorEdge.getX() >= 0 && colorEdge.getX() <= 255) {
-                this->colorEdge = colorEdge;
-            }
-        }
-    }
-}
-
-
 void Face::applyColorFace() {
-    glColor3d(colorFace.getX(), colorFace.getY(), colorFace.getZ());
+    glColor3d(colorFace.getR(), colorFace.getG(), colorFace.getB());
 }
 
 void Face::applyColorEdge() {
-    glColor3d(colorEdge.getX(), colorEdge.getY(), colorEdge.getZ());
+    glColor3d(colorEdge.getR(), colorEdge.getG(), colorEdge.getB());
 }
 
 
