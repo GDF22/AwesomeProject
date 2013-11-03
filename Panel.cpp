@@ -6,14 +6,20 @@
  */
 
 #include "Panel.h"
+#include "Color.h"
+#include <typeinfo>
 
 Panel::Panel() {
 }
 
-Panel::Panel(Coord3D cp , int width , int height) {
+Panel::Panel(Coord3D cp , int width , int height, Color color) {
+    Component();
     this->position = cp;
     this->width = width;
     this->height = height;
+    this->c = color;
+    this->visible = true;
+
 }
 
 Panel::Panel(SDL_Surface* screen) {
@@ -24,23 +30,30 @@ Panel::Panel(SDL_Surface* screen) {
 Panel::~Panel() {
 }
 
-void Panel::addComponent(Component toAdd){
-    componentList.push_back(toAdd);
+void Panel::addComponent(Component* toAdd){
+    toAdd->setParent(this);
+    Component::addComponent(toAdd);
 }
 
-void Panel::draw(Panel* par){
+void Panel::draw(){
     glBegin(GL_QUADS);
-        glColor4f(255, 255, 255, 0.8); 
-        glVertex2f(position.getX(), position.getY());
-        glVertex2f(position.getX() + width, position.getY());
-        glVertex2f(position.getX() + width, position.getY() + height);
-        glVertex2f(position.getX(), position.getY() + height);
+        glColor3f( c.getB() , c.getG() ,  c.getB() );
+        glVertex2i(position.getX(), position.getY());
+        glVertex2i(position.getX()+width, position.getY());
+        glVertex2i(position.getX()+width, position.getY()+height);
+        glVertex2i(position.getX(), position.getY()+height);
     glEnd();
-
-    for(unsigned int i=0; i<componentList.size(); ++i)
-    {
-        Component& el = componentList[i];
-        el.draw(this);
+    cout<<"----------"<<this->getName()<<endl;
+    for(unsigned int i=0; i<componentList.size(); ++i){
+               Component* el = componentList[i];
+               if ( el->isVisible() ){
+                   if(typeid(*el) == typeid(Panel)) ((Panel*) el)->draw();
+                  // else if(typeid(*el) == typeid(Button)) ((Button*) el)->draw(this);
+                  // else if(typeid(*el) == typeid(Label)) ((Label*) el)->draw(this);
+                  // else if(typeid(*el) == typeid(TextField)) ((TextField*) el)->draw(this);
+               }
+               cout<<(el->isVisible()?"oui":"non")<<" : " << typeid(*el).name() <<" : '"<<el->getName()<<"'"<<endl;
     }
-
+    cout<<"----------"<<endl;
+    
 }

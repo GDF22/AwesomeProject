@@ -12,9 +12,12 @@ void axe();
 void grille();
 void carre(float x, float y, float z, float taille);
 void triangle(float x, float y, float z, float hauteur, float rayonBase);
+void pyramide(float x, float y, float z, float hauteur, float rayonBase, int nbSommetBase);
 void grilleModulaire();
 
 Controler::Controler() {
+    this->event = Event();
+    this->ka = KeyAssignment();
     this->camera = Camera(Coord3D(-5, 0, 2), Coord3D(0, 0, 0), Coord3D(0, 0, 1));
 }
 
@@ -22,12 +25,26 @@ Controler::~Controler() {
 }
 
 void Controler::run() {
-    Panel screenPanel = Panel();
     
-    Coord3D cp = Coord3D(20.0,20.0,0.0);
-       
-    Panel p =  Panel(cp,100,100);
-    screenPanel.addComponent(p);
+    
+
+    Panel p =  Panel(Coord3D(100,100,0),100,100,Color(1.0f, 0.5f , 0.0f));
+    Panel partOne =  Panel(Coord3D(110,110,0),50,50,Color(0.9f, 0.0f , 0.0f));
+   
+    
+    partOne.setName("sous-menu1");
+    
+    
+    Panel partTwo =  Panel(Coord3D(310,310,0),50,50,Color(0.0f, 0.0f , 1.0f));
+    
+    
+    partTwo.setName("sous-menu2");
+    
+    
+    p.addComponent(&partOne);
+    p.addComponent(&partTwo);
+    
+    
     
     FrameManager frame = FrameManager(60);
         
@@ -68,7 +85,7 @@ void Controler::run() {
     {
         ka.useKey(event.notifyKeyboard(), &camera);
         camera.updateView(event.notifyMouse());
-        
+                
         // Début de la 3D
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
@@ -101,7 +118,7 @@ void Controler::run() {
             glPushMatrix();
                 glLoadIdentity();
 
-                    p.draw(&p);
+                   p.draw();
 
                 glMatrixMode(GL_PROJECTION);
             glPopMatrix();
@@ -178,7 +195,7 @@ void grilleModulaire() {
    for(int i = 0; i < I; i++) {
         for(int j = 0; j < J; j++) {
           //  coordTab[i][j] = Coord3D(i,j,z);  /* classic */
-            coordTab[i][j] = Coord3D(i,j,z+40*min(sin(M_PI *(j-25)/25),sin(M_PI *(i-25)/25)) );  /* sin */
+           coordTab[i][j] = Coord3D(i,j,z+40*min(sin(M_PI *(j-25)/25),sin(M_PI *(i-25)/25)) );  /* sin */
           //    coordTab[i][j] = Coord3D(i,j,i);  /* sin */
         }
     }

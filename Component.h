@@ -9,16 +9,26 @@
 #define	COMPONENT_H
 
 #include "Coord3D.h"
+#include <vector>
 
 class Component {
 public:
     Component();
     Component(const Component& orig);
     virtual ~Component();
-    void draw(Component* parent);
+    virtual void draw(Component* par);
+    void setName(string name);
+    string getName();
+    void setParent(Component* parent);
+    void addComponent(Component* toAdd);
+    bool isVisible();
+    void setVisible(bool isVisible);
 protected:
+    vector<Component*> componentList;
+    string name;
     Coord3D position;
-
+    bool visible;
+    Component* parent;
 };
 
 #endif	/* COMPONENT_H */
