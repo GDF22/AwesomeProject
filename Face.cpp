@@ -15,20 +15,23 @@ Face::Face() {
     this->colorEdge = Color(0, 0, 0);
 }
 
-Face::Face(vector<int> vect) {
+/*Face::Face(vector<int> vect) {
     for(int i = 0; i < vect.size(); i++) {
         listVertex.push_back(vect[i]);
     }
     this->colorFace = Color(0, 0, 0);
     this->colorEdge = Color(0, 0, 0);
-}
+}*/
 
-Face::Face(vector<int> vect, Color colorFace, Color colorEdge) {
+Face::Face(vector<int> vect, Color colorFac, Color colorEdge) {
     for(int i = 0; i < vect.size(); i++) {
         listVertex.push_back(vect[i]);
     }
-    this->colorFace = colorFace;
+    cout << "couleur passee : " << colorFac.getR() << ", " << colorFac.getG() << ", " << colorFac.getB() << ", " << endl;
+    cout << "initdebut" << this->colorFace.getR() << endl;
+    this->colorFace = colorFac;
     this->colorEdge = colorEdge;
+    cout << "initfin" << this->colorFace.getR() << endl;
 }
 
 Face::~Face() {
@@ -54,11 +57,11 @@ int Face::getSize() {
 
 
 void Face::applyColorFace() {
-    glColor3d(colorFace.getR(), colorFace.getG(), colorFace.getB());
+    glColor3ub(colorFace.getR(), colorFace.getG(), colorFace.getB());
 }
 
 void Face::applyColorEdge() {
-    glColor3d(colorEdge.getR(), colorEdge.getG(), colorEdge.getB());
+    glColor3ub(colorEdge.getR(), colorEdge.getG(), colorEdge.getB());
 }
 
 
@@ -84,7 +87,7 @@ void Face::removeVertex(int vertex) {
 /*
 void Face::drawFace() {
     glBegin(GL_POLYGON);
-        glColor4d(colorFace.getX(), colorFace.getY(), colorFace.getZ(), 1);
+        glColor3ub(colorFace.getR(), colorFace.getG(), colorFace.getB());
         for(int i = 0; i < listVertex.size(); i++) {
             //printf("%f  %f %f\n", (*tabVertex[i]).getX(), (*tabVertex[i]).getY(), (*tabVertex[i]).getZ());
             glVertex3f((*tabVertex[i]).getX(),(*tabVertex[i]).getY(),(*tabVertex[i]).getZ());

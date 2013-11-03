@@ -15,22 +15,22 @@ using namespace std;
 class Color {
 public:
     Color();
-    Color(float r , float g , float b);
-//    Color(int r, int g, int b);
+    Color(int r, int g, int b);
     Color(const Color& orig);
     virtual ~Color();
-    float getR();
-    float getG();
-    float getB();
     
-    void setR(float r);
-    void setG(float g);
-    void setB(float b);
+    int getR();
+    int getG();
+    int getB();
+    
+    void setR(int r);
+    void setG(int g);
+    void setB(int b);
     
 private:
-    float r;
-    float g;
-    float b;
+    int r;
+    int g;
+    int b;
 };
 
 #endif	/* COLOR_H */

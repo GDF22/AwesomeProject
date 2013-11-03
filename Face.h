@@ -21,7 +21,7 @@ class Face {
 public:
     Face();
     Face(vector<int> vect);
-    Face(vector<int> vect, Color colorFace, Color colorEdge);
+    Face(vector<int> vect, Color colorFac, Color colorEdge);
     virtual ~Face();
     
     int getVertex(int i);

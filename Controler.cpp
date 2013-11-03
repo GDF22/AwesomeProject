@@ -25,25 +25,25 @@ Controler::~Controler() {
 }
 
 void Controler::run() {
-    World world;
+    //World world;
     
 
-    /*Panel p =  Panel(Coord3D(100,100,0),100,100,Color(1.0f, 0.5f , 0.0f));
-    Panel partOne =  Panel(Coord3D(110,110,0),50,50,Color(0.9f, 0.0f , 0.0f));
+    /*Panel p =  Panel(Coord3D(100,100,0),100,100,Color(2147483647 , 128 , 0));
+    Panel partOne =  Panel(Coord3D(110,110,0),50,50,Color(230, 0, 0));
    
     
     partOne.setName("sous-menu1");
     
     
-    Panel partTwo =  Panel(Coord3D(310,310,0),50,50,Color(0.0f, 0.0f , 1.0f));
+    Panel partTwo =  Panel(Coord3D(310,310,0),50,50,Color(0, 0, 255));
     
     
     partTwo.setName("sous-menu2");
     
     
     p.addComponent(&partOne);
-    p.addComponent(&partTwo);*/
-    
+    p.addComponent(&partTwo);
+    */
     
     
     FrameManager frame = FrameManager(60);
@@ -60,37 +60,48 @@ void Controler::run() {
     obj.addVertex(Coord3D(1.0, 2.5, 6.0));
     obj.addVertex(Coord3D(4.0, 2.5, 6.0));
     
-    vector<int> face;
-    face.push_back(0);face.push_back(1);face.push_back(2);face.push_back(3);
-    obj.addFace(Face(face, Color(1, 1, 0), Color(255, 255, 255)));
-    vector<int> face2;
+    vector<int> vect;
+    vect.push_back(0);vect.push_back(1);vect.push_back(2);vect.push_back(3);
+    Color c(242, 255, 255);
+    cout << "c :" << c.getR() << endl;
+    Face f(vect, c, c);
+    /*cout << "avantadd : " << f.getColorFace().getR() << endl;
+    obj.addFace(f);*/
+    
+    /*vector<int> face2;
     face2.push_back(4);face2.push_back(5);face2.push_back(6);face2.push_back(7);
-    obj.addFace(Face(face2, Color(0, 0, 1), Color(1, 1, 1)));
+    obj.addFace(face2, Color(0, 0, 255), Color(255, 255, 255));
+    
     vector<int> face3;
     face3.push_back(0);face3.push_back(1);face3.push_back(5);face3.push_back(4);
-    obj.addFace(Face(face3, Color(0, 1, 0), Color(1, 1, 1)));
+    obj.addFace(face3, Color(0, 255, 0), Color(255, 255, 255));
+    
     vector<int> face4;
     face4.push_back(2);face4.push_back(3);face4.push_back(7);face4.push_back(6);
-    obj.addFace(Face(face4, Color(1, 0, 0), Color(1, 1, 1)));
+    obj.addFace(face4, Color(255, 0, 0), Color(255, 255, 255));
+    
     vector<int> face5;
     face5.push_back(1);face5.push_back(2);face5.push_back(6);face5.push_back(5);
-    obj.addFace(Face(face5, Color(1, 0, 1), Color(1, 1, 1)));
+    obj.addFace(Face(face5, Color(255, 0, 255), Color(255, 255, 255)));
+    
     vector<int> face6;
     face6.push_back(0);face6.push_back(3);face6.push_back(7);face6.push_back(4);
-    obj.addFace(Face(face6, Color(0, 1, 1), Color(1, 1, 1)));
+    obj.addFace(Face(face6, Color(0, 255, 255), Color(255, 255, 255)));
+    
     vector<int> face7;
     face7.push_back(1);face7.push_back(2);face7.push_back(9);face7.push_back(8);
-    obj.addFace(Face(face7, Color(0.5, 0.25, 0), Color(1, 1, 1)));
+    obj.addFace(Face(face7, Color(128, 75, 0), Color(255, 255, 255)));
+    
     vector<int> face8;
     face8.push_back(5);face8.push_back(6);face8.push_back(9);face8.push_back(8);
-    obj.addFace(Face(face8, Color(0.5, 0.25, 0), Color(1, 1, 1)));
+    obj.addFace(Face(face8, Color(128, 75, 0), Color(255, 255, 255)));*/
     
     /*obj.removeVertex(Coord3D(1.0, 1.0, 1.0));
     obj.removeVertex(Coord3D(4.0, 1.0, 4.0));
     obj.removeVertex(Coord3D(1.0, 1.0, 4.0));*/
 
     
-    
+    SDL_WarpMouse(800, 450);
     while (event.EventManager())
     {
         ka.useKey(event.notifyKeyboard(), &camera);
@@ -114,7 +125,7 @@ void Controler::run() {
         
         Dessiner();
         obj.drawFace();
-        obj.drawEdge();
+        //obj.drawEdge();
         //world.draw();
         // Fin de la 3D
         
@@ -131,9 +142,9 @@ void Controler::run() {
 
                    //p.draw();
 
-                /*glMatrixMode(GL_PROJECTION);
+                glMatrixMode(GL_PROJECTION);
             glPopMatrix();
-            glMatrixMode(GL_MODELVIEW);*/
+            glMatrixMode(GL_MODELVIEW);
         glPopMatrix();
 
         glEnable(GL_DEPTH_TEST);
@@ -166,17 +177,17 @@ void Dessiner()
 void axe() {
     glBegin(GL_LINES);
     
-    glColor3i(255,0,0);
+    glColor3ub(255 ,0,0);
     glVertex2i(0,0);glVertex2i(0,1);
     glVertex3i(0,1,0);glVertex3f(0.1,0.9,0);
     glVertex3i(0,1,0);glVertex3f(-0.1,0.9,0);
     
-    glColor3i(0,255,0);
+    glColor3ub(0,255 ,0);
     glVertex2i(0,0);glVertex2i(1,0);
     glVertex3i(1,0,0);glVertex3f(0.9,0.1,0);
     glVertex3i(1,0,0);glVertex3f(0.9,-0.1,0);
     
-    glColor3i(0,0,255);
+    glColor3ub(0,0,255 );
     glVertex2i(0,0);glVertex3i(0,0,1);
     glVertex3i(0,0,1);glVertex3f(0.05,-0.05,0.9);
     glVertex3i(0,0,1);glVertex3f(-0.05,0.05,0.9);

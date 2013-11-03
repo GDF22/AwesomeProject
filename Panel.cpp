@@ -37,13 +37,13 @@ void Panel::addComponent(Component* toAdd){
 
 void Panel::draw(){
     glBegin(GL_QUADS);
-        glColor3f( c.getB() , c.getG() ,  c.getB() );
+        glColor3ub(c.getR(), c.getG(), c.getB());
         glVertex2i(position.getX(), position.getY());
         glVertex2i(position.getX()+width, position.getY());
         glVertex2i(position.getX()+width, position.getY()+height);
         glVertex2i(position.getX(), position.getY()+height);
     glEnd();
-    cout<<"----------"<<this->getName()<<endl;
+    //cout<<"----------"<<this->getName()<<endl;
     for(unsigned int i=0; i<componentList.size(); ++i){
                Component* el = componentList[i];
                if ( el->isVisible() ){
@@ -52,8 +52,8 @@ void Panel::draw(){
                   // else if(typeid(*el) == typeid(Label)) ((Label*) el)->draw(this);
                   // else if(typeid(*el) == typeid(TextField)) ((TextField*) el)->draw(this);
                }
-               cout<<(el->isVisible()?"oui":"non")<<" : " << typeid(*el).name() <<" : '"<<el->getName()<<"'"<<endl;
+               //cout<<(el->isVisible()?"oui":"non")<<" : " << typeid(*el).name() <<" : '"<<el->getName()<<"'"<<endl;
     }
-    cout<<"----------"<<endl;
+    //cout<<"----------"<<endl;
     
 }

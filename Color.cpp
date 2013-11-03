@@ -13,16 +13,12 @@ Color::Color() {
     b = 0;
 }
 
-Color::Color(float r , float g , float b) {
+Color::Color(int r, int g, int b) {
     this->setR(r);
     this->setG(g);
     this->setB(b);
+    cout << "constr couleur " << this->r << endl;
 }
-
-/*
-Color::Color(int r, int g, int b) {
-    Color( (float) r/255 , (float) g/255 ,(float)  b/255);
-}*/
 
 Color::Color(const Color& orig) {
 }
@@ -30,26 +26,28 @@ Color::Color(const Color& orig) {
 Color::~Color() {
 }
 
-float Color::getR(){
-    return r;
+
+int Color::getR(){
+    return(this->r);
 }
-float Color::getG(){
-    return g;
+int Color::getG(){
+    return(this->g);
 }
-float Color::getB(){
-    return b;
+int Color::getB(){
+    return(this->b);
 }
 
-void Color::setR(float r){   
-    this->r = (float) (r < 0.0)? 0.0 :r;
-    this->r = (float) (r > 1.0)? 1.0 :r;
+void Color::setR(int r){   
+    this->r = (r < 0)? 0 :r;
+    this->r = (r > 255)? 255 :r;
 }
-void Color::setG(float g){
-    this->g = (float) (g < 0.0)? 0.0 :g;
-    this->g = (float) (g > 1.0)? 1.0 :g;
+
+void Color::setG(int g){
+    this->g = (g < 0)? 0 :g;
+    this->g = (g > 255)? 255 :g;
 }
-void Color::setB(float b){
-    
-    this->b = (float) (b < 0.0)? 0.0 :b;
-    this->b = (float) (b > 1.0)? 1.0 :b;
+
+void Color::setB(int b){
+    this->b = (b < 0)? 0 :b;
+    this->b = (b > 255)? 255 :b;
 }
