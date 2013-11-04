@@ -66,42 +66,38 @@ void Controler::run() {
     
     vector<int> vect;
     vect.push_back(0);vect.push_back(1);vect.push_back(2);vect.push_back(3);
-    Color c(242, 255, 255);
-    cout << "c :" << c.getR() << endl;
-    Face f(vect, c, c);
-    /*cout << "avantadd : " << f.getColorFace().getR() << endl;
-    obj.addFace(f);*/
+    obj.addFace(vect, new Color(255, 0, 0), new Color(242, 242, 242));
     
-    /*vector<int> face2;
+    vector<int> face2;
     face2.push_back(4);face2.push_back(5);face2.push_back(6);face2.push_back(7);
-    obj.addFace(face2, Color(0, 0, 255), Color(255, 255, 255));
+    obj.addFace(new Face(face2, new Color(0, 0, 255), new Color(255, 255, 255)));
     
     vector<int> face3;
     face3.push_back(0);face3.push_back(1);face3.push_back(5);face3.push_back(4);
-    obj.addFace(face3, Color(0, 255, 0), Color(255, 255, 255));
+    obj.addFace(face3, new Color(0, 255, 0), new Color(255, 255, 255));
     
     vector<int> face4;
     face4.push_back(2);face4.push_back(3);face4.push_back(7);face4.push_back(6);
-    obj.addFace(face4, Color(255, 0, 0), Color(255, 255, 255));
+    obj.addFace(face4, new Color(255, 0, 0), new Color(255, 255, 255));
     
     vector<int> face5;
     face5.push_back(1);face5.push_back(2);face5.push_back(6);face5.push_back(5);
-    obj.addFace(Face(face5, Color(255, 0, 255), Color(255, 255, 255)));
+    obj.addFace(new Face(face5, new Color(255, 0, 255), new Color(255, 255, 255)));
     
     vector<int> face6;
     face6.push_back(0);face6.push_back(3);face6.push_back(7);face6.push_back(4);
-    obj.addFace(Face(face6, Color(0, 255, 255), Color(255, 255, 255)));
+    obj.addFace(new Face(face6, new Color(0, 255, 255), new Color(255, 255, 255)));
     
     vector<int> face7;
     face7.push_back(1);face7.push_back(2);face7.push_back(9);face7.push_back(8);
-    obj.addFace(Face(face7, Color(128, 75, 0), Color(255, 255, 255)));
+    obj.addFace(new Face(face7, new Color(128, 75, 0), new Color(255, 255, 255)));
     
     vector<int> face8;
     face8.push_back(5);face8.push_back(6);face8.push_back(9);face8.push_back(8);
-    obj.addFace(Face(face8, Color(128, 75, 0), Color(255, 255, 255)));*/
+    obj.addFace(new Face(face8, new Color(128, 75, 0), new Color(255, 255, 255)));
     
-    /*obj.removeVertex(Coord3D(1.0, 1.0, 1.0));
-    obj.removeVertex(Coord3D(4.0, 1.0, 4.0));
+    obj.removeVertex(Coord3D(1.0, 1.0, 1.0));
+    /*obj.removeVertex(Coord3D(4.0, 1.0, 4.0));
     obj.removeVertex(Coord3D(1.0, 1.0, 4.0));*/
 
     
@@ -129,7 +125,7 @@ void Controler::run() {
         
         Dessiner();
         obj.drawFace();
-        //obj.drawEdge();
+        obj.drawEdge();
         //world.draw();
         // Fin de la 3D
         
