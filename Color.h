@@ -8,7 +8,9 @@
 #ifndef COLOR_H
 #define	COLOR_H
 
+#include <sstream>
 #include <iostream>
+#include <cstdio>
 
 using namespace std;
 
@@ -26,6 +28,10 @@ public:
     void setR(int r);
     void setG(int g);
     void setB(int b);
+    void setRGB(int r, int g, int b);
+    void setColor(Color* color);
+    
+    string toString();
     
 private:
     int r;

@@ -21,14 +21,17 @@ class Face {
 public:
     Face();
     Face(vector<int> vect);
-    Face(vector<int> vect, Color colorFac, Color colorEdge);
+    Face(vector<int> vect, Color* colorFace, Color* colorEdge);
     virtual ~Face();
     
     int getVertex(int i);
-    Color getColorFace();
-    Color getColorEdge();
+    Color* getColorFace();
+    Color* getColorEdge();
     int getSize();
-        
+    
+    void setColorFace(Color* color);
+    void setColorEdge(Color* color);
+    
     void applyColorFace();
     void applyColorEdge();
     
@@ -39,8 +42,8 @@ public:
     string toString();
 private:
     vector<int> listVertex;   // Liste des sommets
-    Color colorFace;      // Couleur de la face
-    Color colorEdge;      // Couleur des arêtes
+    Color* colorFace;      // Couleur de la face
+    Color* colorEdge;      // Couleur des arêtes
 };
 
 #endif	/* FACE_H */

@@ -31,24 +31,7 @@ void Controler::run() {
 
     /*-----------------CREATION-DU-MENU-----------------------------*/
     Panel* menu = new Panel(string("menu"), Coord3D(100,100,0), 100, 100, new Color(0,0,255));
-    twoDim->addComponent(menu);
-    /*Panel p =  Panel(Coord3D(100,100,0),100,100,Color(2147483647 , 128 , 0));
-    Panel partOne =  Panel(Coord3D(110,110,0),50,50,Color(230, 0, 0));
-   
-    
-    partOne.setName("sous-menu1");
-    
-    
-    Panel partTwo =  Panel(Coord3D(310,310,0),50,50,Color(0, 0, 255));
-    
-    
-    partTwo.setName("sous-menu2");
-    
-    
-    p.addComponent(&partOne);
-    p.addComponent(&partTwo);
-    */
-    
+    twoDim->addComponent(menu);    
     
     FrameManager frame = FrameManager(60);
         

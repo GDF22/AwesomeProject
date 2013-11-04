@@ -58,7 +58,10 @@ bool World::addObject(char* filename) {
 				for(v=0; v < 4 ;v++) { // triangles donc composés de 3 vertices
 					vect.push_back(sscanf(buf,"%f"));
 				}
-				newObject.addFace(Face(vect, Color(1, 0, 0), Color(1, 1, 1))); // on enregistre la face récupérée
+                Color f(255, 0, 0);
+                Color e(255, 255, 255);
+                Face fa(vect, &f, &e);
+				newObject.addFace(&fa); // on enregistre la face récupérée
 			}
 		}
 		delete[] buf;

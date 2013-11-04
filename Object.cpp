@@ -75,16 +75,16 @@ void Object::actualisationFace(int vertex) {
 
 
 /* AJout d'une face à partir d'une liste de sommets */
-void Object::addFace(vector<int> listVertex, Color colorFace, Color colorEdge) {
-    cout << "addface" << colorFace.getR() << endl;
-    Face face(listVertex, colorFace, colorEdge);
-    listFace.push_back(face);
+void Object::addFace(vector<int> listVertex, Color* colorFace, Color* colorEdge) {
+    Face* face = new Face(listVertex);
+    face->setColorFace(colorFace);
+    face->setColorEdge(colorEdge);
+    listFace.push_back(*face);
 }
 
 /* AJout d'une face à partir d'une face */
-void Object::addFace(Face face) {
-    cout << "addface : " << face.getColorFace().getR() << endl;
-    listFace.push_back(face);
+void Object::addFace(Face* face) {
+    listFace.push_back(*face);
 }
 
 
@@ -108,7 +108,6 @@ void Object::drawEdge() {
     glBegin(GL_LINES);
         for(int i = 0; i < listFace.size(); i++) {
             listFace[i].applyColorEdge();
-            glColor3ub(listFace[i].getColorFace().getR(), listFace[i].getColorFace().getG(), listFace[i].getColorFace().getB());
             for(int j = 0; j < listFace[i].getSize() - 1; j++) {
                 vertex1 = listVertex[listFace[i].getVertex(j)];
                 vertex2 = listVertex[listFace[i].getVertex(j+1)];
@@ -136,8 +135,11 @@ int Object::nbFace() {
 
 string Object::toString() {
     string out = "";
-    for(int i = 0; i < listVertex.size(); i++) {
-        out += listVertex[i].toString() + " ";
+    /*for(int i = 0; i < listVertex.size(); i++) {
+        out += listVertex[i].toString() + "\n";
+    }*/
+    for(int i = 0; i < listFace.size(); i++) {
+        out += listFace[i].toString() + "\n";
     }
     return(out);
 }

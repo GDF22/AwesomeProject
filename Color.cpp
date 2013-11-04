@@ -7,6 +7,8 @@
 
 #include "Color.h"
 
+using namespace std;
+
 Color::Color() {
     r = 0;
     g = 0;
@@ -17,7 +19,6 @@ Color::Color(int r, int g, int b) {
     this->setR(r);
     this->setG(g);
     this->setB(b);
-    cout << "constr couleur " << this->r << endl;
 }
 
 Color::Color(const Color& orig) {
@@ -50,4 +51,33 @@ void Color::setG(int g){
 void Color::setB(int b){
     this->b = (b < 0)? 0 :b;
     this->b = (b > 255)? 255 :b;
+}
+
+void Color::setRGB(int r, int g, int b) {
+    this->setR(r);
+    this->setG(g);
+    this->setB(b);
+}
+
+void Color::setColor(Color* color) {
+    this->setR(color->getR());
+    this->setG(color->getG());
+    this->setB(color->getB());
+}
+
+string Color::toString() {
+    string out = "";
+    std::ostringstream ossr, ossg, ossb;
+    
+    out += "(";
+    ossr << getR();
+    out += ossr.str();
+    out += ", ";
+    ossg << getG();
+    out += ossg.str();
+    out += ", ";
+    ossb << getB();
+    out += ossb.str();
+    out += ")";
+    return(out);
 }

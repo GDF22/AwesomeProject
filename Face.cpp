@@ -11,27 +11,24 @@
 using namespace std;
 
 Face::Face() {
-    this->colorFace = Color(0, 0, 0);
-    this->colorEdge = Color(0, 0, 0);
+    this->colorFace = new Color(0, 0, 0);
+    this->colorEdge = new Color(0, 0, 0);
 }
 
-/*Face::Face(vector<int> vect) {
+Face::Face(vector<int> vect) {
     for(int i = 0; i < vect.size(); i++) {
         listVertex.push_back(vect[i]);
     }
-    this->colorFace = Color(0, 0, 0);
-    this->colorEdge = Color(0, 0, 0);
-}*/
+    this->colorFace = new Color(0, 0, 0);
+    this->colorEdge = new Color(0, 0, 0);
+}
 
-Face::Face(vector<int> vect, Color colorFac, Color colorEdge) {
+Face::Face(vector<int> vect, Color* colorFace, Color* colorEdge) {
     for(int i = 0; i < vect.size(); i++) {
         listVertex.push_back(vect[i]);
     }
-    cout << "couleur passee : " << colorFac.getR() << ", " << colorFac.getG() << ", " << colorFac.getB() << ", " << endl;
-    cout << "initdebut" << this->colorFace.getR() << endl;
-    this->colorFace = colorFac;
+    this->colorFace = colorFace;
     this->colorEdge = colorEdge;
-    cout << "initfin" << this->colorFace.getR() << endl;
 }
 
 Face::~Face() {
@@ -42,11 +39,11 @@ int Face::getVertex(int i) {
     return(listVertex[i]);
 }
 
-Color Face::getColorFace() {
+Color* Face::getColorFace() {
     return(this->colorFace);
 }
 
-Color Face::getColorEdge() {
+Color* Face::getColorEdge() {
     return(this->colorEdge);
 }
 
@@ -56,12 +53,21 @@ int Face::getSize() {
 }
 
 
+void Face::setColorFace(Color* color) {
+    colorFace->setColor(color);
+}
+
+void Face::setColorEdge(Color* color) {
+    colorEdge->setColor(color);
+}
+
+
 void Face::applyColorFace() {
-    glColor3ub(colorFace.getR(), colorFace.getG(), colorFace.getB());
+    glColor3ub(colorFace->getR(), colorFace->getG(), colorFace->getB());
 }
 
 void Face::applyColorEdge() {
-    glColor3ub(colorEdge.getR(), colorEdge.getG(), colorEdge.getB());
+    glColor3ub(colorEdge->getR(), colorEdge->getG(), colorEdge->getB());
 }
 
 
@@ -119,6 +125,9 @@ string Face::toString() {
             out += ", ";
         }
     }
-    out += ">";
+    out += ">  couleurFace : ";
+    out += this->colorFace->toString();
+    out += ", couleurEdge : ";
+    out += this->colorEdge->toString();
     return(out);
 }
