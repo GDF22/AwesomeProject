@@ -45,7 +45,6 @@ bool Event::EventManager() {
             break;
     }
     
-    SDL_WarpMouse(800, 450);
     return(true);
 }
 
@@ -65,9 +64,6 @@ vector<SDLKey> Event::notifyKeyboard() {
     return(listKeyDown);
 }
 
-int Event::justDown(){
-    return(justDownKey);
-}
 
 int* Event::notifyMouse() {
     int* mouse = new int[2];
@@ -77,4 +73,17 @@ int* Event::notifyMouse() {
     mouseY = 0;
     
     return(mouse);
+}
+
+
+int Event::justDown() {
+    return(justDownKey);
+}
+
+
+
+void Event::initMousePosition() {
+    this->mouseX = 0;
+    this->mouseY = 0;
+    SDL_WarpMouse(800, 450);
 }

@@ -16,7 +16,8 @@ enum Action
     LATERAL_RIGHT = 3,
     UP = 4,
     DOWN = 5,
-    PAUSE_MENU = 6
+    UPDATEVIEW = 6,
+    PAUSE_MENU = 7
 };
 #endif	/* ACTION_H */
 

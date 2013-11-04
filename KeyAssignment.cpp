@@ -49,6 +49,7 @@ void KeyAssignment::useKey(Event event, Controler* ctrl) {
     vector<SDLKey> currentKeys = event.notifyKeyboard();
     int justDown = event.justDown();
     
+    // Touches enfoncees
     for(int i = 0; i < currentKeys.size(); i++) {
         if(currentKeys[i] == primary[0]) {
             ctrl->action(FORWARD);
@@ -70,10 +71,15 @@ void KeyAssignment::useKey(Event event, Controler* ctrl) {
         }
     }
     
+    // Derniere touche pressee
     if(justDown != -1){
-    if(justDown == SDLK_ESCAPE){
+        if(justDown == SDLK_ESCAPE){
             ctrl->action(PAUSE_MENU);
         }
     }
-
+    
+    // Mouvements de la souris
+    if(event.notifyMouse()[0] != 0 || event.notifyMouse()[1] != 0) {
+        ctrl->action(UPDATEVIEW);
+    }
 }

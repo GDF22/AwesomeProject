@@ -7,7 +7,7 @@
 
 #include "World.h"
 
-char * ReadLine(FILE *fp);
+bool ReadLine(FILE *fp, char * *buf);
 
 World::World() {
     char* file = "untitled.obj";
@@ -38,8 +38,9 @@ bool World::addObject(char* filename) {
 	unsigned int lenbuf;
     
     cout << "coucou" << endl;
-	while (!feof(fp)) {
-		buf = ReadLine(fp);
+	/*while (!feof(fp)) {
+		buf = ReadLine(fp);*/
+    while(ReadLine(fp, &buf)) {
 		lenbuf = strlen((const char *)buf);
 		if (lenbuf > 0) {
 			sscanf(buf,"%s",buftmp);
@@ -95,30 +96,30 @@ void World::draw() {
 }
 
 
-char * ReadLine(FILE *fp) {	// Lecture d'une ligne de texte dans un fichier
+bool ReadLine(FILE *fp, char * *buf) {	// Lecture d'une ligne de texte dans un fichier
 	bool extract = true;
 	char *buffer = new char[1024];
 	int i = 0;
 
 	buffer[0]=0;
-	while (extract && !feof(fp)) {
-		if (fread(&buffer[i],1,1,fp) > 0) {
-			if(buffer[i]==0x0D) {
-				fread(&buffer[i],1,1,fp);
-				if(buffer[i]==0x0A) {
-					buffer[i] = 0;
-					extract = false;
-				} else {
-					i++;
-				}
-			} else {
-				i++;
-			}
-		}
-	}
-    for(int i = 0; i < 300; i++) {
-        cout << buffer[i];
+    if(!feof(fp)) {
+        while (extract && !feof(fp)) {
+            if (fread(&buffer[i],1,1,fp) > 0) {
+                if(buffer[i]==0x0D) {
+                    fread(&buffer[i],1,1,fp);
+                    if(buffer[i]==0x0A) {
+                        buffer[i] = 0;
+                        extract = false;
+                    } else {
+                        i++;
+                    }
+                } else {
+                    i++;
+                }
+            }
+        }
+        *buf = buffer;
+        return(true);
     }
-    cout << endl << endl << endl;
-	return buffer;
+	return (false);
 }

@@ -22,8 +22,10 @@ public:
     void removeKeyDown(SDLKey key);
     
     vector<SDLKey> notifyKeyboard();
-    int justDown();
     int* notifyMouse();
+    
+    int justDown();
+    void initMousePosition();
 private:
     int mouseX, mouseY;
     vector<SDLKey> listKeyDown;

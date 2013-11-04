@@ -80,16 +80,17 @@ void Controler::run() {
     face8.push_back(5);face8.push_back(6);face8.push_back(9);face8.push_back(8);
     obj.addFace(new Face(face8, new Color(128, 75, 0), new Color(255, 255, 255)));
     
-    obj.removeVertex(Coord3D(1.0, 1.0, 1.0));
+    //obj.removeVertex(Coord3D(1.0, 1.0, 1.0));
     /*obj.removeVertex(Coord3D(4.0, 1.0, 4.0));
     obj.removeVertex(Coord3D(1.0, 1.0, 4.0));*/
 
+    // Initialisation de la position de la souris
+    event.initMousePosition();
     
-    SDL_WarpMouse(800, 450);
+    // Debut de la boucle principale
     while (event.EventManager())
     {
         ka.useKey(event, this);
-        camera->updateView(event.notifyMouse());
                 
         // Début de la 3D
         glMatrixMode(GL_PROJECTION);
@@ -143,28 +144,39 @@ void Controler::run() {
 }
 
 void Controler::action(Action action){
-    if(action == FORWARD){
-            camera->forward();
-    }
-    else if(action == BACKWARD){
-            camera->backward();
-    }
-    else if(action == LATERAL_LEFT){
-            camera->lateralLeft();
-    }
-    else if(action == LATERAL_RIGHT){
-            camera->lateralRight();
-    }
-    else if(action == UP){
-            camera->up();
-    }
-    else if(action == DOWN){
-            camera->down();
-    }
-    else if(action == PAUSE_MENU){
+    // Si on appuie sur le bouton pause
+    if(action == PAUSE_MENU){   // On rend visible/invisible le menu
         twoDim->getElementByName("menu")->toggleVisible();
+        event.initMousePosition();
+    } else {    // Sinon
+        if(!twoDim->getElementByName("menu")->isVisible()) {  // Si le menu n'est pas visible
+            // On effectue les actions de déplacement de la caméra
+            if(action == FORWARD){
+                camera->forward();
+            }
+            else if(action == BACKWARD){
+                camera->backward();
+            }
+            else if(action == LATERAL_LEFT){
+                camera->lateralLeft();
+            }
+            else if(action == LATERAL_RIGHT){
+                camera->lateralRight();
+            }
+            else if(action == UP){
+                camera->up();
+            }
+            else if(action == DOWN){
+                camera->down();
+            }
+            else if(action == UPDATEVIEW) {
+                camera->updateView(event.notifyMouse());
+            }
+            SDL_WarpMouse(800, 450);  // Reinitialisation de la position de la souris
+        } else {  // Si le menu est visible
+            // actions du menu...
+        }
     }
-
 }
 
 

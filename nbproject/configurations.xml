@@ -32,6 +32,7 @@
           <itemPath>Panel.cpp</itemPath>
           <itemPath>Panel.h</itemPath>
         </logicalFolder>
+		<itemPath>Action.h</itemPath>
         <itemPath>Camera.cpp</itemPath>
         <itemPath>Camera.h</itemPath>
         <itemPath>Color.cpp</itemPath>
@@ -51,7 +52,6 @@
       </logicalFolder>
       <logicalFolder name="f3" displayName="View" projectFiles="true">
       </logicalFolder>
-      <itemPath>Action.h</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
