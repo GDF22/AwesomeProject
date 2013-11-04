@@ -7,9 +7,17 @@
 
 #include "Component.h"
 
+using namespace std;
+
 Component::Component() {
     this->visible = true;
     this->name ="";
+    this->parent = this;
+}
+
+Component::Component(string name) {
+    this->visible = true;
+    this->name = name;
     this->parent = this;
 }
 
@@ -45,5 +53,15 @@ void Component::setParent(Component* parent){
 
 void Component::addComponent(Component* toAdd){
     toAdd->setParent(this);
-    componentList.push_back(toAdd);
+   componentList.push_back(toAdd);
+}
+
+void Component::toggleVisible(){
+    visible = !visible;
+}
+
+Component* Component::getElementByName(string name){
+    for(int i = 0 ; i < componentList.size() ; i++){
+        if (componentList[i]->name == name) return componentList[i];
+    }
 }

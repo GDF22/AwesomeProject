@@ -14,11 +14,14 @@
 #include <SDL/SDL.h>
 #include <gl/gl.h>
 #include <gl/glu.h>
+#include <sstream>
+
+using namespace std;
 
 class Panel : public Component {
 public:
     Panel();
-    Panel(Coord3D cp , int width , int height, Color color);
+    Panel(string name, Coord3D cp , int width , int height, Color* color);
     Panel(SDL_Surface* parent);
     void addComponent(Component* toAdd);
     virtual ~Panel();
@@ -29,7 +32,7 @@ private:
     int width;
     int height;
     SDL_Surface* sdlPanel;
-    Color c;
+    Color* c;
        
 };
 

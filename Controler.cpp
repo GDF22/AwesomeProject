@@ -19,6 +19,7 @@ Controler::Controler() {
     this->event;
     this->ka;
     this->camera = new Camera(Coord3D(-5, 0, 2), Coord3D(0, 0, 0), Coord3D(0, 0, 1));
+    this->twoDim = new Panel(string("2D"), Coord3D(0,0,0),500,500, NULL);
 }
 
 Controler::~Controler() {
@@ -28,6 +29,9 @@ void Controler::run() {
     //World world;
     
 
+    /*-----------------CREATION-DU-MENU-----------------------------*/
+    Panel* menu = new Panel(string("menu"), Coord3D(100,100,0), 100, 100, new Color(0,0,255));
+    twoDim->addComponent(menu);
     /*Panel p =  Panel(Coord3D(100,100,0),100,100,Color(2147483647 , 128 , 0));
     Panel partOne =  Panel(Coord3D(110,110,0),50,50,Color(230, 0, 0));
    
@@ -140,7 +144,7 @@ void Controler::run() {
             glPushMatrix();
                 glLoadIdentity();
 
-                   //p.draw();
+                   twoDim->draw();
 
                 glMatrixMode(GL_PROJECTION);
             glPopMatrix();
@@ -178,10 +182,7 @@ void Controler::action(Action action){
             camera->down();
     }
     else if(action == PAUSE_MENU){
-            camera->backward();
-    }
-    else if(action == BACKWARD){
-            camera->backward();
+        twoDim->getElementByName("menu")->toggleVisible();
     }
 
 }

@@ -17,6 +17,8 @@
 #include <math.h>
 #include <SDL/SDL.h>
 #include <gl/glu.h>
+#include <map>
+#include <sstream>
 
 #include "Action.h"
 #include "Coord3D.h"
@@ -44,6 +46,7 @@ private:
     KeyAssignment ka;
     Event event;
     Camera* camera;
+    Panel* twoDim;
 };
 
 #endif	/* CONTROLER_H */
