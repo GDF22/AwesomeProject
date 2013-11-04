@@ -23,7 +23,7 @@ public:
     virtual ~World();
     
     void addObject(Object obj);
-    bool addObject(char* filename);
+    bool addObject(string filename);
     
     void removeObject(Object obj);
     void removeObject(int obj);

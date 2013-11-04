@@ -26,7 +26,7 @@ Controler::~Controler() {
 }
 
 void Controler::run() {
-    //World world;
+    World world;
     
 
     /*-----------------CREATION-DU-MENU-----------------------------*/
@@ -111,7 +111,7 @@ void Controler::run() {
         Dessiner();
         obj.drawFace();
         obj.drawEdge();
-        //world.draw();
+        world.draw();
         // Fin de la 3D
         
         // Début de la 2D

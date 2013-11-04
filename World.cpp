@@ -7,10 +7,10 @@
 
 #include "World.h"
 
-bool ReadLine(FILE *fp, char * *buf);
+bool ReadLine(ifstream *file, char *firstChar, vector<double> *listNb);
 
 World::World() {
-    char* file = "untitled.obj";
+    string file = "suzanne.obj";
     addObject(file);
 }
 
@@ -25,53 +25,39 @@ void World::addObject(Object obj) {
     listObject.push_back(obj);
 }
 
-bool World::addObject(char* filename) {
+bool World::addObject(string filename) {
+    ifstream file(filename.c_str(), ios::in);
+	if(!file) {
+        cout << "Impossible d'ouvrir " << filename << endl;
+        return false;
+    }
+    
     Object newObject;
-    FILE *fp = fopen(filename,"rb");
-	if(!fp) return false;
-    
-	Face face;
 	Coord3D pt3D;
-	Coord3D pt2D;
-	char *buf,buftmp[64];
-	long i,v,g;	// compteur pour le stockage des données lors de la seconde passe
-	unsigned int lenbuf;
+    char firstChar;
+    vector<double> listNb;
+    vector<int> listInt;
     
-    cout << "coucou" << endl;
-	/*while (!feof(fp)) {
-		buf = ReadLine(fp);*/
-    while(ReadLine(fp, &buf)) {
-		lenbuf = strlen((const char *)buf);
-		if (lenbuf > 0) {
-			sscanf(buf,"%s",buftmp);
-            
-			if(!strcmp((const char *)buftmp,"#")) {	// on a trouvé un commentaire, on passe
-                cout << "yop" << endl;
-			} else if(!strcmp((const char *)buftmp,"v")) {	// on a trouvé une vertice ?
-				//sscanf(&buf[2],"%f%f%f",&pt3D.x,&pt3D.y,&pt3D.z);
-                cout << "v" << endl;
-                pt3D = Coord3D(sscanf(buf,"%f"), sscanf(buf,"%f"), sscanf(buf,"%s"));
-				newObject.addVertex(Coord3D(pt3D));
-			} else if(!strcmp((const char *)buftmp,"f")) {	// on a trouvé une face
-				cout << "f" << endl;
-                for(i=0; (buf[i] < '0') || (buf[i] > '9') ;i++);	// on se positionne à la première valeur
-                vector<int> vect;
-				for(v=0; v < 4 ;v++) { // triangles donc composés de 3 vertices
-					vect.push_back(sscanf(buf,"%f"));
-				}
-                Color f(255, 0, 0);
-                Color e(255, 255, 255);
-                Face fa(vect, &f, &e);
-				newObject.addFace(&fa); // on enregistre la face récupérée
-			}
+    while(ReadLine(&file, &firstChar, &listNb)) {
+        if(firstChar == '#') {	// on a trouvé un commentaire, on passe
+        } else if(firstChar == 'v') {	// on a trouvé une vertice ?
+            pt3D = Coord3D(listNb[0], listNb[1], listNb[2]);
+            newObject.addVertex(Coord3D(pt3D));
+        } else if(firstChar == 'f') {	// on a trouvé une face
+            Color f(255, 0, 0);
+            Color e(255, 255, 255);
+            listInt.clear();
+            for(int i = 0; i < listNb.size(); i++) {
+                listInt.push_back((int)listNb[i]-1);
+            }
+            newObject.addFace(listInt, new Color(180, 180, 180), new Color(255, 255, 255)); // on enregistre la face récupérée
 		}
-		delete[] buf;
+		listNb.clear();
 	}
-    cout << "coucou2" << endl;
-	fclose(fp);
+	file.close();
 	listObject.push_back(newObject);
-    cout << "new" << endl;
-    return true;
+    
+    return(true);
 }
 
 void World::removeObject(Object obj) {
@@ -90,36 +76,42 @@ void World::removeObject(int obj) {
 
 void World::draw() {
     for(int i = 0; i < listObject.size(); i++) {
-        cout << i << endl;
+        cout << i << " : " << listObject[i].nbVertex() << endl;
         listObject[i].drawFace();
+        listObject[i].drawEdge();
     }
 }
 
 
-bool ReadLine(FILE *fp, char * *buf) {	// Lecture d'une ligne de texte dans un fichier
-	bool extract = true;
-	char *buffer = new char[1024];
-	int i = 0;
+bool ReadLine(ifstream *file, char *firstChar, vector<double> *listNb) {	// Lecture d'une ligne de texte dans un fichier
+    int nb;
+    char c;
+    string s = "";
 
-	buffer[0]=0;
-    if(!feof(fp)) {
-        while (extract && !feof(fp)) {
-            if (fread(&buffer[i],1,1,fp) > 0) {
-                if(buffer[i]==0x0D) {
-                    fread(&buffer[i],1,1,fp);
-                    if(buffer[i]==0x0A) {
-                        buffer[i] = 0;
-                        extract = false;
-                    } else {
-                        i++;
-                    }
-                } else {
-                    i++;
-                }
+    file->get(*firstChar);
+    if(!file->eof()) {   // Si la fin du fichier n'a pas été atteinte
+        if(*firstChar == '#') {  // S'il ne s'agit pas d'un commentaire
+            while(c != '\n') {
+                file->get(c);
             }
+            return(true);
         }
-        *buf = buffer;
-        return(true);
+        
+        file->get(c);   // On lit le caractère suivant (espace)
+        file->get(c);
+        while(c != '\n') {  // Tant que ce caractère n'est pas une fin de ligne
+            if(c != ' ') {   // Tant que ce caractère n'est pas un espace
+                s += c;     // On ajoute ce caractère à s
+            } else {
+                listNb->push_back(::atof(s.c_str()));
+                cout << (*listNb)[listNb->size()-1] << endl;
+                s = "";
+            }
+            file->get(c);
+        }
+        listNb->push_back(::atof(s.c_str()));
+        return (true);
     }
-	return (false);
+    
+    return(false);
 }

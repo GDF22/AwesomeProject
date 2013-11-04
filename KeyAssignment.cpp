@@ -11,7 +11,7 @@
 
 KeyAssignment::KeyAssignment() {
     this->primary =  new int[20];
-    //this->readConfig();
+    //->readConfig();
     this->chooseConfig();
 }
 
@@ -23,7 +23,7 @@ KeyAssignment::~KeyAssignment() {
 
 void KeyAssignment::readConfig() {
     fstream file;
-    string key;
+    string key = "";
     int count = 0 ;
     file.open("config\\keys");
     while (getline(file, key, ';')) {
