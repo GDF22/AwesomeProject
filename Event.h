@@ -22,10 +22,12 @@ public:
     void removeKeyDown(SDLKey key);
     
     vector<SDLKey> notifyKeyboard();
+    int justDown();
     int* notifyMouse();
 private:
     int mouseX, mouseY;
     vector<SDLKey> listKeyDown;
+    int justDownKey;
 };
 
 #endif	/* EVENT_H */

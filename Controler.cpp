@@ -30,8 +30,9 @@ void Controler::run() {
     
 
     /*-----------------CREATION-DU-MENU-----------------------------*/
-    Panel* menu = new Panel(string("menu"), Coord3D(100,100,0), 100, 100, new Color(0,0,255));
+    Panel* menu = new Panel(string("menu"), Coord3D(400,100,0), 700, 500, new Color(0,0,255));
     twoDim->addComponent(menu);    
+    
     
     FrameManager frame = FrameManager(60);
         
@@ -87,7 +88,7 @@ void Controler::run() {
     SDL_WarpMouse(800, 450);
     while (event.EventManager())
     {
-        ka.useKey(event.notifyKeyboard(), this);
+        ka.useKey(event, this);
         camera->updateView(event.notifyMouse());
                 
         // Début de la 3D

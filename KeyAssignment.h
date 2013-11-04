@@ -26,7 +26,7 @@ public:
     KeyAssignment(const KeyAssignment& orig);
     void chooseConfig();
     virtual ~KeyAssignment();
-    void useKey(vector<SDLKey> keys, Controler* ctrl);
+    void useKey(Event event, Controler* ctrl);
 private:
     int* primary;
     vector<string> explode(const string& str, const char& ch);

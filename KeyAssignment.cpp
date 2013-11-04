@@ -44,28 +44,36 @@ void KeyAssignment::chooseConfig(){
 }
 
 
-void KeyAssignment::useKey(vector<SDLKey> keys, Controler* ctrl) {
-    for(int i = 0; i < keys.size(); i++) {
-        if(keys[i] == primary[0]) {
+void KeyAssignment::useKey(Event event, Controler* ctrl) {
+    
+    vector<SDLKey> currentKeys = event.notifyKeyboard();
+    int justDown = event.justDown();
+    
+    for(int i = 0; i < currentKeys.size(); i++) {
+        if(currentKeys[i] == primary[0]) {
             ctrl->action(FORWARD);
         }
-        if(keys[i] == primary[1]) {
+        if(currentKeys[i] == primary[1]) {
             ctrl->action(BACKWARD);
         }
-        if(keys[i] == primary[2]) {
+        if(currentKeys[i] == primary[2]) {
             ctrl->action(LATERAL_LEFT);
         }
-        if(keys[i] == primary[3]) {
+        if(currentKeys[i] == primary[3]) {
             ctrl->action(LATERAL_RIGHT);
         }
-        if(keys[i] == primary[4]) {
+        if(currentKeys[i] == primary[4]) {
             ctrl->action(UP);
         }
-        if(keys[i] == primary[5]) {
+        if(currentKeys[i] == primary[5]) {
             ctrl->action(DOWN);
         }
-        if(keys[i] == SDLK_ESCAPE) {
+    }
+    
+    if(justDown != -1){
+    if(justDown == SDLK_ESCAPE){
             ctrl->action(PAUSE_MENU);
         }
     }
+
 }

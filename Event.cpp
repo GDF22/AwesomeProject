@@ -21,7 +21,7 @@ bool Event::EventManager() {
     
     SDL_Event event;
     SDL_PollEvent(&event);
-    
+    justDownKey = -1;
     switch(event.type) {
         case SDL_QUIT:
             return(false);
@@ -30,6 +30,7 @@ bool Event::EventManager() {
             listKeyDown.push_back(event.key.keysym.sym);
             break;
         case SDL_KEYUP:
+            justDownKey = event.key.keysym.sym;
             removeKeyDown(event.key.keysym.sym);
             break;
         /*case SDL_MOUSEBUTTONDOWN:
@@ -64,6 +65,9 @@ vector<SDLKey> Event::notifyKeyboard() {
     return(listKeyDown);
 }
 
+int Event::justDown(){
+    return(justDownKey);
+}
 
 int* Event::notifyMouse() {
     int* mouse = new int[2];
