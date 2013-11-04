@@ -17,6 +17,8 @@
 #include <math.h>
 #include <SDL/SDL.h>
 #include <gl/glu.h>
+
+#include "Action.h"
 #include "Coord3D.h"
 #include "Fenetre.h"
 #include "Camera.h"
@@ -37,10 +39,11 @@ public:
     Controler();
     virtual ~Controler();
     void run();
+    void action(Action act);
 private:
     KeyAssignment ka;
     Event event;
-    Camera camera;
+    Camera* camera;
 };
 
 #endif	/* CONTROLER_H */

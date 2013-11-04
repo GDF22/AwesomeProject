@@ -27,9 +27,6 @@ bool Event::EventManager() {
             return(false);
             break;
         case SDL_KEYDOWN:
-            if(event.key.keysym.sym == SDLK_ESCAPE) {
-                return(false);
-            }
             listKeyDown.push_back(event.key.keysym.sym);
             break;
         case SDL_KEYUP:

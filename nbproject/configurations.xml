@@ -3,7 +3,7 @@
 		</item>
 		<item path="GestionConfig.h" ex="false" tool="3" flavor2="0">
 		</item>-->
-<configurationDescriptor version="89">
+<configurationDescriptor version="90">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
@@ -51,6 +51,7 @@
       </logicalFolder>
       <logicalFolder name="f3" displayName="View" projectFiles="true">
       </logicalFolder>
+      <itemPath>Action.h</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -68,7 +69,6 @@
   <confs>
     <conf name="Debug" type="1">
       <toolsSet>
-        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
         <compilerSet>default</compilerSet>
         <dependencyChecking>true</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
@@ -77,14 +77,16 @@
         <linkerTool>
           <linkerLibItems>
             <linkerLibLibItem>mingw32</linkerLibLibItem>
-            <linkerLibLibItem>SDLmain</linkerLibLibItem>
             <linkerLibLibItem>SDL.dll</linkerLibLibItem>
-            <linkerLibLibItem>opengl32</linkerLibLibItem>
+            <linkerLibLibItem>SDLmain</linkerLibLibItem>
             <linkerLibLibItem>glu32</linkerLibLibItem>
+            <linkerLibLibItem>opengl32</linkerLibLibItem>
           </linkerLibItems>
-          <commandLine>-static-libgcc -static-libstdc++ -lm -lSDL</commandLine>
+          <commandLine>-static-libgcc -static-libstdc++ -lSDL -lm</commandLine>
         </linkerTool>
       </compileType>
+      <item path="Action.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Camera.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Camera.h" ex="false" tool="3" flavor2="0">
@@ -142,7 +144,6 @@
     </conf>
     <conf name="Release" type="1">
       <toolsSet>
-        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
         <compilerSet>default</compilerSet>
         <dependencyChecking>true</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
@@ -161,6 +162,8 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="Action.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Camera.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Camera.h" ex="false" tool="3" flavor2="0">

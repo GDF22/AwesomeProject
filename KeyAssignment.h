@@ -16,17 +16,17 @@
 #include <vector>
 #include <string>
 #include "Camera.h"
+class Controler;
 
 using namespace std;
 
-using namespace std; 
 class KeyAssignment {
 public:
     KeyAssignment();
     KeyAssignment(const KeyAssignment& orig);
     void chooseConfig();
     virtual ~KeyAssignment();
-    void useKey(vector<SDLKey> keys, Camera* camera);
+    void useKey(vector<SDLKey> keys, Controler* ctrl);
 private:
     int* primary;
     vector<string> explode(const string& str, const char& ch);

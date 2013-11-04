@@ -18,7 +18,7 @@ void grilleModulaire();
 Controler::Controler() {
     this->event;
     this->ka;
-    this->camera = Camera(Coord3D(-5, 0, 2), Coord3D(0, 0, 0), Coord3D(0, 0, 1));
+    this->camera = new Camera(Coord3D(-5, 0, 2), Coord3D(0, 0, 0), Coord3D(0, 0, 1));
 }
 
 Controler::~Controler() {
@@ -104,8 +104,8 @@ void Controler::run() {
     SDL_WarpMouse(800, 450);
     while (event.EventManager())
     {
-        ka.useKey(event.notifyKeyboard(), &camera);
-        camera.updateView(event.notifyMouse());
+        ka.useKey(event.notifyKeyboard(), this);
+        camera->updateView(event.notifyMouse());
                 
         // Début de la 3D
         glMatrixMode(GL_PROJECTION);
@@ -121,7 +121,7 @@ void Controler::run() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glLoadIdentity( );
     
-        camera.placeCamera();
+        camera->placeCamera();
         
         Dessiner();
         obj.drawFace();
@@ -158,7 +158,33 @@ void Controler::run() {
     }
 }
 
+void Controler::action(Action action){
+    if(action == FORWARD){
+            camera->forward();
+    }
+    else if(action == BACKWARD){
+            camera->backward();
+    }
+    else if(action == LATERAL_LEFT){
+            camera->lateralLeft();
+    }
+    else if(action == LATERAL_RIGHT){
+            camera->lateralRight();
+    }
+    else if(action == UP){
+            camera->up();
+    }
+    else if(action == DOWN){
+            camera->down();
+    }
+    else if(action == PAUSE_MENU){
+            camera->backward();
+    }
+    else if(action == BACKWARD){
+            camera->backward();
+    }
 
+}
 
 
 

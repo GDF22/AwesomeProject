@@ -6,6 +6,8 @@
  */
 
 #include "KeyAssignment.h"
+#include "Controler.h"
+#include "Action.h"
 
 KeyAssignment::KeyAssignment() {
     this->primary =  new int[20];
@@ -42,25 +44,28 @@ void KeyAssignment::chooseConfig(){
 }
 
 
-void KeyAssignment::useKey(vector<SDLKey> keys, Camera* camera) {
+void KeyAssignment::useKey(vector<SDLKey> keys, Controler* ctrl) {
     for(int i = 0; i < keys.size(); i++) {
         if(keys[i] == primary[0]) {
-            camera->forward();
+            ctrl->action(FORWARD);
         }
         if(keys[i] == primary[1]) {
-            camera->backward();
+            ctrl->action(BACKWARD);
         }
         if(keys[i] == primary[2]) {
-            camera->lateralLeft();
+            ctrl->action(LATERAL_LEFT);
         }
         if(keys[i] == primary[3]) {
-            camera->lateralRight();
+            ctrl->action(LATERAL_RIGHT);
         }
         if(keys[i] == primary[4]) {
-            camera->up();
+            ctrl->action(UP);
         }
         if(keys[i] == primary[5]) {
-            camera->down();
+            ctrl->action(DOWN);
+        }
+        if(keys[i] == SDLK_ESCAPE) {
+            ctrl->action(PAUSE_MENU);
         }
     }
 }
