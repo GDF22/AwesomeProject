@@ -10,7 +10,7 @@
 bool ReadLine(ifstream *file, char *firstChar, vector<double> *listNb);
 
 World::World() {
-    string file = "suzanne.obj";
+    string file = "lambo.obj";
     addObject(file);
 }
 
@@ -76,7 +76,7 @@ void World::removeObject(int obj) {
 
 void World::draw() {
     for(int i = 0; i < listObject.size(); i++) {
-        cout << i << " : " << listObject[i].nbVertex() << endl;
+    //    cout << i << " : " << listObject[i].nbVertex() << endl;
         listObject[i].drawFace();
         listObject[i].drawEdge();
     }
@@ -104,7 +104,7 @@ bool ReadLine(ifstream *file, char *firstChar, vector<double> *listNb) {	// Lect
                 s += c;     // On ajoute ce caractère à s
             } else {
                 listNb->push_back(::atof(s.c_str()));
-                cout << (*listNb)[listNb->size()-1] << endl;
+             //   cout << (*listNb)[listNb->size()-1] << endl;
                 s = "";
             }
             file->get(c);
