@@ -23,11 +23,12 @@ public:
     
     vector<SDLKey> notifyKeyboard();
     int* notifyMouse();
+    pair<int,int> notifyClicked();
     
     int justDown();
     void initMousePosition();
 private:
-    int mouseX, mouseY;
+    int mouseX, mouseY, clickedX , clickedY;
     vector<SDLKey> listKeyDown;
     int justDownKey;
 };

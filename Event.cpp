@@ -33,12 +33,14 @@ bool Event::EventManager() {
             justDownKey = event.key.keysym.sym;
             removeKeyDown(event.key.keysym.sym);
             break;
-        /*case SDL_MOUSEBUTTONDOWN:
-            listKeyDown.push_back(event.button.button);
+        case SDL_MOUSEBUTTONDOWN:
+            clickedX = event.motion.x;
+            clickedY = event.motion.y;
             break;
         case SDL_MOUSEBUTTONUP:
-            removeKeyDown(event.button.button);
-            break;*/
+            clickedX = NULL;
+            clickedY = NULL;
+            break;
         case SDL_MOUSEMOTION:
             mouseX = centrex - event.button.x;
             mouseY = centrey - event.button.y;
@@ -62,6 +64,10 @@ void Event::removeKeyDown(SDLKey key) {
 
 vector<SDLKey> Event::notifyKeyboard() {
     return(listKeyDown);
+}
+
+pair<int,int> Event::notifyClicked() {
+    return(pair<int,int>(clickedX,clickedY) );
 }
 
 

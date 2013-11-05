@@ -28,9 +28,6 @@ public:
     void draw();
 
 private:
-    
-    int width;
-    int height;
     SDL_Surface* sdlPanel;
     Color* c;
        

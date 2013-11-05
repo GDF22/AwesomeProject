@@ -52,7 +52,7 @@ void Component::setParent(Component* parent){
 }
 
 void Component::addComponent(Component* toAdd){
-    toAdd->setParent(this);
+   toAdd->setParent(this);
    componentList.push_back(toAdd);
 }
 
@@ -64,4 +64,14 @@ Component* Component::getElementByName(string name){
     for(int i = 0 ; i < componentList.size() ; i++){
         if (componentList[i]->name == name) return componentList[i];
     }
+}
+
+Component* Component::getElementByCoord(pair<int,int> coord){
+    if(visible && coord.first > position.getX() && coord.first < position.getX()+width && coord.second > position.getY() && coord.second < position.getY()+height ){
+        for(int i = 0 ; i < componentList.size() ; i++){
+            if (componentList[i]->getElementByCoord(coord) != NULL) return componentList[i]->getElementByCoord(coord) ;         
+        }
+         return this;
+    }
+    else return NULL;
 }

@@ -19,6 +19,7 @@
 #include <gl/glu.h>
 #include <map>
 #include <sstream>
+#include <typeinfo>
 
 #include "Action.h"
 #include "Coord3D.h"
@@ -31,6 +32,7 @@
 #include "Object.h"
 #include "Panel.h"
 #include "World.h"
+#include "Button.h"
 
 
 
@@ -42,6 +44,7 @@ public:
     virtual ~Controler();
     void run();
     void action(Action act);
+    void actionOnClick(pair<int,int> coord);
 private:
     KeyAssignment ka;
     Event event;

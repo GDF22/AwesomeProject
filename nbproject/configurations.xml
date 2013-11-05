@@ -27,12 +27,14 @@
       </logicalFolder>
       <logicalFolder name="f2" displayName="Model" projectFiles="true">
         <logicalFolder name="f1" displayName="GraphicalModel" projectFiles="true">
+          <itemPath>Button.cpp</itemPath>
+          <itemPath>Button.h</itemPath>
           <itemPath>Component.cpp</itemPath>
           <itemPath>Component.h</itemPath>
           <itemPath>Panel.cpp</itemPath>
           <itemPath>Panel.h</itemPath>
         </logicalFolder>
-		<itemPath>Action.h</itemPath>
+        <itemPath>Action.h</itemPath>
         <itemPath>Camera.cpp</itemPath>
         <itemPath>Camera.h</itemPath>
         <itemPath>Color.cpp</itemPath>
@@ -86,6 +88,10 @@
         </linkerTool>
       </compileType>
       <item path="Action.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Button.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Button.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Camera.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -163,6 +169,10 @@
         </asmTool>
       </compileType>
       <item path="Action.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Button.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Button.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Camera.cpp" ex="false" tool="1" flavor2="0">
       </item>

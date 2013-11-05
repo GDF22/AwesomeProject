@@ -82,4 +82,9 @@ void KeyAssignment::useKey(Event event, Controler* ctrl) {
     if(event.notifyMouse()[0] != 0 || event.notifyMouse()[1] != 0) {
         ctrl->action(UPDATEVIEW);
     }
+    
+    //click de la souris
+    if(event.notifyClicked().first != NULL){
+        ctrl->actionOnClick(event.notifyClicked());
+    }
 }

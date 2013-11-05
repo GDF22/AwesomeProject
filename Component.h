@@ -28,8 +28,11 @@ public:
     bool isVisible();
     void toggleVisible();
     Component* getElementByName(string name);
+    Component* getElementByCoord(pair<int,int> coord);
     void setVisible(bool isVisible);
 protected:
+    int width;
+    int height;
     vector<Component*> componentList;
     string name;
     Coord3D position;

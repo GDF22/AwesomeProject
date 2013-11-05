@@ -7,6 +7,7 @@
 
 #include "Controler.h"
 
+
 void Dessiner();
 void axe();
 void grille();
@@ -19,7 +20,7 @@ Controler::Controler() {
     this->event;
     this->ka;
     this->camera = new Camera(Coord3D(-5, 0, 2), Coord3D(0, 0, 0), Coord3D(0, 0, 1));
-    this->twoDim = new Panel(string("2D"), Coord3D(0,0,0),500,500, NULL);
+    this->twoDim = new Panel(string("2D"), Coord3D(0,0,0),1900,1900, NULL);  // HERE SCREEN DIMENSIONS
 }
 
 Controler::~Controler() {
@@ -32,6 +33,13 @@ void Controler::run() {
     /*-----------------CREATION-DU-MENU-----------------------------*/
     Panel* menu = new Panel(string("menu"), Coord3D(400,100,0), 700, 500, new Color(0,0,255));
     twoDim->addComponent(menu);    
+    Button* but = new Button(string("Button"), Coord3D(400,100,0), 20, 20, new Color(255,0,0), PAUSE_MENU);
+    Button* but2 = new Button(string("Button2"), Coord3D(500,100,0), 20, 20, new Color(255,0,0), PAUSE_MENU);
+    Panel* menu2 = new Panel(string("menu2"), Coord3D(500,200,0), 50, 50, new Color(0,0,100));
+    menu->addComponent(but);
+    menu->addComponent(but2);
+    menu->addComponent(menu2);
+    menu->setVisible(false);
     
     
     FrameManager frame = FrameManager(60);
@@ -179,6 +187,12 @@ void Controler::action(Action action){
     }
 }
 
+void Controler::actionOnClick(pair<int,int> coord){
+   Component* lol = twoDim->getElementByCoord(coord);
+   if (lol != NULL){
+       if(typeid(*lol) == typeid(Button)) action( ((Button*) lol)->getAction() );
+   }
+}
 
 
 void Dessiner()
