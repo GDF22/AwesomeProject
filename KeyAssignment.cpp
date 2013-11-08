@@ -84,7 +84,7 @@ void KeyAssignment::useKey(Event event, Controler* ctrl) {
     }
     
     //click de la souris
-    if(event.notifyClicked().first != NULL){
+ /*   if(event.notifyClicked().first != NULL){
         ctrl->actionOnClick(event.notifyClicked());
-    }
+    }*/
 }

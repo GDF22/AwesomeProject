@@ -10,7 +10,7 @@
 bool ReadLine(ifstream *file, char *firstChar, vector<double> *listNb);
 
 World::World() {
-    string file = "lambo.obj";
+    string file = "suzanne.obj";
     addObject(file);
 }
 

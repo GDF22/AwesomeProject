@@ -16,6 +16,8 @@
 #include <vector>
 #include <math.h>
 #include <SDL/SDL.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL.h>
 #include <gl/glu.h>
 #include <map>
 #include <sstream>

@@ -79,12 +79,16 @@
         <linkerTool>
           <linkerLibItems>
             <linkerLibLibItem>mingw32</linkerLibLibItem>
-            <linkerLibLibItem>SDL.dll</linkerLibLibItem>
             <linkerLibLibItem>SDLmain</linkerLibLibItem>
-            <linkerLibLibItem>glu32</linkerLibLibItem>
+            <linkerLibLibItem>SDL.dll</linkerLibLibItem>
+            <linkerLibLibItem>SDL2</linkerLibLibItem>
+            <linkerLibLibItem>SDL2main</linkerLibLibItem>
+            <linkerLibLibItem>SDL2.dll</linkerLibLibItem>
+            <linkerLibLibItem>SDL2_ttf</linkerLibLibItem>
             <linkerLibLibItem>opengl32</linkerLibLibItem>
+            <linkerLibLibItem>glu32</linkerLibLibItem>
           </linkerLibItems>
-          <commandLine>-static-libgcc -static-libstdc++ -lSDL -lm</commandLine>
+          <commandLine>-static-libgcc -static-libstdc++ -lSDL -lSDL2 -lm -lSDL2_ttf</commandLine>
         </linkerTool>
       </compileType>
       <item path="Action.h" ex="false" tool="3" flavor2="0">

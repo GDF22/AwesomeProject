@@ -33,8 +33,8 @@ void Controler::run() {
     /*-----------------CREATION-DU-MENU-----------------------------*/
     Panel* menu = new Panel(string("menu"), Coord3D(400,100,0), 700, 500, new Color(0,0,255));
     twoDim->addComponent(menu);    
-    Button* but = new Button(string("Button"), Coord3D(400,100,0), 20, 20, new Color(255,0,0), PAUSE_MENU);
-    Button* but2 = new Button(string("Button2"), Coord3D(500,100,0), 20, 20, new Color(255,0,0), PAUSE_MENU);
+    Button* but = new Button(string("Button"),string("Resume"), Coord3D(400,100,0), 20, 20, new Color(255,0,0), PAUSE_MENU);
+    Button* but2 = new Button(string("Button2"),string("Quit"), Coord3D(500,100,0), 20, 20, new Color(255,0,0), PAUSE_MENU);
     Panel* menu2 = new Panel(string("menu2"), Coord3D(500,200,0), 50, 50, new Color(0,0,100));
     menu->addComponent(but);
     menu->addComponent(but2);

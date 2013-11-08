@@ -9,7 +9,9 @@
 #define	FENETRE_H
 
 #include<SDL/SDL.h>
-#include <SDL/SDL_getenv.h>
+#include<SDL/SDL_getenv.h>
+#include<SDL2/SDL.h>
+#include<SDL2/SDL_ttf.h>
 
 class Fenetre {
 public:

@@ -21,6 +21,7 @@ class Button : public Component {
 public:
     Button();
     Button(string name ,Coord3D cp , int width , int height, Color* color, Action action);
+    Button(string name, string value ,Coord3D cp , int width , int height, Color* color, Action action);
     Button(const Button& orig);
     virtual ~Button();
     void draw();
@@ -29,6 +30,7 @@ private:
     SDL_Surface* sdlPanel;
     Color* c;
     Action action;
+    string value;
 };
 
 #endif	/* BUTTON_H */

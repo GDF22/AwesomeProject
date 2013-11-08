@@ -7,8 +7,12 @@
 
 #include "Fenetre.h"
 
+#include<SDL2/SDL.h>
+#include<SDL2/SDL_ttf.h>
+
 Fenetre::Fenetre(int hauteur, int largeur) {
     SDL_Init(SDL_INIT_VIDEO);
+  //  TTF_Init();
     atexit(SDL_Quit);
     putenv("SDL_VIDEO_WINDOW_POS==0,0");
     SDL_WM_SetCaption("SDL GL Application", NULL);

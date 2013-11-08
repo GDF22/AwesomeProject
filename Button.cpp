@@ -23,7 +23,12 @@ Button::Button(string name ,Coord3D cp , int width , int height, Color* color ,A
     this->c = color;
     this->visible = true;
     this->action = action;
+    this->value = name;
 
+}
+
+Button::Button(string name, string value ,Coord3D cp , int width , int height, Color* color, Action action) : Button(name ,cp ,width ,height,color ,action) {
+    this->value = value;
 }
 
 Button::Button(const Button& orig) {
