@@ -50,13 +50,6 @@ void Camera::updateView(int* mouse) {
     for(i = 0; i > mouse[1]; i--) {
         this->lookDown();
     }
-    
-    /*for(i = 0; i < mouse.wheel; i++) {
-        this->monte();
-    }
-    for(i = 0; i > mouse.wheel; i--) {
-        this->descend();
-    }*/
 }
 
 

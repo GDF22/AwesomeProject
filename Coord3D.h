@@ -30,10 +30,11 @@ public:
     void setY(double y);
     void setZ(double z);
     
-    double distance(Coord3D p);
+    double distance(Coord3D* p);
     Coord3D vectUnitaire(Coord3D direction);
     
     bool equal(Coord3D a);
+    Coord3D operator+(Coord3D coord);
     string toString();
     
     SDL_Rect toSDL_Rect();

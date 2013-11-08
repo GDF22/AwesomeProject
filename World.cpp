@@ -12,6 +12,21 @@ bool ReadLine(ifstream *file, char *firstChar, vector<double> *listNb);
 World::World() {
     string file = "suzanne.obj";
     addObject(file);
+    listObject[0].setPosition(new Coord3D(5, -3, 4));
+    listObject[0].rotate(M_PI/2, 0, 0);
+    listObject[0].rotate(0, -M_PI/2, 0);
+    
+    addObject(listObject[0]);
+    listObject[0].setPosition(new Coord3D(4, -2, 2));
+    listObject[0].rotate(M_PI*3.5, 0, 0);
+    
+    addObject(listObject[0]);
+    listObject[0].setPosition(new Coord3D(0, -1, 1));
+    listObject[0].rotate(M_PI, 0, 0);
+    
+    addObject(listObject[0]);
+    listObject[0].setPosition(new Coord3D(2, 3, 4));
+    listObject[0].rotate(M_PI/2, 0, 0);
 }
 
 World::World(const World& orig) {
@@ -76,7 +91,7 @@ void World::removeObject(int obj) {
 
 void World::draw() {
     for(int i = 0; i < listObject.size(); i++) {
-    //    cout << i << " : " << listObject[i].nbVertex() << endl;
+        listObject[i].rotate(0.1, 0, 0);
         listObject[i].drawFace();
         listObject[i].drawEdge();
     }

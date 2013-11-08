@@ -69,6 +69,9 @@ void KeyAssignment::useKey(Event event, Controler* ctrl) {
         if(currentKeys[i] == primary[5]) {
             ctrl->action(DOWN);
         }
+        if(currentKeys[i] == SDLK_RETURN) {
+            ctrl->action(EXIT);
+        }
     }
     
     // Derniere touche pressee
@@ -79,7 +82,8 @@ void KeyAssignment::useKey(Event event, Controler* ctrl) {
     }
     
     // Mouvements de la souris
-    if(event.notifyMouse()[0] != 0 || event.notifyMouse()[1] != 0) {
+    int* mouse = event.notifyMouse();
+    if(mouse[0] != 0 || mouse[1] != 0) {
         ctrl->action(UPDATEVIEW);
     }
     

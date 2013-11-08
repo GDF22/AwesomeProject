@@ -17,7 +17,8 @@ enum Action
     UP = 4,
     DOWN = 5,
     UPDATEVIEW = 6,
-    PAUSE_MENU = 7
+    PAUSE_MENU = 7,
+    EXIT = 8,
 };
 #endif	/* ACTION_H */
 

@@ -8,6 +8,7 @@
 #include "Event.h"
 
 Event::Event() {
+    initMousePosition();
 }
 
 

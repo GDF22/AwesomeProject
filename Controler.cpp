@@ -43,22 +43,23 @@ void Controler::run() {
     
     
     FrameManager frame = FrameManager(60);
-        
-    Object obj = Object();
-    obj.addVertex(Coord3D(1.0, 1.0, 1.0));
-    obj.addVertex(Coord3D(1.0, 1.0, 4.0));
-    obj.addVertex(Coord3D(4.0, 1.0, 4.0));
-    obj.addVertex(Coord3D(4.0, 1.0, 1.0));
-    obj.addVertex(Coord3D(1.0, 4.0, 1.0));
-    obj.addVertex(Coord3D(1.0, 4.0, 4.0));
-    obj.addVertex(Coord3D(4.0, 4.0, 4.0));
-    obj.addVertex(Coord3D(4.0, 4.0, 1.0));
-    obj.addVertex(Coord3D(1.0, 2.5, 6.0));
-    obj.addVertex(Coord3D(4.0, 2.5, 6.0));
+   
     
-    vector<int> vect;
-    vect.push_back(0);vect.push_back(1);vect.push_back(2);vect.push_back(3);
-    obj.addFace(vect, new Color(255, 0, 0), new Color(242, 242, 242));
+    Object obj = Object("maison", new Coord3D(0, 0, 0));
+    obj.addVertex(Coord3D(-1.0, -1.0, -1.0));
+    obj.addVertex(Coord3D(-1.0, -1.0, 1.0));
+    obj.addVertex(Coord3D(1.0, -1.0, 1.0));
+    obj.addVertex(Coord3D(1.0, -1.0, -1.0));
+    obj.addVertex(Coord3D(-1.0, 1.0, -1.0));
+    obj.addVertex(Coord3D(-1.0, 1.0, 1.0));
+    obj.addVertex(Coord3D(1.0, 1.0, 1.0));
+    obj.addVertex(Coord3D(1.0, 1.0, -1.0));
+    obj.addVertex(Coord3D(-1.0, 0, 2.0));
+    obj.addVertex(Coord3D(1.0, 0, 2.0));
+    
+    vector<int> face;
+    face.push_back(0);face.push_back(1);face.push_back(2);face.push_back(3);
+    obj.addFace(new Face(face, new Color(255, 0, 0), new Color(242, 242, 242)));
     
     vector<int> face2;
     face2.push_back(4);face2.push_back(5);face2.push_back(6);face2.push_back(7);
@@ -70,7 +71,7 @@ void Controler::run() {
     
     vector<int> face4;
     face4.push_back(2);face4.push_back(3);face4.push_back(7);face4.push_back(6);
-    obj.addFace(face4, new Color(255, 0, 0), new Color(255, 255, 255));
+    obj.addFace(face4, new Color(255, 255, 0), new Color(255, 255, 255));
     
     vector<int> face5;
     face5.push_back(1);face5.push_back(2);face5.push_back(6);face5.push_back(5);
@@ -87,19 +88,12 @@ void Controler::run() {
     vector<int> face8;
     face8.push_back(5);face8.push_back(6);face8.push_back(9);face8.push_back(8);
     obj.addFace(new Face(face8, new Color(128, 75, 0), new Color(255, 255, 255)));
-    
-    //obj.removeVertex(Coord3D(1.0, 1.0, 1.0));
-    /*obj.removeVertex(Coord3D(4.0, 1.0, 4.0));
-    obj.removeVertex(Coord3D(1.0, 1.0, 4.0));*/
 
-    // Initialisation de la position de la souris
-    event.initMousePosition();
-    
+
     // Debut de la boucle principale
-    while (event.EventManager())
-    {
+    while(event.EventManager()) {
         ka.useKey(event, this);
-                
+
         // Début de la 3D
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
@@ -117,9 +111,10 @@ void Controler::run() {
         camera->placeCamera();
         
         Dessiner();
-        obj.drawFace();
-        obj.drawEdge();
+        //obj.drawFace();
+        //obj.drawEdge();
         world.draw();
+        
         // Fin de la 3D
         
         // Début de la 2D
@@ -180,6 +175,9 @@ void Controler::action(Action action){
             else if(action == UPDATEVIEW) {
                 camera->updateView(event.notifyMouse());
             }
+            else if(action == EXIT) {
+                SDL_Quit();
+            }
             SDL_WarpMouse(800, 450);  // Reinitialisation de la position de la souris
         } else {  // Si le menu est visible
             // actions du menu...
@@ -210,17 +208,17 @@ void Dessiner()
 void axe() {
     glBegin(GL_LINES);
     
-    glColor3ub(255 ,0,0);
-    glVertex2i(0,0);glVertex2i(0,1);
-    glVertex3i(0,1,0);glVertex3f(0.1,0.9,0);
-    glVertex3i(0,1,0);glVertex3f(-0.1,0.9,0);
-    
-    glColor3ub(0,255 ,0);
+    glColor3ub(255,0,0);
     glVertex2i(0,0);glVertex2i(1,0);
     glVertex3i(1,0,0);glVertex3f(0.9,0.1,0);
     glVertex3i(1,0,0);glVertex3f(0.9,-0.1,0);
     
-    glColor3ub(0,0,255 );
+    glColor3ub(0,255,0);
+    glVertex2i(0,0);glVertex2i(0,1);
+    glVertex3i(0,1,0);glVertex3f(0.1,0.9,0);
+    glVertex3i(0,1,0);glVertex3f(-0.1,0.9,0);
+    
+    glColor3ub(0,0,255);
     glVertex2i(0,0);glVertex3i(0,0,1);
     glVertex3i(0,0,1);glVertex3f(0.05,-0.05,0.9);
     glVertex3i(0,0,1);glVertex3f(-0.05,0.05,0.9);
