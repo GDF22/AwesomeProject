@@ -12,7 +12,6 @@ bool ReadLine(ifstream *file, char *firstChar, vector<double> *listNb);
 World::World() {
     string file = "suzanne.obj";
     addObject(file);
-    listObject[0].setPosition(new Coord3D(5, -3, 4));
     listObject[0].rotate(M_PI/2, 0, 0);
     listObject[0].rotate(0, -M_PI/2, 0);
     
@@ -55,6 +54,8 @@ bool World::addObject(string filename) {
     
     while(ReadLine(&file, &firstChar, &listNb)) {
         if(firstChar == '#') {	// on a trouvé un commentaire, on passe
+        } else if(firstChar == 'p') {	// on a trouvé la position de l'objet ?
+            newObject.setPosition(new Coord3D(listNb[0], listNb[1], listNb[2]));
         } else if(firstChar == 'v') {	// on a trouvé une vertice ?
             pt3D = Coord3D(listNb[0], listNb[1], listNb[2]);
             newObject.addVertex(Coord3D(pt3D));

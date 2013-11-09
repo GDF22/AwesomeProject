@@ -8,7 +8,7 @@
 #ifndef EVENT_H
 #define	EVENT_H
 
-#include <SDl/SDL.h>
+#include <SDL/SDL.h>
 #include <vector>
 
 using namespace std;
