@@ -186,9 +186,9 @@ void Controler::action(Action action){
 }
 
 void Controler::actionOnClick(pair<int,int> coord){
-   Component* lol = twoDim->getElementByCoord(coord);
-   if (lol != NULL){
-       if(typeid(*lol) == typeid(Button)) action( ((Button*) lol)->getAction() );
+   Component* cpnt = twoDim->getElementByCoord(coord);
+   if (cpnt != NULL){
+       if(typeid(*cpnt) == typeid(Button)) action( ((Button*) cpnt)->getAction() );
    }
 }
 
