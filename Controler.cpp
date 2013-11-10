@@ -26,6 +26,11 @@ Controler::~Controler() {
 
 // Initialisation de la SDL et de la fenetre
 void Controler::init() {
+    /*if(TTF_Init() == -1) {
+        printf("TTF_Init: %s\n", TTF_GetError());
+        exit(2);
+    }*/
+    
     SDL_Init(SDL_INIT_VIDEO);
     SDL_Init(SDL_INIT_EVENTS);
     

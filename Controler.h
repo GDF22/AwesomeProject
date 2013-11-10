@@ -12,19 +12,14 @@
 #include <cstdio>
 #include <iostream>
 #include <string>
-#include <map>
-#include <vector>
-#include <math.h>
-#include <SDL2/SDL_ttf.h>
+#include <typeinfo>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include <GL/gl.h>
 #include <gl/glu.h>
-#include <map>
-#include <sstream>
-#include <typeinfo>
+
 #include "Action.h"
 #include "Coord3D.h"
-#include "Fenetre.h"
 #include "Camera.h"
 #include "KeyAssignment.h"
 #include "Event.h"
@@ -34,8 +29,6 @@
 #include "Panel.h"
 #include "World.h"
 #include "Button.h"
-
-
 
 using namespace std;
 
@@ -57,7 +50,6 @@ public:
     void actionOnClick(pair<int,int> coord);
     
 private:
-    
     SDL_Window* pWindow;
     KeyAssignment ka;
     Event event;

@@ -43,8 +43,6 @@
         <itemPath>Coord3D.h</itemPath>
         <itemPath>Face.cpp</itemPath>
         <itemPath>Face.h</itemPath>
-        <itemPath>Fenetre.cpp</itemPath>
-        <itemPath>Fenetre.h</itemPath>
         <itemPath>KeyAssignment.cpp</itemPath>
         <itemPath>KeyAssignment.h</itemPath>
         <itemPath>Object.cpp</itemPath>
@@ -86,7 +84,7 @@
             <linkerLibLibItem>opengl32</linkerLibLibItem>
             <linkerLibLibItem>glu32</linkerLibLibItem>
           </linkerLibItems>
-          <commandLine>-static-libgcc -static-libstdc++ -lSDL -lSDL2 -lm -lSDL2_ttf</commandLine>
+          <commandLine>-static-libgcc -static-libstdc++ -lSDL2 -lm -lSDL2_ttf</commandLine>
         </linkerTool>
       </compileType>
       <item path="Action.h" ex="false" tool="3" flavor2="0">
@@ -122,10 +120,6 @@
       <item path="Face.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Face.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Fenetre.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Fenetre.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="FrameManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -203,10 +197,6 @@
       <item path="Face.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Face.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Fenetre.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Fenetre.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="FrameManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
