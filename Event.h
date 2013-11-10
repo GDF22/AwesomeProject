@@ -10,6 +10,7 @@
 
 #include <SDL2/SDL.h>
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -26,7 +27,7 @@ public:
     pair<int,int> notifyClicked();
     
     int justDown();
-    void initMousePosition();
+    void initMousePosition(SDL_Window* pWindow);
 private:
     int mouseX, mouseY, clickedX , clickedY;
     vector<SDL_Keycode> listKeyDown;

@@ -34,12 +34,12 @@ void KeyAssignment::chooseConfig(){
     int i = 0;
     SDL_Event e;
     while(i < 6) {
-      SDL_WaitEvent(&e);
-     if(e.type == SDL_KEYUP) {
-          this->primary[i] = e.key.keysym.sym;
-          i++;
-      }
-   }
+        SDL_WaitEvent(&e);
+        if(e.type == SDL_KEYUP) {
+             this->primary[i] = e.key.keysym.sym;
+             i++;
+         }
+    }
 }
 
 

@@ -8,7 +8,6 @@
 #include "Event.h"
 
 Event::Event() {
-    initMousePosition();
 }
 
 
@@ -20,15 +19,20 @@ bool Event::EventManager() {
     int centrex = 800;
     int centrey = 450;
     
+    SDL_FlushEvent(SDL_MOUSEMOTION);
+    
     SDL_Event event;
     SDL_PollEvent(&event);
+    
     justDownKey = -1;
     switch(event.type) {
         case SDL_QUIT:
             return(false);
             break;
         case SDL_KEYDOWN:
-            listKeyDown.push_back(event.key.keysym.sym);
+            if(event.key.repeat == 0 ){
+                listKeyDown.push_back(event.key.keysym.sym);
+            }
             break;
         case SDL_KEYUP:
             justDownKey = event.key.keysym.sym;
@@ -42,12 +46,12 @@ bool Event::EventManager() {
             clickedX = -1;
             clickedY = -1;
             break;
-        case SDL_MOUSEMOTION:
-            mouseX = centrex - event.button.x;
-            mouseY = centrey - event.button.y;
-            break;
     }
     
+    SDL_GetMouseState(&mouseX, &mouseY);
+    mouseX = 800 - mouseX;
+    mouseY = 450 - mouseY;
+
     return(true);
 }
 
@@ -89,8 +93,8 @@ int Event::justDown() {
 
 
 
-void Event::initMousePosition() {
+void Event::initMousePosition(SDL_Window* pWindow) {
     this->mouseX = 0;
     this->mouseY = 0;
-//    SDL_WarpMouse(800, 450);
+    SDL_WarpMouseInWindow(pWindow, 800, 450);
 }

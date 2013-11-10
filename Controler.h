@@ -43,6 +43,9 @@ class Controler {
 public:
     Controler();
     virtual ~Controler();
+    
+    void init();
+    void quit();
     void run();
     void action(Action act);
     void actionOnClick(pair<int,int> coord);

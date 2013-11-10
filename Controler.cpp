@@ -17,33 +17,42 @@ void pyramide(float x, float y, float z, float hauteur, float rayonBase, int nbS
 void grilleModulaire();
 
 Controler::Controler() {
-    cout<<"2";
-    this->event;
-    this->ka;
+    init();
+    event.initMousePosition(pWindow);
     this->camera = new Camera(Coord3D(-5, 0, 2), Coord3D(0, 0, 0), Coord3D(0, 0, 1));
     this->twoDim = new Panel(string("2D"), Coord3D(0,0,0),1900,1900, NULL);  // HERE SCREEN DIMENSIONS
-    
+    ka.chooseConfig();
 }
 
 Controler::~Controler() {
 }
 
-void Controler::run() {
-  cout<<"3";
-   // Fenetre fenetre(1600, 900);
+// Initialisation de la SDL et de la fenetre
+void Controler::init() {
+    SDL_Init(SDL_INIT_VIDEO);
+    SDL_Init(SDL_INIT_EVENTS);
+    
     SDL_Renderer* displayRenderer;
     SDL_RendererInfo displayRendererInfo;
     SDL_CreateWindowAndRenderer(1600, 900, SDL_WINDOW_OPENGL, &pWindow, &displayRenderer);
+    SDL_SetWindowFullscreen(pWindow, 0);
+    SDL_SetWindowTitle(pWindow, "AwesomeProject");
+
     SDL_GetRendererInfo(displayRenderer, &displayRendererInfo);
     SDL_GLContext context;
     context = SDL_GL_CreateContext(pWindow);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
-    
-    ka.chooseConfig();
-    
-    
-    
+}
+
+
+void Controler::quit() {
+    SDL_DestroyWindow(pWindow);
+    SDL_Quit();
+    exit(0);
+}
+
+void Controler::run() {
     World world;
     
 
@@ -59,7 +68,7 @@ void Controler::run() {
     menu->addComponent(menu2);
     menu->setVisible(false);
 
-    FrameManager frame = FrameManager(60);
+    FrameManager frame = FrameManager(100);
    
     
     Object obj = Object("maison", new Coord3D(0, 0, 0));
@@ -106,7 +115,6 @@ void Controler::run() {
     face8.push_back(5);face8.push_back(6);face8.push_back(9);face8.push_back(8);
     obj.addFace(new Face(face8, new Color(128, 75, 0), new Color(255, 255, 255)));
 
-
     // Debut de la boucle principale
     while(event.EventManager()) {
         ka.useKey(event, this);
@@ -130,7 +138,7 @@ void Controler::run() {
         Dessiner();
         //obj.drawFace();
         //obj.drawEdge();
-        world.draw();
+        //world.draw();
         
         // Fin de la 3D
         
@@ -167,7 +175,7 @@ void Controler::action(Action action){
     // Si on appuie sur le bouton pause
     if(action == PAUSE_MENU){   // On rend visible/invisible le menu
         twoDim->getElementByName("menu")->toggleVisible();
-        event.initMousePosition();
+        event.initMousePosition(pWindow);
     } else {    // Sinon
         if(!twoDim->getElementByName("menu")->isVisible()) {  // Si le menu n'est pas visible
             // On effectue les actions de déplacement de la caméra
@@ -193,9 +201,9 @@ void Controler::action(Action action){
                 camera->updateView(event.notifyMouse());
             }
             else if(action == EXIT) {
-                SDL_Quit();
+                quit();
             }
-            SDL_WarpMouseInWindow(pWindow,800,450);
+            SDL_WarpMouseInWindow(pWindow, 800, 450);
         } else {  // Si le menu est visible
             // actions du menu...
         }
