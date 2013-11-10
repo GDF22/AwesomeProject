@@ -11,9 +11,6 @@
 void Dessiner();
 void axe();
 void grille();
-void carre(float x, float y, float z, float taille);
-void triangle(float x, float y, float z, float hauteur, float rayonBase);
-void pyramide(float x, float y, float z, float hauteur, float rayonBase, int nbSommetBase);
 void grilleModulaire();
 
 Controler::Controler() {
@@ -69,107 +66,90 @@ void Controler::run() {
     menu->setVisible(false);
 
     FrameManager frame = FrameManager(100);
-   
-    
-    Object obj = Object("maison", new Coord3D(0, 0, 0));
-    obj.addVertex(Coord3D(-1.0, -1.0, -1.0));
-    obj.addVertex(Coord3D(-1.0, -1.0, 1.0));
-    obj.addVertex(Coord3D(1.0, -1.0, 1.0));
-    obj.addVertex(Coord3D(1.0, -1.0, -1.0));
-    obj.addVertex(Coord3D(-1.0, 1.0, -1.0));
-    obj.addVertex(Coord3D(-1.0, 1.0, 1.0));
-    obj.addVertex(Coord3D(1.0, 1.0, 1.0));
-    obj.addVertex(Coord3D(1.0, 1.0, -1.0));
-    obj.addVertex(Coord3D(-1.0, 0, 2.0));
-    obj.addVertex(Coord3D(1.0, 0, 2.0));
-    
-    vector<int> face;
-    face.push_back(0);face.push_back(1);face.push_back(2);face.push_back(3);
-    obj.addFace(new Face(face, new Color(255, 0, 0), new Color(242, 242, 242)));
-    
-    vector<int> face2;
-    face2.push_back(4);face2.push_back(5);face2.push_back(6);face2.push_back(7);
-    obj.addFace(new Face(face2, new Color(0, 0, 255), new Color(255, 255, 255)));
-    
-    vector<int> face3;
-    face3.push_back(0);face3.push_back(1);face3.push_back(5);face3.push_back(4);
-    obj.addFace(face3, new Color(0, 255, 0), new Color(255, 255, 255));
-    
-    vector<int> face4;
-    face4.push_back(2);face4.push_back(3);face4.push_back(7);face4.push_back(6);
-    obj.addFace(face4, new Color(255, 255, 0), new Color(255, 255, 255));
-    
-    vector<int> face5;
-    face5.push_back(1);face5.push_back(2);face5.push_back(6);face5.push_back(5);
-    obj.addFace(new Face(face5, new Color(255, 0, 255), new Color(255, 255, 255)));
-    
-    vector<int> face6;
-    face6.push_back(0);face6.push_back(3);face6.push_back(7);face6.push_back(4);
-    obj.addFace(new Face(face6, new Color(0, 255, 255), new Color(255, 255, 255)));
-    
-    vector<int> face7;
-    face7.push_back(1);face7.push_back(2);face7.push_back(9);face7.push_back(8);
-    obj.addFace(new Face(face7, new Color(128, 75, 0), new Color(255, 255, 255)));
-    
-    vector<int> face8;
-    face8.push_back(5);face8.push_back(6);face8.push_back(9);face8.push_back(8);
-    obj.addFace(new Face(face8, new Color(128, 75, 0), new Color(255, 255, 255)));
 
     // Debut de la boucle principale
     while(event.EventManager()) {
         ka.useKey(event, this);
 
-        // Début de la 3D
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        gluPerspective(70,(double)640/480,1,1000);
-        glEnable(GL_DEPTH_TEST);
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
-
-        glEnable(GL_BLEND) ;
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA) ; 
-    
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glLoadIdentity( );
-    
-        camera->placeCamera();
+        // Affichage 3D
+        glEnable3D();
+            camera->placeCamera();
+            Dessiner();
+            world.draw();
+         glDisable3D();
         
-        Dessiner();
-        //obj.drawFace();
-        //obj.drawEdge();
-        //world.draw();
-        
-        // Fin de la 3D
-        
-        // Début de la 2D
-        glDisable(GL_DEPTH_TEST);
-
-        glMatrixMode(GL_PROJECTION);
-        glPushMatrix();
-            glLoadIdentity();
-            gluOrtho2D(0.0, 1600, 900, 0);
-            glMatrixMode(GL_MODELVIEW);
-            glPushMatrix();
-                glLoadIdentity();
-
-                   twoDim->draw();
-
-                glMatrixMode(GL_PROJECTION);
-            glPopMatrix();
-            glMatrixMode(GL_MODELVIEW);
-        glPopMatrix();
-
-        glEnable(GL_DEPTH_TEST);
-        // Fin de la 2D
-        
-        // Affichage
+        // Affichage 2D
+        glEnable2D();
+           twoDim->draw();
+        glDisable2D();
+           
+        // Mise à jour de l'écran
         glFlush();
         SDL_GL_SwapWindow(pWindow);
-                
+        
+        // Gestion des frames
         frame.manageFrame();
     }
 }
+
+// Active l'affichage 3D (à modifier)
+void Controler::glEnable3D() {
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(70,(double)640/480,1,1000);
+    glEnable(GL_DEPTH_TEST);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    glEnable(GL_BLEND) ;
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA) ; 
+
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glLoadIdentity( );
+}
+
+// Désactive l'affichage 3D (à modifier)
+void Controler::glDisable3D() {
+    glDisable(GL_DEPTH_TEST);
+}
+ 
+// Active l'affichage 2D
+void Controler::glEnable2D() {
+    /*GLint iViewport[4];
+
+    // Get a copy of the viewport
+    glGetIntegerv(GL_VIEWPORT, iViewport);*/
+
+    // Save a copy of the projection matrix so that we can restore it 
+    // when it's time to do 3D rendering again.
+    glMatrixMode( GL_PROJECTION );
+    glPushMatrix();
+    glLoadIdentity();
+
+    // Set up the orthographic projection
+    gluOrtho2D(0.0, 1600, 900, 0);
+    glMatrixMode( GL_MODELVIEW );
+    glPushMatrix();
+    glLoadIdentity();
+
+    // Make sure depth testing and lighting are disabled for 2D rendering until
+    // we are finished rendering in 2D
+    glPushAttrib( GL_DEPTH_BUFFER_BIT | GL_LIGHTING_BIT );
+    glDisable( GL_DEPTH_TEST );
+    glDisable( GL_LIGHTING );
+}
+
+// Désctive l'affichage 2D
+void Controler::glDisable2D() {
+        glPopAttrib();
+        glMatrixMode( GL_PROJECTION );
+        glPopMatrix();
+        glMatrixMode( GL_MODELVIEW );
+        glPopMatrix();
+}
+
+
+
 
 void Controler::action(Action action){
     // Si on appuie sur le bouton pause
@@ -218,13 +198,21 @@ void Controler::actionOnClick(pair<int,int> coord){
 }
 
 
-void Dessiner()
-{
-    carre(2, 5, -3, 1);
-    carre(5, 2, 5, 1);
-    carre(2, 5, 3, 1);
-    //triangle(-5, -3, 5, 4, 3);
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void Dessiner() {
     grille();
     grilleModulaire();
     axe();
@@ -250,6 +238,7 @@ void axe() {
     
     glEnd();
 }
+
 
 void grille() {
     glBegin(GL_LINES);
@@ -291,100 +280,5 @@ void grilleModulaire() {
             
         }
     }
-    glEnd();
-}
-
-void carre(float x, float y, float z, float taille) {
-    glBegin(GL_QUADS);
-        glColor3ub(0,0,255);
-        glVertex3f(x+(taille/2),y+(taille/2),z+(taille/2));
-        glVertex3f(x+(taille/2),y+(taille/2),z-(taille/2));
-        glVertex3f(x-(taille/2),y+(taille/2),z-(taille/2));
-        glVertex3f(x-(taille/2),y+(taille/2),z+(taille/2));
-
-        glVertex3f(x+(taille/2),y-(taille/2),z+(taille/2));
-        glVertex3f(x+(taille/2),y-(taille/2),z-(taille/2));
-        glVertex3f(x+(taille/2),y+(taille/2),z-(taille/2));
-        glVertex3f(x+(taille/2),y+(taille/2),z+(taille/2));
-
-        glVertex3f(x-(taille/2),y-(taille/2),z+(taille/2));
-        glVertex3f(x-(taille/2),y-(taille/2),z-(taille/2));
-        glVertex3f(x+(taille/2),y-(taille/2),z-(taille/2));
-        glVertex3f(x+(taille/2),y-(taille/2),z+(taille/2));
-
-        glVertex3f(x-(taille/2),y-(taille/2),z+(taille/2));
-        glVertex3f(x-(taille/2),y-(taille/2),z-(taille/2));
-        glVertex3f(x-(taille/2),y+(taille/2),z-(taille/2));
-        glVertex3f(x-(taille/2),y+(taille/2),z+(taille/2));
-
-        glVertex3f(x-(taille/2),y-(taille/2),z+(taille/2));
-        glVertex3f(x+(taille/2),y-(taille/2),z+(taille/2));
-        glVertex3f(x+(taille/2),y+(taille/2),z+(taille/2));
-        glVertex3f(x-(taille/2),y+(taille/2),z+(taille/2));
-
-        glVertex3f(x-(taille/2),y-(taille/2),z-(taille/2));
-        glVertex3f(x+(taille/2),y-(taille/2),z-(taille/2));
-        glVertex3f(x+(taille/2),y+(taille/2),z-(taille/2));
-        glVertex3f(x-(taille/2),y+(taille/2),z-(taille/2));
-    glEnd();
-    
-    glBegin(GL_LINES);
-        glColor3ub(255,255,255);
-        glVertex3f(x-(taille/2),y-(taille/2),z+(taille/2));glVertex3f(x+(taille/2),y-(taille/2),z+(taille/2));
-        glVertex3f(x+(taille/2),y-(taille/2),z+(taille/2));glVertex3f(x+(taille/2),y+(taille/2),z+(taille/2));
-        glVertex3f(x+(taille/2),y+(taille/2),z+(taille/2));glVertex3f(x-(taille/2),y+(taille/2),z+(taille/2));
-        glVertex3f(x-(taille/2),y+(taille/2),z+(taille/2));glVertex3f(x-(taille/2),y-(taille/2),z+(taille/2));
-
-        glVertex3f(x-(taille/2),y-(taille/2),z-(taille/2));glVertex3f(x+(taille/2),y-(taille/2),z-(taille/2));
-        glVertex3f(x+(taille/2),y-(taille/2),z-(taille/2));glVertex3f(x+(taille/2),y+(taille/2),z-(taille/2));
-        glVertex3f(x+(taille/2),y+(taille/2),z-(taille/2));glVertex3f(x-(taille/2),y+(taille/2),z-(taille/2));
-        glVertex3f(x-(taille/2),y+(taille/2),z-(taille/2));glVertex3f(x-(taille/2),y-(taille/2),z-(taille/2));
-        
-        glVertex3f(x-(taille/2),y-(taille/2),z+(taille/2));glVertex3f(x-(taille/2),y-(taille/2),z-(taille/2));
-        glVertex3f(x+(taille/2),y-(taille/2),z+(taille/2));glVertex3f(x+(taille/2),y-(taille/2),z-(taille/2));
-        glVertex3f(x+(taille/2),y+(taille/2),z+(taille/2));glVertex3f(x+(taille/2),y+(taille/2),z-(taille/2));
-        glVertex3f(x-(taille/2),y+(taille/2),z+(taille/2));glVertex3f(x-(taille/2),y+(taille/2),z-(taille/2));
-    glEnd();
-}
-
-
-
-void triangle(float x, float y, float z, float hauteur, float rayonBase) {
-    glBegin(GL_TRIANGLES);
-        glColor3ub(0,0,255);
-        Coord3D s1 = Coord3D(x, y, z+hauteur);
-        Coord3D s2 = Coord3D(x + cos(0)*rayonBase, y + sin(0)*rayonBase, z);
-        Coord3D s3 = Coord3D(x + cos(90)*rayonBase, y + sin(90)*rayonBase, z);
-        Coord3D s4 = Coord3D(x + cos(180)*rayonBase, y + sin(180)*rayonBase, z);
-
-        glVertex3f(s1.getX(), s1.getY(), s1.getZ());
-        glVertex3f(s2.getX(), s2.getY(), s2.getZ());
-        glVertex3f(s3.getX(), s3.getY(), s3.getZ());
-
-        glVertex3f(s1.getX(), s1.getY(), s1.getZ());
-        glVertex3f(s2.getX(), s2.getY(), s2.getZ());
-        glVertex3f(s4.getX(), s4.getY(), s4.getZ());
-        
-        glVertex3f(s1.getX(), s1.getY(), s1.getZ());
-        glVertex3f(s4.getX(), s4.getY(), s4.getZ());
-        glVertex3f(s3.getX(), s3.getY(), s3.getZ());
-        
-        glVertex3f(s4.getX(), s4.getY(), s4.getZ());
-        glVertex3f(s2.getX(), s2.getY(), s2.getZ());
-        glVertex3f(s3.getX(), s3.getY(), s3.getZ());
-
-    glEnd();
-    
-    glBegin(GL_LINES);
-        glColor3ub(255,255,255);
-        
-        glVertex3f(s1.getX(), s1.getY(), s1.getZ());glVertex3f(s2.getX(), s2.getY(), s2.getZ());
-        glVertex3f(s1.getX(), s1.getY(), s1.getZ());glVertex3f(s3.getX(), s3.getY(), s3.getZ());
-        glVertex3f(s1.getX(), s1.getY(), s1.getZ());glVertex3f(s4.getX(), s4.getY(), s4.getZ());
-
-        glVertex3f(s2.getX(), s2.getY(), s2.getZ());glVertex3f(s3.getX(), s3.getY(), s3.getZ());
-        glVertex3f(s3.getX(), s3.getY(), s3.getZ());glVertex3f(s4.getX(), s4.getY(), s4.getZ());
-        glVertex3f(s4.getX(), s4.getY(), s4.getZ());glVertex3f(s2.getX(), s2.getY(), s2.getZ());
-        
     glEnd();
 }

@@ -47,6 +47,12 @@ public:
     void init();
     void quit();
     void run();
+    
+    void glEnable3D();
+    void glDisable3D();
+    void glEnable2D();
+    void glDisable2D();
+    
     void action(Action act);
     void actionOnClick(pair<int,int> coord);
     
