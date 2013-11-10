@@ -6,20 +6,15 @@
  */
 
 #include "Controler.h"
-#include "Panel.h"
+
 
 int main(int argc, char *argv[])
 {
-    freopen("CON", "w", stdout);    // redirection des flux
-    freopen("CON", "w", stderr);
-    
-    Fenetre fenetre(1600, 900);
-    
-  
+
+    cout<<"1.0";
     Controler controler = Controler();
 
     controler.run();
  
     return 0;
 }
- 

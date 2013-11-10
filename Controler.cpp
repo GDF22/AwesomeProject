@@ -17,20 +17,38 @@ void pyramide(float x, float y, float z, float hauteur, float rayonBase, int nbS
 void grilleModulaire();
 
 Controler::Controler() {
+    cout<<"2";
     this->event;
     this->ka;
     this->camera = new Camera(Coord3D(-5, 0, 2), Coord3D(0, 0, 0), Coord3D(0, 0, 1));
     this->twoDim = new Panel(string("2D"), Coord3D(0,0,0),1900,1900, NULL);  // HERE SCREEN DIMENSIONS
+    
 }
 
 Controler::~Controler() {
 }
 
 void Controler::run() {
+  cout<<"3";
+   // Fenetre fenetre(1600, 900);
+    SDL_Renderer* displayRenderer;
+    SDL_RendererInfo displayRendererInfo;
+    SDL_CreateWindowAndRenderer(1600, 900, SDL_WINDOW_OPENGL, &pWindow, &displayRenderer);
+    SDL_GetRendererInfo(displayRenderer, &displayRendererInfo);
+    SDL_GLContext context;
+    context = SDL_GL_CreateContext(pWindow);
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+    
+    ka.chooseConfig();
+    
+    
+    
     World world;
     
 
-    /*-----------------CREATION-DU-MENU-----------------------------*/
+    //*-----------------CREATION-DU-MENU-----------------------------
+ 
     Panel* menu = new Panel(string("menu"), Coord3D(400,100,0), 700, 500, new Color(0,0,255));
     twoDim->addComponent(menu);    
     Button* but = new Button(string("Button"),string("Resume"), Coord3D(400,100,0), 20, 20, new Color(255,0,0), PAUSE_MENU);
@@ -40,8 +58,7 @@ void Controler::run() {
     menu->addComponent(but2);
     menu->addComponent(menu2);
     menu->setVisible(false);
-    
-    
+
     FrameManager frame = FrameManager(60);
    
     
@@ -140,7 +157,7 @@ void Controler::run() {
         
         // Affichage
         glFlush();
-        SDL_GL_SwapBuffers();
+        SDL_GL_SwapWindow(pWindow);
                 
         frame.manageFrame();
     }
@@ -178,7 +195,7 @@ void Controler::action(Action action){
             else if(action == EXIT) {
                 SDL_Quit();
             }
-            SDL_WarpMouse(800, 450);  // Reinitialisation de la position de la souris
+            SDL_WarpMouseInWindow(pWindow,800,450);
         } else {  // Si le menu est visible
             // actions du menu...
         }
@@ -247,9 +264,9 @@ void grilleModulaire() {
    int z = 5; 
    for(int i = 0; i < I; i++) {
         for(int j = 0; j < J; j++) {
-          //  coordTab[i][j] = Coord3D(i,j,z);  /* classic */
-           coordTab[i][j] = Coord3D(i,j,z+40*min(sin(M_PI *(j-25)/25),sin(M_PI *(i-25)/25)) );  /* sin */
-          //    coordTab[i][j] = Coord3D(i,j,i);  /* sin */
+          //  coordTab[i][j] = Coord3D(i,j,z);   classic 
+           coordTab[i][j] = Coord3D(i,j,z+40*min(sin(M_PI *(j-25)/25),sin(M_PI *(i-25)/25)) );   
+          //    coordTab[i][j] = Coord3D(i,j,i);  sin 
         }
     }
     glBegin(GL_LINES);

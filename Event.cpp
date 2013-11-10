@@ -39,8 +39,8 @@ bool Event::EventManager() {
             clickedY = event.motion.y;
             break;
         case SDL_MOUSEBUTTONUP:
-            clickedX = NULL;
-            clickedY = NULL;
+            clickedX = -1;
+            clickedY = -1;
             break;
         case SDL_MOUSEMOTION:
             mouseX = centrex - event.button.x;
@@ -52,8 +52,8 @@ bool Event::EventManager() {
 }
 
 
-void Event::removeKeyDown(SDLKey key) {
-    vector<SDLKey>::iterator it(listKeyDown.begin());
+void Event::removeKeyDown(SDL_Keycode key) {
+    vector<SDL_Keycode>::iterator it(listKeyDown.begin());
     for(int i = 0; i < listKeyDown.size(); i++) {
         if(listKeyDown[i] == key) {
             listKeyDown.erase(it);
@@ -63,7 +63,7 @@ void Event::removeKeyDown(SDLKey key) {
 }
 
 
-vector<SDLKey> Event::notifyKeyboard() {
+vector<SDL_Keycode> Event::notifyKeyboard() {
     return(listKeyDown);
 }
 
@@ -92,5 +92,5 @@ int Event::justDown() {
 void Event::initMousePosition() {
     this->mouseX = 0;
     this->mouseY = 0;
-    SDL_WarpMouse(800, 450);
+//    SDL_WarpMouse(800, 450);
 }

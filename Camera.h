@@ -9,7 +9,7 @@
 #define	CAMERA_H
 
 #include <GL/glu.h>
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include <cstdio>
 #include <math.h>
 

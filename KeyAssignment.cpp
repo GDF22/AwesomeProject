@@ -12,7 +12,6 @@
 KeyAssignment::KeyAssignment() {
     this->primary =  new int[20];
     //->readConfig();
-    this->chooseConfig();
 }
 
 KeyAssignment::KeyAssignment(const KeyAssignment& orig) {
@@ -36,7 +35,7 @@ void KeyAssignment::chooseConfig(){
     SDL_Event e;
     while(i < 6) {
       SDL_WaitEvent(&e);
-      if(e.type == SDL_KEYDOWN) {
+     if(e.type == SDL_KEYUP) {
           this->primary[i] = e.key.keysym.sym;
           i++;
       }
@@ -46,7 +45,7 @@ void KeyAssignment::chooseConfig(){
 
 void KeyAssignment::useKey(Event event, Controler* ctrl) {
     
-    vector<SDLKey> currentKeys = event.notifyKeyboard();
+    vector<SDL_Keycode> currentKeys = event.notifyKeyboard();
     int justDown = event.justDown();
     
     // Touches enfoncees
@@ -88,7 +87,7 @@ void KeyAssignment::useKey(Event event, Controler* ctrl) {
     }
     
     //click de la souris
-    if(event.notifyClicked().first != NULL){
+    if(event.notifyClicked().first != -1){
         ctrl->actionOnClick(event.notifyClicked());
     }
 }

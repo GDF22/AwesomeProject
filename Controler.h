@@ -15,14 +15,13 @@
 #include <map>
 #include <vector>
 #include <math.h>
-#include <SDL/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL.h>
+#include <GL/gl.h>
 #include <gl/glu.h>
 #include <map>
 #include <sstream>
 #include <typeinfo>
-
 #include "Action.h"
 #include "Coord3D.h"
 #include "Fenetre.h"
@@ -47,11 +46,15 @@ public:
     void run();
     void action(Action act);
     void actionOnClick(pair<int,int> coord);
+    
 private:
+    
+    SDL_Window* pWindow;
     KeyAssignment ka;
     Event event;
     Camera* camera;
     Panel* twoDim;
+    
 };
 
 #endif	/* CONTROLER_H */

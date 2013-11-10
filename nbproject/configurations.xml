@@ -79,8 +79,6 @@
         <linkerTool>
           <linkerLibItems>
             <linkerLibLibItem>mingw32</linkerLibLibItem>
-            <linkerLibLibItem>SDLmain</linkerLibLibItem>
-            <linkerLibLibItem>SDL.dll</linkerLibLibItem>
             <linkerLibLibItem>SDL2</linkerLibLibItem>
             <linkerLibLibItem>SDL2main</linkerLibLibItem>
             <linkerLibLibItem>SDL2.dll</linkerLibLibItem>

@@ -11,11 +11,13 @@
 #include <iostream>
 #include <fstream>
 #include <cstdio>
-#include <SDL/SDL.h>
-#include <SDL/SDL_getenv.h>
+#include <SDL2/SDL.h>
+
 #include <vector>
 #include <string>
 #include "Camera.h"
+
+
 class Controler;
 
 using namespace std;

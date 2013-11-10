@@ -8,7 +8,7 @@
 #ifndef EVENT_H
 #define	EVENT_H
 
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include <vector>
 
 using namespace std;
@@ -19,9 +19,9 @@ public:
     virtual ~Event();
     
     bool EventManager();
-    void removeKeyDown(SDLKey key);
+    void removeKeyDown(SDL_Keycode key);
     
-    vector<SDLKey> notifyKeyboard();
+    vector<SDL_Keycode> notifyKeyboard();
     int* notifyMouse();
     pair<int,int> notifyClicked();
     
@@ -29,7 +29,7 @@ public:
     void initMousePosition();
 private:
     int mouseX, mouseY, clickedX , clickedY;
-    vector<SDLKey> listKeyDown;
+    vector<SDL_Keycode> listKeyDown;
     int justDownKey;
 };
 
